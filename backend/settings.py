@@ -7,10 +7,11 @@ SECRET_KEY = 'django-insecure-a8yjq+-+(oh-tcnwrorii&l18j5iiakij%7!@6@h^m4v7!@*g!
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",  
+    "http://localhost:8080", 
+    "http://192.168.0.38:8080", 
     "http://localhost:5173",
     "http://127.0.0.1:5173"
 ]
@@ -105,6 +106,16 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # vagy más SMTP szerver
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'te@gmail.com'  # a küldő email címed
+EMAIL_HOST_PASSWORD = 'alkalmazasjelszo'  # Google-fiókhoz: App Password
+
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
