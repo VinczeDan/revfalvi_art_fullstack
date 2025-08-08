@@ -6,7 +6,8 @@ from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
@@ -68,13 +69,16 @@ class TodoViewSet(viewsets.ModelViewSet):
 
 
 
+# views.py
+
+
 class PaintingViewSet(viewsets.ModelViewSet):
     queryset = Painting.objects.all()
     serializer_class = PaintingSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        technique = self.request.query_params.get('technique', None)
+        technique = self.request.query_params.get('technique')
         if technique:
             queryset = queryset.filter(technique=technique)
-        return queryset
+        return queryset.order_by('-created_at')
