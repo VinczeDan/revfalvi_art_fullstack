@@ -13,19 +13,24 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
 import json
 
+import logging
+from django.conf import settings
+
+logger = logging.getLogger(__name__)
+
 @csrf_exempt
 def send_contact_email(request):
     if request.method == 'POST':
         try:
-            # Debug log
-            print("Request received:", request.body)
-            
+            logger.info("Email kérés érkezett")
             data = json.loads(request.body)
-            
+            logger.debug(f"Feldolgozott adatok: {data}")
+
             # Validáció
             required_fields = ['name', 'email', 'subject', 'message']
             for field in required_fields:
                 if not data.get(field):
+                    logger.error(f"Hiányzó mező: {field}")
                     return JsonResponse(
                         {'error': f'Hiányzó kötelező mező: {field}'},
                         status=400
@@ -40,21 +45,25 @@ def send_contact_email(request):
                 Üzenet:
                 {data.get('message')}
                 """,
-                from_email='daniel.vincze15@gmail.com', 
-                to=['daniel.vincze15@gmail.com'],  # IDE ÉRKEZZEN
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[settings.DEFAULT_FROM_EMAIL],
                 reply_to=[data.get('email')],
-                headers={'Content-Type': 'text/plain; charset=utf-8'},
             )
             
+            logger.info("Email küldése megkezdve")
             email.send(fail_silently=False)
+            logger.info("Email sikeresen elküldve")
+            
             return JsonResponse({'status': 'success'})
             
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON hiba: {str(e)}")
             return JsonResponse({'error': 'Érvénytelen JSON formátum'}, status=400)
         except Exception as e:
-            print("Error sending email:", str(e))
+            logger.error(f"Email küldési hiba: {str(e)}")
             return JsonResponse({'error': str(e)}, status=500)
     
+    logger.warning("Nem POST kérés érkezett")
     return JsonResponse({'error': 'Csak POST kérés engedélyezett'}, status=405)
 
 
