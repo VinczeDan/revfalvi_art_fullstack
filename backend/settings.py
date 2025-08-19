@@ -1,25 +1,9 @@
 from pathlib import Path
 import os
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-a8yjq+-+(oh-tcnwrorii&l18j5iiakij%7!@6@h^m4v7!@*g!'
-
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '192.168.0.38',
-    '139.59.154.26',
-]
-# CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://139.59.154.26",
-    "https://139.59.154.26",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080"
-]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
@@ -116,16 +100,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-# settings.py
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'daniel.vincze15@gmail.com'
-EMAIL_HOST_PASSWORD = 'mthg vhcu utjb zycg'  # Ellenőrizd újra az App Password-t
-DEFAULT_FROM_EMAIL = 'daniel.vincze15@gmail.com'
-SERVER_EMAIL = 'daniel.vincze15@gmail.com'
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
