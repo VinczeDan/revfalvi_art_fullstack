@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtualenv
+venv/
+.env
+
+# Django secret settings
+backend/local_settings.py
+
+# Databases
+db.sqlite3
+
+# Django collectstatic output
+staticfiles/
+media/
+
+# VSCode / IDE
+.vscode/
+.idea/
+
