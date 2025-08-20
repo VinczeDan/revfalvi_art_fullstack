@@ -1,0 +1,13 @@
+# általános
+Django==5.2.5
+djangorestframework==3.16.1
+django-cors-headers==4.4.0
+gunicorn==23.0.0
+sqlparse==0.5.3
+asgiref==3.9.1
+packaging==25.0
+
+# adatbázis driverek
+psycopg2-binary==2.9.9  # PostgreSQL
+mysqlclient==2.2.4       # MySQL, ha használnád
+

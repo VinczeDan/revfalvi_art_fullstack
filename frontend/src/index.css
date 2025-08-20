@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Művészeti portfólió dizájn rendszer - Faber Castell színpaletta
+Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
+*/
+
+@layer base {
+  :root {
+    /* Faber Castell inspired color palette */
+    --background: 210 100% 98%;
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Türkiz kék primary szín */
+    --primary: 174 44% 51%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 174 54% 61%;
+
+    /* Világos kék secondary */
+    --secondary: 200 89% 78%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Világos türkiz accent */
+    --accent: 182 25% 88%;
+    --accent-foreground: 215 25% 27%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 40% 90%;
+    --input: 210 40% 94%;
+    --ring: 174 44% 51%;
+
+    /* Művészeti portfólió specifikus színek */
+    --artist-blue: 200 89% 78%;
+    --artist-turquoise: 174 44% 51%;
+    --artist-light: 210 100% 98%;
+    --artist-dark: 215 25% 27%;
+
+    /* Gradientek */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(120deg, hsl(var(--artist-blue)), hsl(var(--artist-turquoise)));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 8px 30px hsl(var(--primary) / 0.15);
+    --shadow-strong: 0 12px 40px hsl(var(--primary) / 0.2);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Sötét mód - sötét háttér világos szöveggel */
+    --background: 215 25% 27%;
+    --foreground: 210 100% 98%;
+
+    --card: 215 20% 30%;
+    --card-foreground: 210 100% 98%;
+
+    --popover: 215 20% 30%;
+    --popover-foreground: 210 100% 98%;
+
+    --primary: 174 44% 51%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 174 54% 61%;
+
+    --secondary: 215 20% 35%;
+    --secondary-foreground: 210 100% 98%;
+
+    --muted: 215 20% 35%;
+    --muted-foreground: 210 40% 70%;
+
+    --accent: 215 20% 35%;
+    --accent-foreground: 210 100% 98%;
+
+    --destructive: 0 62% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 40%;
+    --input: 215 20% 35%;
+    --ring: 174 44% 51%;
+
+    /* Dark mode specifikus színek */
+    --artist-blue: 200 89% 78%;
+    --artist-turquoise: 174 44% 51%;
+    --artist-light: 210 100% 98%;
+    --artist-dark: 215 25% 27%;
+
+    /* Sötét mód gradientek */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(120deg, hsl(var(--artist-blue)), hsl(var(--artist-turquoise)));
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-light;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Oldalról beúszó animációk */
+@layer utilities {
+  .slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+  }
+}
+
+/* Keyframe animációk */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

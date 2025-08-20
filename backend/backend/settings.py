@@ -1,14 +1,15 @@
 from pathlib import Path
 import os
 
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Default values (felülírható a local_settings.py-ban)
+DEBUG = True
+ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = []
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,7 +36,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-REACT_BUILD_DIR = os.path.join(BASE_DIR.parent, 'project_rp_react', 'dist')
+REACT_BUILD_DIR = os.path.join(BASE_DIR.parent, 'frontend', 'frontend', 'build')
 
 TEMPLATES = [
     {
@@ -54,16 +55,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -80,18 +77,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
-
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
@@ -103,10 +94,34 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-
+# --- Local settings import ---
 try:
-    from .local_settings import *
+    import local_settings
+    # DEBUG és ALLOWED_HOSTS felülírása
+    DEBUG = getattr(local_settings, 'DEBUG', DEBUG)
+    ALLOWED_HOSTS = getattr(local_settings, 'ALLOWED_HOSTS', ALLOWED_HOSTS)
+    CORS_ALLOWED_ORIGINS = getattr(local_settings, 'CORS_ALLOWED_ORIGINS', CORS_ALLOWED_ORIGINS)
+
+    HOL_VAGYOK = getattr(local_settings, 'HOL_VAGYOK', None)
+
+    if HOL_VAGYOK == 'otthon':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+    elif HOL_VAGYOK == 'droplet':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': local_settings.DB_NAME,
+                'USER': local_settings.DB_USER,
+                'PASSWORD': local_settings.DB_PASSWORD,
+                'HOST': local_settings.DB_HOST,
+                'PORT': '',
+            }
+        }
 except ImportError:
     pass
+
