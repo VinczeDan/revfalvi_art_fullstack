@@ -10,6 +10,3 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Disallow: /admin/
-Disallow: /api/
