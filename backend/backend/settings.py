@@ -1,13 +1,14 @@
 from pathlib import Path
 import os
-
+import sys
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Default values (felülírható a local_settings.py-ban)
 DEBUG = True
 ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = []
-
+SECRET_KEY = 'django-insecure-a8yjq+-+(oh-tcnwrorii&l18j5iiakij%7!@6@h^m4v7!@*g!'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
 
@@ -36,7 +37,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-REACT_BUILD_DIR = os.path.join(BASE_DIR.parent, 'frontend', 'frontend', 'build')
+REACT_BUILD_DIR = os.path.join(BASE_DIR.parent, 'frontend', 'dist')
 
 TEMPLATES = [
     {
@@ -94,10 +95,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+
 # --- Local settings import ---
 try:
     import local_settings
-    # DEBUG és ALLOWED_HOSTS felülírása
+
     DEBUG = getattr(local_settings, 'DEBUG', DEBUG)
     ALLOWED_HOSTS = getattr(local_settings, 'ALLOWED_HOSTS', ALLOWED_HOSTS)
     CORS_ALLOWED_ORIGINS = getattr(local_settings, 'CORS_ALLOWED_ORIGINS', CORS_ALLOWED_ORIGINS)
@@ -123,5 +127,4 @@ try:
             }
         }
 except ImportError:
-    pass
-
+    print("local_settings nem található!")
