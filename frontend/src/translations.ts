@@ -18,7 +18,7 @@ export const translations = {
     },
     about: {
       title: "Rólam",
-      text: "Művészként mindig a természet és az emberi érzelmek inspirálnak...",
+      text: "Üdvözöllek az oldalamon! Révfalvi Péter vagyok, A képzőművészettel már több éve foglalkozom. Azon belül is festészettel és grafikával. Alkotásaimmal egy-egy hely szépségét, formavilágát mutatom be különböző médiumok használatával. Ami a grafikai munkáimat illeti, igyekszem olyat alkotni, amin egy-egy emberi érzés, vagy valamilyen egyedi tárgy kerül a középpontba. \n Jó időtöltést kívánok az oldalamon! ",
     },
     contact: {
       title: "Kapcsolat",
