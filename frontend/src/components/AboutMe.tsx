@@ -16,7 +16,6 @@ const AboutMe = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("about.title")}
           </h2>
-          <p className="text-lg text-muted-foreground">{t("about.text")}</p>
         </div>
 
         <div className="flex justify-center">
