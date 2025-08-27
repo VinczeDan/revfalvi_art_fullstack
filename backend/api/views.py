@@ -8,10 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import EmailMessage
-import json
+
 
 import logging
 from django.conf import settings
@@ -76,9 +73,6 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
-
-
-# views.py
 
 class PaintingViewSet(viewsets.ModelViewSet):
     queryset = Painting.objects.all()
