@@ -12,7 +12,8 @@ export const translations = {
     },
     hero: {
       title: "Üdvözöllek az oldalamon",
-      subtitle: "Akvarell, akril és olajfestmények, valamint ceruza munkák gyűjteménye.",
+      subtitle:
+        "Akvarell, akril és olajfestmények, valamint ceruza munkák gyűjteménye.",
       button: "Galéria megtekintése",
     },
     about: {
@@ -21,8 +22,22 @@ export const translations = {
     },
     contact: {
       title: "Kapcsolat",
-      text: "Ha szeretnél kapcsolatba lépni velem, írj bátran emailt:",
-      button: "Írj nekem",
+      text: "Érdekel egy egyedi megrendelés vagy kérdésed van a munkáimmal kapcsolatban? Vedd fel velem a kapcsolatot!",
+      successTitle: "Sikeres küldés!",
+      successDescription: "Üzenetét megkaptuk, hamarosan válaszolunk.",
+      errorTitle: "Hiba",
+      servicesTitle: "Művészeti szolgáltatások",
+      servicesList:
+        "• Házasságkötés\n• Babavárás\n• Páros tánc\n• Egyedi portré készítés\n• Hangszeres előadás",
+      emailTitle: "Email",
+      phoneTitle: "Telefon",
+      formTitle: "Üzenet küldése",
+      formName: "Teljes név",
+      formEmail: "Email cím",
+      formSubject: "Tárgy",
+      formMessage: "Üzenet...",
+      sendButton: "Üzenet küldése",
+      sending: "Küldés...",
     },
     gallery: {
       watercolor: {
@@ -59,7 +74,8 @@ export const translations = {
     },
     hero: {
       title: "Welcome to my website",
-      subtitle: "A collection of watercolor, acrylic, oil paintings and pencil works.",
+      subtitle:
+        "A collection of watercolor, acrylic, oil paintings and pencil works.",
       button: "View Gallery",
     },
     about: {
@@ -68,8 +84,22 @@ export const translations = {
     },
     contact: {
       title: "Contact",
-      text: "If you would like to get in touch with me, feel free to send me an email:",
-      button: "Write to me",
+      text: "Interested in a custom order or have questions about my works? Get in touch with me!",
+      successTitle: "Message Sent!",
+      successDescription: "We received your message, we will reply soon.",
+      errorTitle: "Error",
+      servicesTitle: "Art Services",
+      servicesList:
+        "• Wedding\n• Expecting a baby\n• Couple dance\n• Custom portrait\n• Musical performance",
+      emailTitle: "Email",
+      phoneTitle: "Phone",
+      formTitle: "Send Message",
+      formName: "Full Name",
+      formEmail: "Email Address",
+      formSubject: "Subject",
+      formMessage: "Message...",
+      sendButton: "Send Message",
+      sending: "Sending...",
     },
     gallery: {
       watercolor: {
