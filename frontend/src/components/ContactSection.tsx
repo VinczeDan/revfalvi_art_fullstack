@@ -94,9 +94,8 @@ const ContactSection = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  {t("contact.servicesList") ||
-                    "• Házasságkötés <br />• Babavárás <br />• Páros tánc <br />• Egyedi portré készítés <br />• Hangszeres előadás"}
+                <p className="text-muted-foreground whitespace-pre-line">
+                  {t("contact.servicesList")}
                 </p>
               </CardContent>
             </Card>
