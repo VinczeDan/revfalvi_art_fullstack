@@ -1,38 +1,49 @@
-import { useState, useEffect } from 'react';
-import Navigation from '@/components/Navigation';
-import HeroSection from '@/components/HeroSection';
-import GallerySection from '@/components/GallerySection';
-import ContactSection from '@/components/ContactSection';
-import AboutMe from '@/components/AboutMe';
+// src/pages/Index.tsx
+import { useState, useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import HeroSection from "@/components/HeroSection";
+import GallerySection from "@/components/GallerySection";
+import ContactSection from "@/components/ContactSection";
+import AboutMe from "@/components/AboutMe";
+import { useTranslation } from "@/TranslationContext";
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
+  const { t } = useTranslation();
 
-  // Scroll tracking for active section
+  // Scroll tracking
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home','about', 'watercolor', 'acrylic', 'oil', 'pencil', 'contact'];
+      const sections = [
+        "home",
+        "about",
+        "watercolor",
+        "acrylic",
+        "oil",
+        "pencil",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
         }
       }
 
-      // Home section (hero)
-      if (window.scrollY < 200) {
-        setActiveSection('home');
-      }
+      if (window.scrollY < 200) setActiveSection("home");
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -41,36 +52,41 @@ const Index = () => {
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
-      {/* Hero Section */}
-      <HeroSection setActiveSection={setActiveSection} />
-      <AboutMe /> {/* Új sor */}
-      {/* Gallery Sections */}
+
+      <HeroSection
+        setActiveSection={setActiveSection}
+        title={t("hero.title")}
+        subtitle={t("hero.subtitle")}
+        buttonText={t("hero.button")}
+      />
+
+      <AboutMe />
+
       <GallerySection
         id="watercolor"
-        title="Akvarell"
-        description="Átlátszó, könnyű technikával készült festmények, amelyek a víz és pigment harmonikus játékát mutatják be."
+        title={t("gallery.watercolor.title")}
+        description={t("gallery.watercolor.description")}
         color="watercolor"
       />
       <GallerySection
         id="acrylic"
-        title="Akril"
-        description="Élénk színekkel és gazdag textúrákkal készült akril festmények, amelyek modern technikával születtek."
+        title={t("gallery.acrylic.title")}
+        description={t("gallery.acrylic.description")}
         color="acrylic"
       />
       <GallerySection
         id="oil"
-        title="Olajfestés"
-        description="Klasszikus olajfestő technikával készült művek, amelyek mélységet és gazdagságot tükröznek."
+        title={t("gallery.oil.title")}
+        description={t("gallery.oil.description")}
         color="oil"
       />
       <GallerySection
         id="pencil"
-        title="Ceruza munkák"
-        description="Szén, grafit, színes és pasztell ceruzával készült finom kompozíciók és részletgazdag ábrázolások."
+        title={t("gallery.pencil.title")}
+        description={t("gallery.pencil.description")}
         color="pencil"
       />
-      
-      {/* Contact Section */}
+
       <ContactSection />
     </div>
   );
