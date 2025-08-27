@@ -2,11 +2,11 @@ from rest_framework import serializers
 from .models import Todo, Painting  
 
 
-
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = '__all__'
+
 
 class PaintingSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
@@ -35,7 +35,7 @@ class PaintingSerializer(serializers.ModelSerializer):
         return None
 
     def get_title(self, obj):
-        lang = self.context.get("lang", "hu")  # lang jön majd a view-ból
+        lang = self.context.get("lang", "hu")
         if lang == "en" and obj.title_en:
             return obj.title_en
         return obj.title_hu

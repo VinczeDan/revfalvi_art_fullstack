@@ -9,7 +9,6 @@ import json
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-
 import logging
 from django.conf import settings
 
@@ -23,7 +22,6 @@ def send_contact_email(request):
             data = json.loads(request.body)
             logger.debug(f"Feldolgozott adatok: {data}")
 
-            # Validáció
             required_fields = ['name', 'email', 'subject', 'message']
             for field in required_fields:
                 if not data.get(field):
@@ -68,7 +66,6 @@ def index_view(request):
     return render(request, 'index.html')  
 
 
-
 class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
@@ -80,6 +77,6 @@ class PaintingViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        lang = self.request.query_params.get("lang", "hu")  # alapból magyar
+        lang = self.request.query_params.get("lang", "hu")
         context["lang"] = lang
         return context

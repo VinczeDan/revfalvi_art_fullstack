@@ -39,7 +39,7 @@ class Painting(models.Model):
         verbose_name = "Festmény"
         verbose_name_plural = "Festmények"
 
-    # Ez egy kis segédfüggvény a nyelv alapú megjelenítéshez
+    # Nyelv alapú megjelenítés
     def get_title(self, lang="hu"):
         return self.title_en if lang == "en" and self.title_en else self.title_hu
 
