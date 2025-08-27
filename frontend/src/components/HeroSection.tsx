@@ -38,7 +38,6 @@ const HeroSection = ({
         <div className="fade-in-up stagger-3">
           <Button
             onClick={scrollToGallery}
-            size="lg"
             className="bg-white text-artist-dark hover:bg-white/90 transition-all duration-300 px-8 py-4 text-lg font-medium rounded-full shadow-strong hover-lift"
           >
             {buttonText}

@@ -131,7 +131,6 @@ const ContactSection = () => {
                   />
                   <Button
                     type="submit"
-                    size="lg"
                     disabled={isSubmitting}
                     className="w-full bg-gradient-primary text-white"
                   >
