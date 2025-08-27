@@ -18,7 +18,9 @@ export const translations = {
     },
     about: {
       title: "Rólam",
-      text: "Üdvözöllek az oldalamon! Révfalvi Péter vagyok, A képzőművészettel már több éve foglalkozom. Azon belül is festészettel és grafikával. Alkotásaimmal egy-egy hely szépségét, formavilágát mutatom be különböző médiumok használatával. Ami a grafikai munkáimat illeti, igyekszem olyat alkotni, amin egy-egy emberi érzés, vagy valamilyen egyedi tárgy kerül a középpontba. \n Jó időtöltést kívánok az oldalamon! ",
+      text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
+      cardTitle: "Bemutatkozás",
+      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, A képzőművészettel már több éve foglalkozom. Azon belül is festészettel és grafikával. Alkotásaimmal egy-egy hely szépségét, formavilágát mutatom be különböző médiumok használatával. Ami a grafikai munkáimat illeti, igyekszem olyat alkotni, amin egy-egy emberi érzés, vagy valamilyen egyedi tárgy kerül a középpontba. Jó időtöltést kívánok az oldalamon!`,
     },
     contact: {
       title: "Kapcsolat",
@@ -80,8 +82,11 @@ export const translations = {
     },
     about: {
       title: "About Me",
-      text: "As an artist, I am always inspired by nature and human emotions...",
+      text: "Get to know me better and explore the story behind my art.",
+      cardTitle: "Introduction",
+      cardContent: `Welcome to my website! I am Péter Révfalvi, and I have been involved in visual arts for several years. I focus mainly on painting and graphics. Through my works, I aim to capture the beauty and forms of different places using various media. As for my graphic works, I strive to create pieces that highlight human emotions or unique objects. Enjoy your time on my website!`,
     },
+
     contact: {
       title: "Contact",
       text: "Interested in a custom order or have questions about my works? Get in touch with me!",
