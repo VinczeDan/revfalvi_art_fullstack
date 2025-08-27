@@ -11,7 +11,7 @@ interface NavigationProps {
 
 const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, lang, setLang } = useTranslation(); // TranslationContext
+  const { t, language, setLanguage } = useTranslation(); // TranslationContext
 
   const menuItems = [
     { id: "home", label: t("navigation.home") },
@@ -73,9 +73,9 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
             {/* Nyelvváltó gomb */}
             <button
               className="ml-4 px-3 py-1 border rounded text-sm hover:bg-accent transition-colors"
-              onClick={() => setLang(lang === "hu" ? "en" : "hu")}
+              onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
             >
-              {lang === "hu" ? "EN" : "HU"}
+              {language === "hu" ? "EN" : "HU"}
             </button>
           </div>
 
@@ -84,9 +84,9 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
             {/* Nyelvváltó gomb mobilon */}
             <button
               className="px-2 py-1 border rounded text-sm hover:bg-accent transition-colors"
-              onClick={() => setLang(lang === "hu" ? "en" : "hu")}
+              onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
             >
-              {lang === "hu" ? "EN" : "HU"}
+              {language === "hu" ? "EN" : "HU"}
             </button>
 
             <Button
