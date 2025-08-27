@@ -9,6 +9,5 @@ class PaintingAdmin(admin.ModelAdmin):
     search_fields = ('title_hu', 'title_en', 'description_hu', 'description_en')
 
     def get_title(self, obj):
-        # Admin listában megjelenő cím
         return obj.title_hu or obj.title_en
     get_title.short_description = "Cím"
