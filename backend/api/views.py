@@ -75,8 +75,16 @@ class PaintingViewSet(viewsets.ModelViewSet):
     queryset = Painting.objects.all()
     serializer_class = PaintingSerializer
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        technique = self.request.query_params.get("technique")
+        if technique:
+            queryset = queryset.filter(technique=technique)
+        return queryset
+
     def get_serializer_context(self):
         context = super().get_serializer_context()
         lang = self.request.query_params.get("lang", "hu")
         context["lang"] = lang
         return context
+
