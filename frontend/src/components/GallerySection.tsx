@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "@/TranslationContext";
 
 interface Painting {
   id: number;
@@ -30,16 +31,19 @@ const GallerySection = ({
     null
   );
 
+  const { language } = useTranslation();
+
+  // Fetch paintings whenever id or lang changes
   useEffect(() => {
     const fetchPaintings = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
-          `/api/paintings/?technique=${id}`
+          `/api/paintings/?technique=${id}&lang=${language}`
         );
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+        const data: Painting[] = await response.json();
         setPaintings(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error occurred");
@@ -50,7 +54,7 @@ const GallerySection = ({
     };
 
     fetchPaintings();
-  }, [id]);
+  }, [id, language]);
 
   const colorVariants = {
     watercolor: "from-blue-400 to-blue-600",
@@ -59,25 +63,28 @@ const GallerySection = ({
     pencil: "from-gray-400 to-gray-600",
   };
 
-  if (loading) {
+  if (loading)
     return (
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center">
-          <p>Képek betöltése...</p>
+          <p>{language === "en" ? "Loading paintings..." : "Képek betöltése..."}</p>
         </div>
       </section>
     );
-  }
 
-  if (error) {
+  if (error)
     return (
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center text-red-500">
-          <p>Hiba történt a képek betöltése közben: {error}</p>
+          <p>
+            {language === "en"
+              ? "Error loading paintings:"
+              : "Hiba történt a képek betöltése közben:"}{" "}
+            {error}
+          </p>
         </div>
       </section>
     );
-  }
 
   return (
     <section id={id} className="py-20 px-4">
@@ -95,7 +102,6 @@ const GallerySection = ({
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {title}
           </h2>
-
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {description}
           </p>
@@ -132,7 +138,7 @@ const GallerySection = ({
           ))}
         </div>
 
-        {/* Modal with fixed height image */}
+        {/* Modal */}
         {selectedPainting && (
           <div
             className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
@@ -142,7 +148,7 @@ const GallerySection = ({
               className="bg-white rounded-lg overflow-hidden max-w-6xl w-full max-h-[90vh] flex flex-col lg:flex-row"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Left Side - Fixed Height Image (always 70vh) */}
+              {/* Left Side - Image */}
               <div className="lg:w-1/2 h-[70vh] bg-gray-50 flex items-center justify-center p-8">
                 <div className="w-full h-full flex items-center justify-center">
                   <img
@@ -163,7 +169,7 @@ const GallerySection = ({
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm font-medium text-gray-500">
-                        Technika
+                        {language === "en" ? "Technique" : "Technika"}
                       </p>
                       <p className="text-lg capitalize">
                         {selectedPainting.technique}
@@ -171,19 +177,19 @@ const GallerySection = ({
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-500">
-                        Készült
+                        {language === "en" ? "Created" : "Készült"}
                       </p>
                       <p className="text-lg">
                         {new Date(
                           selectedPainting.created_at
-                        ).toLocaleDateString("hu-HU")}
+                        ).toLocaleDateString(language === "en" ? "en-US" : "hu-HU")}
                       </p>
                     </div>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
                     <h4 className="text-sm font-medium text-gray-500 mb-2">
-                      Leírás
+                      {language === "en" ? "Description" : "Leírás"}
                     </h4>
                     <p className="text-gray-700 whitespace-pre-line">
                       {selectedPainting.description}
