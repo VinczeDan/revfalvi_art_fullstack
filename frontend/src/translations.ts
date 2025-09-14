@@ -30,7 +30,7 @@ export const translations = {
       errorTitle: "Hiba",
       servicesTitle: "Művészeti szolgáltatások",
       servicesList:
-        "• Házasságkötés\n• Babavárás\n• Páros tánc\n• Egyedi portré készítés\n• Hangszeres előadás",
+        "• Házasságkötés ( pl. egy szép templomi pillanat megörökítése) \n• Babavárás ( Mi lehet ennél egy szebb pillanat, amikor egy pár babát vár. Ennek megörökítése akár egy őszi csendéletben is maradandó lehet)\n• Páros tánc ( Sok festmény és rajz készült már táncoló párokról. Lehet, hogy ti is szeretnétek egy szép rajzot vagy festményt erről? )\n• Hangszeres portré ( Nincs annál szebb, amikor gyermekünk vagy netán rokonunk vagy ismerősünk megszólaltat egy hangszert. Ennek megörökítése jól mutathat a falon) \n• Egyedi portré készitése ",
       emailTitle: "Email",
       phoneTitle: "Telefon",
       formTitle: "Üzenet küldése",
@@ -95,7 +95,7 @@ export const translations = {
       errorTitle: "Error",
       servicesTitle: "Art Services",
       servicesList:
-        "• Wedding\n• Expecting a baby\n• Couple dance\n• Custom portrait\n• Musical performance",
+        "• Weddings (e.g., capturing a beautiful moment in a church ceremony)\n• Expecting a Baby (What could be more beautiful than a couple awaiting a child? Immortalizing this moment—even in the form of an autumn still life—can be truly lasting)\n• Couple’s Dance (Many artworks have been created of dancing couples. Maybe you, too, would like a beautiful drawing or painting of such a moment?)\n• Musical Portrait (There’s nothing more touching than when our child, relative, or friend plays an instrument. Preserving this memory can look wonderful on your wall)\n• Custom Portraits",
       emailTitle: "Email",
       phoneTitle: "Phone",
       formTitle: "Send Message",
