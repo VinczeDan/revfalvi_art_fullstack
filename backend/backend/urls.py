@@ -4,8 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from api.views import PaintingViewSet, TodoViewSet, send_contact_email  
-
+from api.views import PaintingViewSet, TodoViewSet, send_contact_email, NewsViewSet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
