@@ -16,6 +16,7 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
   const menuItems = [
     { id: "home", label: t("navigation.home") },
     { id: "about", label: t("navigation.about") },
+    { id: "news", label: t("navigation.news") }, // Hozzáadjuk a news menüpontot
     { id: "watercolor", label: t("navigation.watercolor") },
     { id: "acrylic", label: t("navigation.acrylic") },
     { id: "oil", label: t("navigation.oil") },

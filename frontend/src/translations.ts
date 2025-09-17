@@ -4,6 +4,7 @@ export const translations = {
     navigation: {
       home: "Kezdőlap",
       about: "Rólam",
+      news: "Sajtó", // Új kulcs a navigációban
       watercolor: "Akvarell",
       acrylic: "Akril",
       oil: "Olajfestés",
@@ -21,6 +22,15 @@ export const translations = {
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
       cardTitle: "Bemutatkozás",
       cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, A képzőművészettel már több éve foglalkozom. Azon belül is festészettel és grafikával. Alkotásaimmal egy-egy hely szépségét, formavilágát mutatom be különböző médiumok használatával. Ami a grafikai munkáimat illeti, igyekszem olyat alkotni, amin egy-egy emberi érzés, vagy valamilyen egyedi tárgy kerül a középpontba. Jó időtöltést kívánok az oldalamon!`,
+    },
+    news: {
+      // Új news objektum
+      title: "Friss hírek",
+      description:
+        "Légy naprakész a sajtómegjelenéseimről és a munkáimról szóló cikkekről.",
+      loading: "Hírek betöltése...",
+      error: "Hiba történt a hírek betöltése közben",
+      noNews: "Nincsenek hírek.",
     },
     contact: {
       title: "Kapcsolat",
@@ -68,6 +78,7 @@ export const translations = {
     navigation: {
       home: "Home",
       about: "About",
+      news: "Press", // Új kulcs a navigációban
       watercolor: "Watercolor",
       acrylic: "Acrylic",
       oil: "Oil Painting",
@@ -86,7 +97,15 @@ export const translations = {
       cardTitle: "Introduction",
       cardContent: `Welcome to my website! I am Péter Révfalvi, and I have been involved in visual arts for several years. I focus mainly on painting and graphics. Through my works, I aim to capture the beauty and forms of different places using various media. As for my graphic works, I strive to create pieces that highlight human emotions or unique objects. Enjoy your time on my website!`,
     },
-
+    news: {
+      // Új news objektum
+      title: "Latest News",
+      description:
+        "Stay updated with recent press releases and articles about my work.",
+      loading: "Loading news...",
+      error: "Error loading news",
+      noNews: "No news items found.",
+    },
     contact: {
       title: "Contact",
       text: "Interested in a custom order or have questions about my works? Get in touch with me!",

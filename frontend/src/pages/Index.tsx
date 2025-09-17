@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import AboutMe from "@/components/AboutMe";
+import NewsSection from "@/components/NewsSection"; // Importáljuk az új komponenst
 import { useTranslation } from "@/TranslationContext";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       const sections = [
         "home",
         "about",
+        "news", // Hozzáadjuk a news szekciót
         "watercolor",
         "acrylic",
         "oil",
@@ -52,16 +54,14 @@ const Index = () => {
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
-
       <HeroSection
         setActiveSection={setActiveSection}
         title={t("hero.title")}
         subtitle={t("hero.subtitle")}
         buttonText={t("hero.button")}
       />
-
       <AboutMe />
-
+      <NewsSection /> {/* Beillesztjük a hírek komponenst */}
       <GallerySection
         id="watercolor"
         title={t("gallery.watercolor.title")}
@@ -86,7 +86,6 @@ const Index = () => {
         description={t("gallery.pencil.description")}
         color="pencil"
       />
-
       <ContactSection />
     </div>
   );
