@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Todo, Painting
-from .serializers import TodoSerializer, PaintingSerializer 
+from .models import Todo, Painting, News
+from .serializers import TodoSerializer, PaintingSerializer, NewsSerializer
 from django.shortcuts import render
 from django.core.mail import EmailMessage
 from django.http import JsonResponse
@@ -41,10 +41,9 @@ def send_contact_email(request):
                 {data.get('message')}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[settings.DEFAULT_FROM_EMAIL],
-                reply_to=[data.get('email')],
+                to=[settings.DEFAULT_TO_EMAIL]
             )
-            
+           
             logger.info("Email küldése megkezdve")
             email.send(fail_silently=False)
             logger.info("Email sikeresen elküldve")
@@ -63,7 +62,7 @@ def send_contact_email(request):
 
 
 def index_view(request):
-    return render(request, 'index.html')  
+    return render(request, 'index.html')
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -84,7 +83,15 @@ class PaintingViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        lang = self.request.query_params.get("lang", "hu")
-        context["lang"] = lang
+        context['lang'] = self.request.query_params.get('lang', 'hu')
         return context
 
+
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['lang'] = self.request.query_params.get('lang', 'hu')
+        return context

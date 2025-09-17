@@ -36,12 +36,27 @@ class Painting(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Festmény"
-        verbose_name_plural = "Festmények"
 
-    # Nyelv alapú megjelenítés
-    def get_title(self, lang="hu"):
-        return self.title_en if lang == "en" and self.title_en else self.title_hu
 
-    def get_description(self, lang="hu"):
-        return self.description_en if lang == "en" and self.description_en else self.description_hu
+class News(models.Model):
+    title_hu = models.CharField(max_length=200, verbose_name="Cím (magyar)")
+    title_en = models.CharField(max_length=200, verbose_name="Cím (angol)", blank=True, null=True)
+    
+    content_hu = models.TextField(verbose_name="Tartalom (magyar)")
+    content_en = models.TextField(verbose_name="Tartalom (angol)", blank=True, null=True)
+    
+    image = models.ImageField(
+        upload_to='news_images/',
+        verbose_name="Képfájl",
+        blank=True,
+        null=True
+    )
+    
+    publication_date = models.DateField(auto_now_add=True, verbose_name="Dátum")
+
+    def __str__(self):
+        return self.title_hu
+
+    class Meta:
+        ordering = ['-publication_date']
+        verbose_name_plural = "Hírek"

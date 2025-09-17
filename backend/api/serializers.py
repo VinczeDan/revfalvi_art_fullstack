@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Todo, Painting  
+from .models import Todo, Painting, News
 
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -45,3 +45,39 @@ class PaintingSerializer(serializers.ModelSerializer):
         if lang == "en" and obj.description_en:
             return obj.description_en
         return obj.description_hu
+
+
+class NewsSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
+    content = serializers.SerializerMethodField()
+
+    class Meta:
+        model = News
+        fields = [
+            'id',
+            'title',
+            'content',
+            'image_url',
+            'publication_date',
+        ]
+
+    def get_image_url(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return None
+
+    def get_title(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.title_en:
+            return obj.title_en
+        return obj.title_hu
+
+    def get_content(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.content_en:
+            return obj.content_en
+        return obj.content_hu
