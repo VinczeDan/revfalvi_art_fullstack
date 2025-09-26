@@ -152,7 +152,7 @@ const GallerySection = ({
               {/* Close Button */}
               <button
                 onClick={() => setSelectedPainting(null)}
-                className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold z-50"
+                className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold z-50"
               >
                 ×
               </button>
