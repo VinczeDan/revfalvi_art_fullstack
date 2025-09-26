@@ -31,6 +31,7 @@ export const translations = {
       loading: "Hírek betöltése...",
       error: "Hiba történt a hírek betöltése közben",
       noNews: "Nincsenek hírek.",
+      back: "Vissza a hírekhez", // 🔹 új kulcs
     },
     contact: {
       title: "Kapcsolat",
@@ -105,6 +106,7 @@ export const translations = {
       loading: "Loading news...",
       error: "Error loading news",
       noNews: "No news items found.",
+      back: "Back to news", // 🔹 új kulcs
     },
     contact: {
       title: "Contact",
