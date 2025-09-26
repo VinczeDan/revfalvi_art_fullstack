@@ -56,6 +56,23 @@ const GallerySection = ({
     fetchPaintings();
   }, [id, language]);
 
+  // Scroll effect for image scaling
+  useEffect(() => {
+    if (!selectedPainting) return;
+
+    const image = document.getElementById("modal-image");
+    const handleScroll = () => {
+      if (image) {
+        const scrollY = window.scrollY;
+        const scale = Math.max(0.6, 1 - scrollY / 500);
+        image.style.transform = `scale(${scale})`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [selectedPainting]);
+
   const colorVariants = {
     watercolor: "from-blue-400 to-blue-600",
     acrylic: "from-purple-500 to-pink-500",
@@ -67,7 +84,9 @@ const GallerySection = ({
     return (
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center">
-          <p>{language === "en" ? "Loading paintings..." : "Képek betöltése..."}</p>
+          <p>
+            {language === "en" ? "Loading paintings..." : "Képek betöltése..."}
+          </p>
         </div>
       </section>
     );
@@ -141,60 +160,64 @@ const GallerySection = ({
         {/* Modal */}
         {selectedPainting && (
           <div
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/90 flex flex-col"
             onClick={() => setSelectedPainting(null)}
           >
-            <div
-              className="bg-white rounded-lg overflow-hidden max-w-6xl w-full max-h-[90vh] flex flex-col lg:flex-row"
-              onClick={(e) => e.stopPropagation()}
+            {/* Bezáró gomb */}
+            <button
+              onClick={() => setSelectedPainting(null)}
+              className="absolute top-4 right-4 z-50 bg-white/80 hover:bg-white text-black rounded-full p-2 shadow-lg"
             >
-              {/* Left Side - Image */}
-              <div className="lg:w-1/2 h-[70vh] bg-gray-50 flex items-center justify-center p-8">
-                <div className="w-full h-full flex items-center justify-center">
-                  <img
-                    src={selectedPainting.image_url}
-                    alt={selectedPainting.title}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
+              ✕
+            </button>
+
+            {/* Tartalom görgethető */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Kép blokk */}
+              <div className="sticky top-0 z-40 bg-black flex justify-center items-center h-[50vh]">
+                <img
+                  src={selectedPainting.image_url}
+                  alt={selectedPainting.title}
+                  className="object-contain max-h-full transition-transform duration-300 ease-in-out will-change-transform"
+                  style={{
+                    transform: `scale(1)`,
+                  }}
+                  id="modal-image"
+                />
               </div>
 
-              {/* Right Side - Content */}
-              <div className="lg:w-1/2 p-8 overflow-y-auto">
-                <div className="space-y-6">
-                  <h3 className="text-3xl font-bold text-gray-900">
-                    {selectedPainting.title}
-                  </h3>
+              {/* Szöveges rész */}
+              <div className="bg-white p-6 space-y-6">
+                <h3 className="text-2xl font-bold">{selectedPainting.title}</h3>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm font-medium text-gray-500">
-                        {language === "en" ? "Technique" : "Technika"}
-                      </p>
-                      <p className="text-lg capitalize">
-                        {selectedPainting.technique}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-500">
-                        {language === "en" ? "Created" : "Készült"}
-                      </p>
-                      <p className="text-lg">
-                        {new Date(
-                          selectedPainting.created_at
-                        ).toLocaleDateString(language === "en" ? "en-US" : "hu-HU")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-200 pt-4">
-                    <h4 className="text-sm font-medium text-gray-500 mb-2">
-                      {language === "en" ? "Description" : "Leírás"}
-                    </h4>
-                    <p className="text-gray-700 whitespace-pre-line">
-                      {selectedPainting.description}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
+                      {language === "en" ? "Technique" : "Technika"}
+                    </p>
+                    <p className="text-lg capitalize">
+                      {selectedPainting.technique}
                     </p>
                   </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
+                      {language === "en" ? "Created" : "Készült"}
+                    </p>
+                    <p className="text-lg">
+                      {new Date(selectedPainting.created_at).toLocaleDateString(
+                        language === "en" ? "en-US" : "hu-HU"
+                      )}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <h4 className="text-sm font-medium text-gray-500 mb-2">
+                    {language === "en" ? "Description" : "Leírás"}
+                  </h4>
+                  <p className="text-gray-700 whitespace-pre-line">
+                    {selectedPainting.description}
+                  </p>
                 </div>
               </div>
             </div>
