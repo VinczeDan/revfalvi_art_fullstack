@@ -47,25 +47,28 @@ const NewsDetail = () => {
   if (!news) return <p>{t("news.noNews")}</p>;
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-10 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-3xl">
-        <Link to="/" className="text-blue-500 underline mb-6 block">
+        <Link to="/" className="text-blue-600 hover:underline mb-6 block">
           ← {t("news.back")}
         </Link>
-        <Card className="overflow-hidden shadow-soft">
+
+        <Card className="overflow-hidden shadow-soft rounded-2xl">
           {news.image_url && (
             <img
               src={news.image_url}
               alt={news.title}
-              className="w-full h-64 object-cover"
+              className="w-full h-48 sm:h-64 md:h-80 object-cover"
             />
           )}
-          <CardContent className="p-6">
-            <h1 className="text-3xl font-bold mb-4">{news.title}</h1>
-            <p className="text-sm text-gray-500 mb-6">
+          <CardContent className="p-4 sm:p-6 md:p-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+              {news.title}
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
               {new Date(news.publication_date).toLocaleDateString()}
             </p>
-            <p className="text-lg leading-relaxed whitespace-pre-line">
+            <p className="text-base sm:text-lg leading-relaxed whitespace-pre-line">
               {news.content}
             </p>
           </CardContent>
