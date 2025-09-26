@@ -108,26 +108,27 @@ const GallerySection = ({
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {paintings.map((painting) => (
             <Card
               key={painting.id}
-              className="group hover-lift cursor-pointer border-0 shadow-soft hover:shadow-medium overflow-hidden"
+              className="group cursor-pointer border-0 shadow-soft overflow-hidden rounded-xl"
               onClick={() => setSelectedPainting(painting)}
             >
               <CardContent className="p-0">
-                <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
+                <div className="relative overflow-hidden aspect-[4/3] rounded-lg">
                   <img
                     src={painting.image_url}
                     alt={painting.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-semibold text-lg mb-1">
+                  {/* Overlay for mobile & hover */}
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 sm:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <div>
+                      <h3 className="text-white font-semibold text-base sm:text-lg">
                         {painting.title}
                       </h3>
-                      <p className="text-white/90 text-sm line-clamp-2">
+                      <p className="text-white/90 text-xs sm:text-sm line-clamp-2">
                         {painting.description}
                       </p>
                     </div>
@@ -137,6 +138,64 @@ const GallerySection = ({
             </Card>
           ))}
         </div>
+
+        {selectedPainting && (
+          <div
+            className="fixed inset-0 z-50 bg-black/80 flex items-start sm:items-center justify-center p-4 overflow-y-auto"
+            onClick={() => setSelectedPainting(null)}
+          >
+            <div
+              className="bg-white rounded-xl overflow-hidden w-full sm:max-w-4xl max-h-[90vh] flex flex-col sm:flex-row"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Left Side - Image */}
+              <div className="sm:w-1/2 h-64 sm:h-auto bg-gray-50 flex items-center justify-center p-4 sm:p-8">
+                <img
+                  src={selectedPainting.image_url}
+                  alt={selectedPainting.title}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="sm:w-1/2 p-4 sm:p-8 overflow-y-auto">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+                  {selectedPainting.title}
+                </h3>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <p className="text-xs sm:text-sm font-medium text-gray-500">
+                      {language === "en" ? "Technique" : "Technika"}
+                    </p>
+                    <p className="text-sm sm:text-lg capitalize">
+                      {selectedPainting.technique}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm font-medium text-gray-500">
+                      {language === "en" ? "Created" : "Készült"}
+                    </p>
+                    <p className="text-sm sm:text-lg">
+                      {new Date(selectedPainting.created_at).toLocaleDateString(
+                        language === "en" ? "en-US" : "hu-HU"
+                      )}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <h4 className="text-xs sm:text-sm font-medium text-gray-500 mb-2">
+                    {language === "en" ? "Description" : "Leírás"}
+                  </h4>
+                  <p className="text-sm sm:text-base text-gray-700 whitespace-pre-line">
+                    {selectedPainting.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Modal */}
         {selectedPainting && (
@@ -182,7 +241,9 @@ const GallerySection = ({
                       <p className="text-lg">
                         {new Date(
                           selectedPainting.created_at
-                        ).toLocaleDateString(language === "en" ? "en-US" : "hu-HU")}
+                        ).toLocaleDateString(
+                          language === "en" ? "en-US" : "hu-HU"
+                        )}
                       </p>
                     </div>
                   </div>
