@@ -20,8 +20,19 @@ export const translations = {
     about: {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
-      cardTitle: "Bemutatkozás",
-      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, A képzőművészettel már több éve foglalkozom. Azon belül is festészettel és grafikával. Alkotásaimmal egy-egy hely szépségét, formavilágát mutatom be különböző médiumok használatával. Ami a grafikai munkáimat illeti, igyekszem olyat alkotni, amin egy-egy emberi érzés, vagy valamilyen egyedi tárgy kerül a középpontba. Jó időtöltést kívánok az oldalamon!`,
+      cardTitle: "Küldetésnyilatkozat",
+      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes
+embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat
+jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy
+olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek
+felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a
+világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a
+színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában
+legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít
+ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell,
+az akvarell és az olajfesték. Amiben úgy érzem, hogy más vagyok mint festő vagy grafikus
+társaim, az az, hogy meg tudok állni egy pillanatra, észre tudom venni azt az egyediséget,
+ami elragad és alkotásra késztet.`,
     },
     news: {
       // Új news objektum
