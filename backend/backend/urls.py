@@ -8,6 +8,5 @@ from api.views import PaintingViewSet, TodoViewSet, send_contact_email, NewsView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('send-contact-email/', send_contact_email, name='send-contact-email'),  # <- Új sor
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
