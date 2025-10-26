@@ -21,7 +21,7 @@ export const translations = {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
       cardTitle: "Küldetésnyilatkozat",
-      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. Amiben úgy érzem, hogy más vagyok mint festő vagy grafikus társaim, az az, hogy meg tudok állni egy pillanatra, észre tudom venni azt az egyediséget, ami elragad és alkotásra késztet.`,
+      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. `,
     },
     news: {
       // Új news objektum
@@ -96,7 +96,11 @@ export const translations = {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
       cardTitle: "Introduction",
-      cardContent: `Welcome to my website! I am Péter Révfalvi, and I have been involved in visual arts for several years. I focus mainly on painting and graphics. Through my works, I aim to capture the beauty and forms of different places using various media. As for my graphic works, I strive to create pieces that highlight human emotions or unique objects. Enjoy your time on my website!`,
+      cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface.
+
+For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil.
+
+My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
     },
     news: {
       // Új news objektum
