@@ -5,18 +5,11 @@ import { useTranslation } from "@/TranslationContext";
 import { Newspaper } from "lucide-react";
 import { Link } from "react-router-dom";
 
-interface NewsImage {
-  id: number;
-  image_url: string;
-  caption?: string;
-}
-
 interface NewsItem {
   id: number;
   title: string;
   content: string;
-  image_url: string; // borítókép
-  images: NewsImage[]; // több kép
+  image_url: string;
   publication_date: string;
 }
 
@@ -120,24 +113,6 @@ const NewsSection = () => {
                   </div>
                 </CardContent>
               </Link>
-
-              {/* Több kép megjelenítése alul */}
-              {item.images && item.images.length > 0 && (
-                <div className="grid grid-cols-2 gap-2 p-4 bg-muted/20">
-                  {item.images.map((img) => (
-                    <div
-                      key={img.id}
-                      className="aspect-[4/3] overflow-hidden rounded-md"
-                    >
-                      <img
-                        src={img.image_url}
-                        alt={img.caption || item.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
             </Card>
           ))}
         </div>
