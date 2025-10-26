@@ -25,6 +25,7 @@ const NewsDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { t, language } = useTranslation();
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchNewsDetail = async () => {
@@ -82,7 +83,7 @@ const NewsDetail = () => {
             </p>
 
             {/* Tartalom */}
-            <p className="text-base sm:text-lg leading-relaxed whitespace-pre-line">
+            <p className="text-base sm:text-lg leading-relaxed whitespace-pre-line mb-6">
               {news.content}
             </p>
 
@@ -94,7 +95,8 @@ const NewsDetail = () => {
                     <img
                       src={img.image_url}
                       alt={img.caption || news.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-cover cursor-pointer transform transition-transform duration-300 hover:scale-105"
+                      onClick={() => setZoomedImage(img.image_url)}
                     />
                     {img.caption && (
                       <p className="text-sm text-gray-600 mt-1">
@@ -108,6 +110,20 @@ const NewsDetail = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Zoom modal */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-pointer"
+          onClick={() => setZoomedImage(null)}
+        >
+          <img
+            src={zoomedImage}
+            alt="Zoomed"
+            className="max-h-[90%] max-w-[90%] rounded-lg shadow-lg transform transition-transform duration-300 scale-100"
+          />
+        </div>
+      )}
     </section>
   );
 };
