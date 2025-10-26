@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Todo, Painting, News
+from .models import Todo, Painting, News, NewsImage
 
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -47,10 +47,28 @@ class PaintingSerializer(serializers.ModelSerializer):
         return obj.description_hu
 
 
+# ÚJ: Képek serializer a News-hoz
+class NewsImageSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = NewsImage
+        fields = ["id", "image_url", "caption"]
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        if obj.image:
+            if request is not None:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return None
+
+
 class NewsSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()
     content = serializers.SerializerMethodField()
+    images = NewsImageSerializer(many=True, read_only=True)  # ⬅️ több kép hozzáadva
 
     class Meta:
         model = News
@@ -59,6 +77,7 @@ class NewsSerializer(serializers.ModelSerializer):
             'title',
             'content',
             'image_url',
+            'images',
             'publication_date',
         ]
 

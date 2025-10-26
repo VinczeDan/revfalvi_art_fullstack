@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Painting, News
+from .models import Painting, News, NewsImage
 
 
 @admin.register(Painting)
@@ -25,11 +25,18 @@ class PaintingAdmin(admin.ModelAdmin):
     get_title.short_description = "Cím"
 
 
+class NewsImageInline(admin.TabularInline):
+    model = NewsImage
+    extra = 1  # hány üres sort mutasson
+    fields = ('image', 'caption', 'order')
+
+
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('get_title', 'publication_date')
     list_filter = ('publication_date',)
     search_fields = ('title_hu', 'title_en', 'content_hu', 'content_en')
+    inlines = [NewsImageInline]  # ⬅️ itt hozzáadva
 
     fieldsets = (
         ("Címek", {
@@ -38,7 +45,7 @@ class NewsAdmin(admin.ModelAdmin):
         ("Tartalom", {
             'fields': ('content_hu', 'content_en')
         }),
-        ("Kép", {
+        ("Borítókép", {
             'fields': ('image',)
         }),
     )

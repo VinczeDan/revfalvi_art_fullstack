@@ -51,6 +51,8 @@ class News(models.Model):
         blank=True,
         null=True
     )
+
+
     
     publication_date = models.DateField(auto_now_add=True, verbose_name="Dátum")
 
@@ -60,3 +62,21 @@ class News(models.Model):
     class Meta:
         ordering = ['-publication_date']
         verbose_name_plural = "Hírek"
+
+
+class NewsImage(models.Model):
+    news = models.ForeignKey(
+        News,
+        related_name='images',
+        on_delete=models.CASCADE,
+        verbose_name="Hír"
+    )
+    image = models.ImageField(upload_to='news_images/', verbose_name="Kép")
+    caption = models.CharField(max_length=255, blank=True, null=True, verbose_name="Képaláírás")
+    order = models.PositiveIntegerField(default=0, verbose_name="Sorrend")
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Kép a(z) {self.news.title_hu} hírhez"
