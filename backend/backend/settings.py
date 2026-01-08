@@ -99,16 +99,11 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-DEFAULT_FROM_EMAIL = "no-reply@example.com"
-DEFAULT_TO_EMAIL = "info@example.com"
+# EMAIL – biztonságos default
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "localhost"
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
-
+DEFAULT_FROM_EMAIL = "no-reply@revfalvi-art.hu"
+DEFAULT_TO_EMAIL = "revfalvi.peter@googlemail.com"
 
 
 # --- Local settings import ---
