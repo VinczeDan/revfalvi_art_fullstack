@@ -102,8 +102,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL – biztonságos default
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-DEFAULT_FROM_EMAIL = "no-reply@revfalvi-art.hu"
-DEFAULT_TO_EMAIL = "revfalvi.peter@googlemail.com"
+DEFAULT_FROM_EMAIL = "daniel.vincze15@gmail.com"
+DEFAULT_TO_EMAIL = "daniel.vincze15@gmail.com"
 
 
 # --- Local settings import ---
@@ -134,5 +134,15 @@ try:
                 'PORT': '',
             }
         }
+
+    EMAIL_BACKEND = getattr(local_settings, 'EMAIL_BACKEND', EMAIL_BACKEND)
+    EMAIL_HOST = getattr(local_settings, 'EMAIL_HOST', None)
+    EMAIL_PORT = getattr(local_settings, 'EMAIL_PORT', None)
+    EMAIL_USE_TLS = getattr(local_settings, 'EMAIL_USE_TLS', None)
+    EMAIL_HOST_USER = getattr(local_settings, 'EMAIL_HOST_USER', None)
+    EMAIL_HOST_PASSWORD = getattr(local_settings, 'EMAIL_HOST_PASSWORD', None)
+    DEFAULT_FROM_EMAIL = getattr(local_settings, 'DEFAULT_FROM_EMAIL', DEFAULT_FROM_EMAIL)
+    DEFAULT_TO_EMAIL = getattr(local_settings, 'DEFAULT_TO_EMAIL', DEFAULT_TO_EMAIL)
+
 except ImportError:
     print("local_settings nem található!")

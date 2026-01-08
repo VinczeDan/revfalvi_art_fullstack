@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+from django.core.mail import send_mail
 import logging
 from django.conf import settings
 
@@ -95,3 +95,17 @@ class NewsViewSet(viewsets.ModelViewSet):
         context = super().get_serializer_context()
         context['lang'] = self.request.query_params.get('lang', 'hu')
         return context
+
+
+
+def send_test_email(request):
+    subject = "Teszt email a Revfalvi Art weboldalról"
+    message = "Ez egy teszt email, hogy ellenőrizzük a SendGrid SMTP beállításokat."
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [settings.DEFAULT_TO_EMAIL]
+
+    try:
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        return JsonResponse({"status": "success", "message": "Email elküldve"})
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)})

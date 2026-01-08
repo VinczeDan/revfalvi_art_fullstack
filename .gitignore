@@ -9,7 +9,7 @@ venv/
 
 # Django secret settings
 backend/local_settings.py
-
+local_settings.py
 # Databases
 db.sqlite3
 

@@ -10,4 +10,5 @@ router.register(r'news', NewsViewSet)
 
 urlpatterns = router.urls + [
     path("send-contact-email/", send_contact_email, name="send_contact_email"),
+    path('send-test-email/', views.send_test_email, name='send_test_email'),
 ]
