@@ -5,24 +5,22 @@ import HeroSection from "@/components/HeroSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import AboutMe from "@/components/AboutMe";
-import NewsSection from "@/components/NewsSection"; // Importáljuk az új komponenst
+import NewsSection from "@/components/NewsSection";
+import CoursesSection from "@/components/CoursesSection";
 import { useTranslation } from "@/TranslationContext";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
   const { t } = useTranslation();
 
-  // Scroll tracking
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
         "home",
         "about",
-        "news", // Hozzáadjuk a news szekciót
-        "watercolor",
-        "acrylic",
-        "oil",
-        "pencil",
+        "courses", // ← ÚJ
+        "news",
+        "portfolio", // ← a gallery wrapper id-je
         "contact",
       ];
       const scrollPosition = window.scrollY + 100;
@@ -61,31 +59,40 @@ const Index = () => {
         buttonText={t("hero.button")}
       />
       <AboutMe />
-      <NewsSection /> {/* Beillesztjük a hírek komponenst */}
-      <GallerySection
-        id="watercolor"
-        title={t("gallery.watercolor.title")}
-        description={t("gallery.watercolor.description")}
-        color="watercolor"
-      />
-      <GallerySection
-        id="acrylic"
-        title={t("gallery.acrylic.title")}
-        description={t("gallery.acrylic.description")}
-        color="acrylic"
-      />
-      <GallerySection
-        id="oil"
-        title={t("gallery.oil.title")}
-        description={t("gallery.oil.description")}
-        color="oil"
-      />
-      <GallerySection
-        id="pencil"
-        title={t("gallery.pencil.title")}
-        description={t("gallery.pencil.description")}
-        color="pencil"
-      />
+
+      {/* ÚJ: Tanfolyamok szekció – közvetlenül a Rólam után */}
+      <CoursesSection />
+
+      <NewsSection />
+
+      {/* Portfolio wrapper – a navigáció a "portfolio" id-re scrolloz */}
+      <div id="portfolio">
+        <GallerySection
+          id="watercolor"
+          title={t("gallery.watercolor.title")}
+          description={t("gallery.watercolor.description")}
+          color="watercolor"
+        />
+        <GallerySection
+          id="acrylic"
+          title={t("gallery.acrylic.title")}
+          description={t("gallery.acrylic.description")}
+          color="acrylic"
+        />
+        <GallerySection
+          id="oil"
+          title={t("gallery.oil.title")}
+          description={t("gallery.oil.description")}
+          color="oil"
+        />
+        <GallerySection
+          id="pencil"
+          title={t("gallery.pencil.title")}
+          description={t("gallery.pencil.description")}
+          color="pencil"
+        />
+      </div>
+
       <ContactSection />
     </div>
   );

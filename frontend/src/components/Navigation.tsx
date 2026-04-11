@@ -11,17 +11,15 @@ interface NavigationProps {
 
 const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, language, setLanguage } = useTranslation(); // TranslationContext
+  const { t, language, setLanguage } = useTranslation();
 
   const menuItems = [
-    { id: "home", label: t("navigation.home") },
-    { id: "about", label: t("navigation.about") },
-    { id: "news", label: t("navigation.news") }, // Hozzáadjuk a news menüpontot
-    { id: "watercolor", label: t("navigation.watercolor") },
-    { id: "acrylic", label: t("navigation.acrylic") },
-    { id: "oil", label: t("navigation.oil") },
-    { id: "pencil", label: t("navigation.pencil") },
-    { id: "contact", label: t("navigation.contact") },
+    { id: "home", label: "Kezdőlap", highlight: false },
+    { id: "about", label: "Rólam", highlight: false },
+    { id: "courses", label: "Tanfolyamok", highlight: true }, // ← piros kiemelés
+    { id: "news", label: "Sajtó", highlight: false },
+    { id: "portfolio", label: "Portfólió", highlight: false },
+    { id: "contact", label: "Kapcsolat", highlight: false },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -33,7 +31,10 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const navHeight = 64;
+        const top =
+          element.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top, behavior: "smooth" });
       }
     }
   };
@@ -42,7 +43,7 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Név */}
+          {/* Logo */}
           <div className="slide-in-left">
             <h1
               className="text-xl font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
@@ -53,25 +54,32 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-1">
             {menuItems.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`slide-in-right stagger-${Math.min(
-                  index + 1,
-                  4
-                )} text-sm font-medium transition-colors hover:text-primary ${
-                  activeSection === item.id
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-muted-foreground"
-                }`}
+                className={`
+                  slide-in-right stagger-${Math.min(index + 1, 4)}
+                  text-sm font-medium transition-all duration-200 px-3 py-1.5 rounded
+                  ${
+                    item.highlight
+                      ? `border border-red-500 text-red-500 hover:bg-red-500 hover:text-white
+                       ${activeSection === item.id ? "bg-red-500 text-white" : ""}`
+                      : `hover:text-primary
+                       ${
+                         activeSection === item.id
+                           ? "text-primary border-b-2 border-primary"
+                           : "text-muted-foreground"
+                       }`
+                  }
+                `}
               >
                 {item.label}
               </button>
             ))}
 
-            {/* Nyelvváltó gomb */}
+            {/* Nyelvváltó */}
             <button
               className="ml-4 px-3 py-1 border rounded text-sm hover:bg-accent transition-colors"
               onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
@@ -82,7 +90,6 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            {/* Nyelvváltó gomb mobilon */}
             <button
               className="px-2 py-1 border rounded text-sm hover:bg-accent transition-colors"
               onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
@@ -111,11 +118,21 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-accent rounded-md ${
-                    activeSection === item.id
-                      ? "text-primary bg-accent"
-                      : "text-muted-foreground"
-                  }`}
+                  className={`
+                    block w-full text-left px-3 py-2 text-sm font-medium
+                    transition-colors rounded-md
+                    ${
+                      item.highlight
+                        ? `text-red-500 hover:bg-red-50
+                         ${activeSection === item.id ? "bg-red-50" : ""}`
+                        : `hover:text-primary hover:bg-accent
+                         ${
+                           activeSection === item.id
+                             ? "text-primary bg-accent"
+                             : "text-muted-foreground"
+                         }`
+                    }
+                  `}
                 >
                   {item.label}
                 </button>

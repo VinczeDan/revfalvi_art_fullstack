@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+// src/components/GallerySection.tsx
+import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/TranslationContext";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface Painting {
   id: number;
@@ -28,18 +30,21 @@ const GallerySection = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedPainting, setSelectedPainting] = useState<Painting | null>(
-    null
+    null,
   );
+  // ← ÚJ: bővített állapot kezelése kategóriánként
+  const [expanded, setExpanded] = useState(false);
 
   const { language } = useTranslation();
 
-  // Fetch paintings whenever id or lang changes
   useEffect(() => {
     const fetchPaintings = async () => {
       setLoading(true);
+      // Kategória váltásnál mindig összecsukjuk
+      setExpanded(false);
       try {
         const response = await fetch(
-          `/api/paintings/?technique=${id}&lang=${language}`
+          `/api/paintings/?technique=${id}&lang=${language}`,
         );
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -63,11 +68,17 @@ const GallerySection = ({
     pencil: "from-gray-400 to-gray-600",
   };
 
+  // Az első 3 mindig látható, bővítésnél az összes
+  const visiblePaintings = expanded ? paintings : paintings.slice(0, 3);
+  const hasMore = paintings.length > 3;
+
   if (loading)
     return (
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center">
-          <p>{language === "en" ? "Loading paintings..." : "Képek betöltése..."}</p>
+          <p>
+            {language === "en" ? "Loading paintings..." : "Képek betöltése..."}
+          </p>
         </div>
       </section>
     );
@@ -107,9 +118,9 @@ const GallerySection = ({
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {paintings.map((painting) => (
+        {/* Gallery Grid – csak a látható képek */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {visiblePaintings.map((painting) => (
             <Card
               key={painting.id}
               className="group hover-lift cursor-pointer border-0 shadow-soft hover:shadow-medium overflow-hidden"
@@ -138,7 +149,34 @@ const GallerySection = ({
           ))}
         </div>
 
-        {/* Modal */}
+        {/* ← ÚJ: Bővítő/összecsukó gomb – csak ha több mint 3 kép van */}
+        {hasMore && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="
+              mt-6 w-full flex items-center justify-center gap-3
+              py-4 px-6 rounded-lg border-2 border-dashed
+              border-muted-foreground/30 text-muted-foreground
+              hover:border-primary hover:text-primary hover:bg-primary/5
+              transition-all duration-200 font-medium text-sm
+            "
+          >
+            {expanded ? (
+              <>
+                <ChevronUp className="w-4 h-4" />
+                {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-4 h-4" />
+                {language === "en"
+                  ? `View all ${title} works (${paintings.length} pieces)`
+                  : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
+              </>
+            )}
+          </button>
+        )}
+
         {/* Modal */}
         {selectedPainting && (
           <div
@@ -146,7 +184,7 @@ const GallerySection = ({
             onClick={() => setSelectedPainting(null)}
           >
             <div
-              className="bg-white rounded-lg overflow-hidden w-full max-w-6xl max-h-[90vh] flex flex-col lg:flex-row"
+              className="bg-white rounded-lg overflow-hidden w-full max-w-6xl max-h-[90vh] flex flex-col lg:flex-row relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -188,9 +226,9 @@ const GallerySection = ({
                       </p>
                       <p className="text-lg">
                         {new Date(
-                          selectedPainting.created_at
+                          selectedPainting.created_at,
                         ).toLocaleDateString(
-                          language === "en" ? "en-US" : "hu-HU"
+                          language === "en" ? "en-US" : "hu-HU",
                         )}
                       </p>
                     </div>
