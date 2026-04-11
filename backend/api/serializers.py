@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Todo, Painting, News, NewsImage
+from .models import Todo, Painting, News, NewsImage, Course
 
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -100,3 +100,36 @@ class NewsSerializer(serializers.ModelSerializer):
         if lang == "en" and obj.content_en:
             return obj.content_en
         return obj.content_hu
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    level_display = serializers.CharField(source='get_level_display', read_only=True)
+
+    class Meta:
+        model = Course
+        fields = [
+            'id',
+            'title',
+            'description',
+            'level',
+            'level_display',
+            'duration',
+            'price',
+            'icon',
+            'is_active',
+            'order',
+        ]
+
+    def get_title(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.title_en:
+            return obj.title_en
+        return obj.title_hu
+
+    def get_description(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.description_en:
+            return obj.description_en
+        return obj.description_hu

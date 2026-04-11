@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Todo, Painting, News
-from .serializers import TodoSerializer, PaintingSerializer, NewsSerializer
+from .models import Todo, Painting, News, Course
+from .serializers import TodoSerializer, PaintingSerializer, NewsSerializer, CourseSerializer
 from django.shortcuts import render
 from django.core.mail import EmailMessage
 from django.http import JsonResponse
@@ -138,6 +138,18 @@ class NewsViewSet(viewsets.ModelViewSet):
         return context
 
 
+class CourseViewSet(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+
+    def get_queryset(self):
+        return Course.objects.filter(is_active=True)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['lang'] = self.request.query_params.get('lang', 'hu')
+        return context
+
+
 
 def send_test_email(request):
     subject = "Teszt email a Revfalvi Art weboldalról"
@@ -150,4 +162,3 @@ def send_test_email(request):
         return JsonResponse({"status": "success", "message": "Email elküldve"})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)})
-

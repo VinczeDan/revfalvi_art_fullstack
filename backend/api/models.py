@@ -80,3 +80,37 @@ class NewsImage(models.Model):
 
     def __str__(self):
         return f"Kép a(z) {self.news.title_hu} hírhez"
+
+
+class Course(models.Model):
+    LEVEL_CHOICES = [
+        ('beginner', 'Kezdő'),
+        ('advanced', 'Haladó'),
+        ('all', 'Minden szint'),
+    ]
+
+    title_hu = models.CharField(max_length=200, verbose_name="Cím (magyar)")
+    title_en = models.CharField(max_length=200, verbose_name="Cím (angol)", blank=True, null=True)
+
+    description_hu = models.TextField(verbose_name="Leírás (magyar)")
+    description_en = models.TextField(verbose_name="Leírás (angol)", blank=True, null=True)
+
+    level = models.CharField(
+        max_length=20,
+        choices=LEVEL_CHOICES,
+        default='all',
+        verbose_name="Szint"
+    )
+    duration = models.CharField(max_length=100, verbose_name="Időtartam", help_text="Pl. 8 alkalom")
+    price = models.CharField(max_length=100, verbose_name="Ár", help_text="Pl. 35 000 Ft")
+    icon = models.CharField(max_length=10, verbose_name="Ikon (emoji)", default="🎨", blank=True)
+    is_active = models.BooleanField(default=True, verbose_name="Aktív")
+    order = models.PositiveIntegerField(default=0, verbose_name="Sorrend")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Tanfolyam"
+        verbose_name_plural = "Tanfolyamok"
+
+    def __str__(self):
+        return self.title_hu
