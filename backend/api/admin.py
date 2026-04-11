@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Painting, News, NewsImage
+from .models import Course, Painting, News, NewsImage
 
 
 @admin.register(Painting)
@@ -47,6 +47,26 @@ class NewsAdmin(admin.ModelAdmin):
         }),
         ("Borítókép", {
             'fields': ('image',)
+        }),
+    )
+
+    def get_title(self, obj):
+        return obj.title_hu or obj.title_en
+    get_title.short_description = "Cím"
+    
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('get_title', 'level', 'price', 'is_active', 'order')
+    list_editable = ('is_active', 'order') # Közvetlenül a listában is állítható
+    list_filter = ('level', 'is_active')
+    search_fields = ('title_hu', 'title_en')
+
+    fieldsets = (
+        ("Alapadatok", {
+            'fields': ('title_hu', 'title_en', 'icon', 'order', 'is_active')
+        }),
+        ("Részletek", {
+            'fields': ('description_hu', 'description_en', 'level', 'duration', 'price')
         }),
     )
 
