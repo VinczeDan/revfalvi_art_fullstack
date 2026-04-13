@@ -1,93 +1,50 @@
-// src/components/CoursesSection.tsx
-// ÚJ FÁJL – illeszd be a többi komponens mellé
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Loader2 } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
+import { useQuery } from "@tanstack/react-query";
 
+// 1. Típus definíció a backend adatokhoz
 interface Course {
   id: number;
   icon: string;
-  titleHu: string;
-  titleEn: string;
-  level: string;
+  title_hu: string;
+  title_en: string;
+  level: "beginner" | "advanced" | "all";
   duration: string;
-  descriptionHu: string;
-  descriptionEn: string;
+  description_hu: string;
+  description_en: string;
   price: string;
 }
 
-// ============================================================
-// TANFOLYAM ADATOK – itt szerkeszd a saját kurzusaidat!
-// ============================================================
-const COURSES: Course[] = [
-  {
-    id: 1,
-    icon: "🎨",
-    titleHu: "Akvarell alapok",
-    titleEn: "Watercolor basics",
-    level: "Kezdő / Beginner",
-    duration: "8 alkalom",
-    descriptionHu:
-      "Ismerkedj meg az akvarell technikájával lépésről lépésre. Alapvető ecsetkezelés, színkeverés, nedves-nedves technika.",
-    descriptionEn:
-      "Learn watercolor step by step. Brush handling, color mixing, wet-on-wet technique.",
-    price: "35 000 Ft",
-  },
-  {
-    id: 2,
-    icon: "🖌️",
-    titleHu: "Akril festészet",
-    titleEn: "Acrylic painting",
-    level: "Haladó / Advanced",
-    duration: "10 alkalom",
-    descriptionHu:
-      "Fedezd fel az akrilfesték sokoldalúságát. Textúrák, rétegezés, impasztó és vegyes technikák.",
-    descriptionEn:
-      "Discover the versatility of acrylics. Textures, layering, impasto and mixed techniques.",
-    price: "42 000 Ft",
-  },
-  {
-    id: 3,
-    icon: "🖼",
-    titleHu: "Olajfestészet",
-    titleEn: "Oil painting",
-    level: "Haladó / Advanced",
-    duration: "12 alkalom",
-    descriptionHu:
-      "Klasszikus olajfestészeti technikák: alépítés, glazúrozás, fény és árnyék, portré és tájkép.",
-    descriptionEn:
-      "Classic oil painting techniques: underpainting, glazing, light and shadow, portrait and landscape.",
-    price: "48 000 Ft",
-  },
-  {
-    id: 4,
-    icon: "✏️",
-    titleHu: "Ceruza & rajz",
-    titleEn: "Pencil & drawing",
-    level: "Minden szint / All levels",
-    duration: "6 alkalom",
-    descriptionHu:
-      "A rajzolás alapjaitól a részletgazdag ceruzarajzokig. Arányok, perspektíva, tónusok.",
-    descriptionEn:
-      "From drawing basics to detailed pencil work. Proportions, perspective, values.",
-    price: "28 000 Ft",
-  },
-];
-
-const LEVEL_COLORS: Record<string, string> = {
-  "Kezdő / Beginner": "bg-green-500",
-  "Haladó / Advanced": "bg-orange-500",
-  "Minden szint / All levels": "bg-blue-500",
+// Szintek fordítása és színei a backend kulcsok alapján
+const LEVEL_MAP: Record<string, { hu: string; en: string; color: string }> = {
+  beginner: { hu: "Kezdő", en: "Beginner", color: "bg-green-500" },
+  advanced: { hu: "Haladó", en: "Advanced", color: "bg-orange-500" },
+  all: { hu: "Minden szint", en: "All levels", color: "bg-blue-500" },
 };
 
 const CoursesSection = () => {
   const { language } = useTranslation();
-  const [contactCourse, setContactCourse] = useState<string | null>(null);
+
+  // 2. Adatlekérés React Query-vel
+  // Cseréld ki az URL-t a saját backend címedre!
+  const {
+    data: courses,
+    isLoading,
+    error,
+  } = useQuery<Course[]>({
+    queryKey: ["courses"],
+    queryFn: async () => {
+      const response = await fetch("http://127.0.0.1:8000/api/courses/");
+      if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
+      return response.json();
+    },
+  });
 
   const scrollToContact = (courseTitle: string) => {
-    setContactCourse(courseTitle);
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    // Itt opcionálisan átadhatod a címet egy state-be, ha a formban ki akarod tölteni
   };
 
   return (
@@ -98,43 +55,55 @@ const CoursesSection = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
-
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {language === "hu" ? "Tanfolyamok" : "Courses"}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {language === "hu"
-              ? "Kis csoportokban, személyre szabott oktatás – válaszd ki a számodra legmegfelelőbb kurzust!"
-              : "Small groups, personalized instruction – find the course that fits you best!"}
-          </p>
         </div>
 
-        {/* Course Cards */}
+        {/* Töltés jelzése */}
+        {isLoading && (
+          <div className="flex justify-center py-20">
+            <Loader2 className="w-10 h-10 animate-spin text-primary" />
+          </div>
+        )}
+
+        {/* Hibaüzenet */}
+        {error && (
+          <div className="text-center text-red-500 py-10">
+            {language === "hu"
+              ? "Nem sikerült betölteni a tanfolyamokat."
+              : "Failed to load courses."}
+          </div>
+        )}
+
+        {/* Dinamikus kártyák listázása */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {COURSES.map((course) => (
+          {courses?.map((course) => (
             <Card
               key={course.id}
               className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col"
             >
               <CardHeader className="pb-2">
-                <div className="text-4xl mb-3">{course.icon}</div>
+                <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
                 <span
-                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${
-                    LEVEL_COLORS[course.level] ?? "bg-gray-500"
-                  }`}
+                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${LEVEL_MAP[course.level]?.color}`}
                 >
-                  {course.level}
+                  {language === "hu"
+                    ? LEVEL_MAP[course.level]?.hu
+                    : LEVEL_MAP[course.level]?.en}
                 </span>
                 <CardTitle className="text-lg leading-snug">
-                  {language === "hu" ? course.titleHu : course.titleEn}
+                  {language === "hu"
+                    ? course.title_hu
+                    : course.title_en || course.title_hu}
                 </CardTitle>
               </CardHeader>
 
               <CardContent className="flex flex-col flex-1 gap-4">
                 <p className="text-muted-foreground text-sm flex-1">
                   {language === "hu"
-                    ? course.descriptionHu
-                    : course.descriptionEn}
+                    ? course.description_hu
+                    : course.description_en || course.description_hu}
                 </p>
 
                 <div className="flex items-center justify-between text-sm border-t pt-3">
@@ -147,28 +116,16 @@ const CoursesSection = () => {
                 <button
                   onClick={() =>
                     scrollToContact(
-                      language === "hu" ? course.titleHu : course.titleEn,
+                      language === "hu" ? course.title_hu : course.title_en,
                     )
                   }
-                  className="
-                    w-full py-2.5 rounded-full text-sm font-semibold
-                    bg-red-500 hover:bg-red-600 text-white
-                    transition-all duration-200 hover:-translate-y-0.5
-                  "
+                  className="w-full py-2.5 rounded-full text-sm font-semibold bg-red-500 hover:bg-red-600 text-white transition-all duration-200"
                 >
                   {language === "hu" ? "Jelentkezés" : "Sign up"}
                 </button>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Egyéni óra megjegyzés */}
-        <div className="bg-white/60 border border-border rounded-xl px-6 py-4 text-center text-muted-foreground text-sm">
-          💬{" "}
-          {language === "hu"
-            ? "Egyéni óra is lehetséges – érdeklődj a Kapcsolat oldalon!"
-            : "Private lessons available – ask via the Contact section!"}
         </div>
       </div>
     </section>
