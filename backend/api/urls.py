@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register(r'paintings', views.PaintingViewSet)
 router.register(r'todos', views.TodoViewSet)
 router.register(r'news', views.NewsViewSet)
-router.register(r'courses', views.CourseViewSet, basename='course')
+router.register(r'courses', views.CourseViewSet)
 
 urlpatterns = router.urls + [
     # Most már a views.függvénynév formátum működni fog

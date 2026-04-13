@@ -36,7 +36,7 @@ const CoursesSection = () => {
   } = useQuery<Course[]>({
     queryKey: ["courses"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/courses/");
+      const response = await fetch("http://revfalvi-art.hu/api/courses/");
       if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
       return response.json();
     },
