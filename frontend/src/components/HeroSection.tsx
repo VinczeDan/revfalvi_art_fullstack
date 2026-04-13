@@ -1,13 +1,8 @@
 // src/components/HeroSection.tsx
 import { Button } from "@/components/ui/button";
 
-// ============================================================
-// HÁTTÉRKÉP BEÁLLÍTÁSA:
-// Töltsd fel a képet a public/ mappába, majd írd be az elérési
-// útját ide. Például: "/images/hero-background.jpg"
-// Ha üresen hagyod, a meglévő gradiens háttér marad.
-// ============================================================
-const HERO_BACKGROUND_IMAGE = "borito.jpg"; // ← IDE ÍRD BE A KÉPED ÚTJÁT
+
+const HERO_BACKGROUND_IMAGE = "/borito.jpg"; // ← IDE ÍRD BE A KÉPED ÚTJÁT
 
 interface HeroSectionProps {
   setActiveSection: (section: string) => void;
