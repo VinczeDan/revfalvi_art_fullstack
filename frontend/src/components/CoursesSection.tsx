@@ -8,12 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 interface Course {
   id: number;
   icon: string;
-  title_hu: string;
-  title_en: string;
+  title: string; // ← nem title_hu/title_en
+  description: string; // ← nem description_hu/description_en
   level: "beginner" | "advanced" | "all";
   duration: string;
-  description_hu: string;
-  description_en: string;
   price: string;
 }
 
@@ -92,18 +90,12 @@ const CoursesSection = () => {
                     ? LEVEL_MAP[course.level]?.hu
                     : LEVEL_MAP[course.level]?.en}
                 </span>
-                <CardTitle className="text-lg leading-snug">
-                  {language === "hu"
-                    ? course.title_hu
-                    : course.title_en || course.title_hu}
-                </CardTitle>
+                <CardTitle>{course.title}</CardTitle>
               </CardHeader>
 
               <CardContent className="flex flex-col flex-1 gap-4">
                 <p className="text-muted-foreground text-sm flex-1">
-                  {language === "hu"
-                    ? course.description_hu
-                    : course.description_en || course.description_hu}
+                  {course.description}
                 </p>
 
                 <div className="flex items-center justify-between text-sm border-t pt-3">
