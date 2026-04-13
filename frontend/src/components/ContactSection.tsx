@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Palette } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useTranslation } from "@/TranslationContext"; // <-- Importáljuk a fordítást
+import { toast } from "sonner";
+import { useTranslation } from "@/TranslationContext";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -15,13 +15,11 @@ const ContactSection = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
-  // Translation context
   const { t } = useTranslation();
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -41,12 +39,11 @@ const ContactSection = () => {
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
+          errorData.error || `HTTP error! status: ${response.status}`,
         );
       }
 
-      toast({
-        title: t("contact.successTitle") || "Sikeres küldés!",
+      toast.success(t("contact.successTitle") || "Sikeres küldés!", {
         description:
           t("contact.successDescription") ||
           "Üzenetét megkaptuk, hamarosan válaszolunk.",
@@ -54,10 +51,8 @@ const ContactSection = () => {
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      toast({
-        title: t("contact.errorTitle") || "Hiba",
+      toast.error(t("contact.errorTitle") || "Hiba", {
         description: error instanceof Error ? error.message : "Ismeretlen hiba",
-        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
