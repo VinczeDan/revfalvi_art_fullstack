@@ -139,13 +139,12 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    # Fontos: Csak az aktív tanfolyamokat küldjük ki
-    queryset = Course.objects.filter(is_active=True).order_by('order')
+    queryset = Course.objects.filter(is_active=True) # Csak az aktívakat mutatjuk
     serializer_class = CourseSerializer
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        # Ez kell ahhoz, hogy a Serializer tudja, milyen nyelven adja vissza a címet/leírást
+        # Átadjuk a nyelvet a frontendtől (ha küldi), alapértelmezett a 'hu'
         context['lang'] = self.request.query_params.get('lang', 'hu')
         return context
 

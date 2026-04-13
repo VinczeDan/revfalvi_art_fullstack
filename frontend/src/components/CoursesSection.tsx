@@ -34,9 +34,9 @@ const CoursesSection = () => {
     isLoading,
     error,
   } = useQuery<Course[]>({
-    queryKey: ["courses"],
+    queryKey: ["courses", language], // Nyelv is része a kulcsnak, hogy váltáskor újra lekérdezze
     queryFn: async () => {
-      const response = await fetch("http://revfalvi-art.hu/api/courses/");
+        const response = await fetch(`/api/courses/?lang=${language}`);
       if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
       return response.json();
     },
