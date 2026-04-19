@@ -8,37 +8,44 @@ Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
 
 @layer base {
   :root {
-    /* ÚJ: Sötétebb, karakteresebb barna paletta */
-    /* Háttér: Mélyebb bézs/barna */
-    --background: 33 30% 85%;
-    --foreground: 29 45% 15%; /* Közel fekete barna a maximális kontrasztért */
+    /* Eredeti színek finom sötétítése és kontraszt javítása */
+    /* Háttér: Egy árnyalattal sötétebb, melegebb bézs */
+    --background: 33 35% 88%; /* #E8D8C3 környéke */
+    --foreground: 29 45% 12%; /* Nagyon sötét barna a maximális olvashatóságért */
 
-    /* Kártyák: Világosabb, de kontrasztos */
-    --card: 33 40% 94%;
-    --card-foreground: 29 45% 15%;
+    /* Kártyák: Hogy elváljanak a háttértől, maradnak világosabbak */
+    --card: 33 40% 95%;
+    --card-foreground: 29 45% 12%;
 
-    /* Elsődleges Arany/Barna (#A68B5B - sötétített arany) */
-    --primary: 38 35% 45%;
-    --primary-foreground: 33 100% 98%; /* Fehérített szöveg a sötét gombon */
-    --primary-glow: 38 35% 55%;
+    /* Elsődleges Arany/Barna: Karakteresebb, hogy a gombok olvashatóak legyenek */
+    --primary: 38 32% 40%;
+    --primary-foreground: 33 100% 98%;
+    --primary-glow: 38 32% 50%;
 
-    /* Accent: Sötétebb barna a vállalkozói adatok kiemeléséhez */
-    --secondary: 29 37% 32%;
-    --secondary-foreground: 33 50% 95%;
+    /* Vállalkozói adatok és hangsúlyos részek színe */
+    --secondary: 29 35% 25%;
+    --secondary-foreground: 33 60% 96%;
 
-    --muted: 33 20% 75%;
-    --muted-foreground: 29 25% 30%; /* Sötétebb szürke-barna az olvashatóságért */
+    /* Tompított szövegek: sötétebbek az olvashatóság miatt */
+    --muted: 33 20% 78%;
+    --muted-foreground: 29 20% 35%;
 
-    --accent: 38 35% 45%;
+    --accent: 38 32% 40%;
     --accent-foreground: 33 100% 98%;
 
-    --border: 29 25% 70%;
-    --input: 33 30% 85%;
-    --ring: 38 35% 45%;
+    --border: 29 20% 75%;
+    --input: 33 25% 85%;
+    --ring: 38 32% 40%;
 
-    /* Árnyékok felerősítése a mélységérzetért */
-    --shadow-soft: 0 4px 20px hsla(29, 45%, 10%, 0.15);
-    --shadow-medium: 0 8px 30px hsla(29, 45%, 10%, 0.2);
+    /* Artist specifikus mélyebb tónusok */
+    --artist-blue: 33 45% 85%;
+    --artist-turquoise: 29 40% 25%;
+    --artist-light: 33 45% 92%;
+    --artist-dark: 29 40% 15%;
+
+    /* Árnyékok - sötétebb barna alappal */
+    --shadow-soft: 0 4px 20px hsla(29, 45%, 10%, 0.12);
+    --shadow-medium: 0 8px 30px hsla(29, 45%, 10%, 0.18);
 
     --radius: 0.75rem;
   }
