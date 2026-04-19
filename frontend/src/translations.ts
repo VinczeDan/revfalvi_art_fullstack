@@ -13,8 +13,7 @@ export const translations = {
     },
     hero: {
       title: "Üdvözöllek az oldalamon",
-      subtitle:
-        "Rajzokotatás, élményfestés, angol- és sakkoktatás egy helyen.",
+      subtitle: "Rajzokotatás, élményfestés, angol- és sakkoktatás egy helyen.",
     },
     about: {
       title: "Rólam",
@@ -34,7 +33,7 @@ export const translations = {
     },
     contact: {
       title: "Kapcsolat",
-      text: "Érdekel egy egyedi megrendelés vagy kérdésed van a munkáimmal kapcsolatban? Vedd fel velem a kapcsolatot!",
+      text: "Ha érdeklődsz egy rajz-, vagy angol - vagy sakktanfolyam iránt, illetve valamilyen grafikai munkám vagy festményem iránt, amellyel szebbé tennéd az otthonodat, töltsd ki az alábbi űrlapot,  és küldd el nekem. Rövid időn belül válaszolok.",
       successTitle: "Sikeres küldés!",
       successDescription: "Üzenetét megkaptuk, hamarosan válaszolunk.",
       errorTitle: "Hiba",
