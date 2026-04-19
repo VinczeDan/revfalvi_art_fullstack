@@ -13,7 +13,7 @@ export const translations = {
     },
     hero: {
       title: "Üdvözöllek az oldalamon",
-      subtitle: "Rajzokotatás, élményfestés, angol- és sakkoktatás egy helyen.",
+      subtitle: "Rajzoktatás, élményfestés, angol- és sakkoktatás egy helyen.",
     },
     about: {
       title: "Rólam",
