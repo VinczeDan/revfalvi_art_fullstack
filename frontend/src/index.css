@@ -1,188 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  /* Fő barna színünk (#6E5034) HSL-re váltva: 29 37% 32% */
+  --background: 29 37% 28%;      /* Mélyebb barna háttér */
+  --foreground: 33 53% 89%;      /* Bézs (#F3E3D0) szöveg a jó kontrasztért */
 
-/* Művészeti portfólió dizájn rendszer - Faber Castell színpaletta
-Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
-*/
+  --card: 29 37% 32%;            /* Az eredeti #6E5034 a kártyáknak */
+  --card-foreground: 33 53% 89%;
 
-@layer base {
-  :root {
-    /* Új Meleg Elegáns Paletta */
-    --background: 33 53% 95%;      /* Nagyon világos bézs háttér */
-    --foreground: 43 20% 20%;      /* Sötétbarna szöveg a jobb olvashatóságért */
+  /* Elsődleges Arany (#CDB885) */
+  --primary: 43 44% 66%;
+  --primary-foreground: 29 37% 15%; /* Sötét szöveg az arany felületeken */
+  --primary-glow: 43 54% 76%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 43 20% 20%;
+  /* Bézs Accent (#F3E3D0) */
+  --secondary: 33 53% 89%;
+  --secondary-foreground: 29 37% 20%;
 
-    /* Elsődleges Arany szín (#CDB885) */
-    --primary: 43 44% 66%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 43 54% 76%;
+  --muted: 29 30% 22%;
+  --muted-foreground: 33 20% 70%;
 
-    /* Másodlagos Bézs (#F3E3D0) */
-    --secondary: 33 53% 89%;
-    --secondary-foreground: 43 20% 25%;
+  --accent: 43 44% 66%;
+  --accent-foreground: 29 37% 15%;
 
-    --muted: 33 30% 92%;
-    --muted-foreground: 43 10% 45%;
+  --border: 29 30% 38%;          /* Finom, barnás keretek */
+  --input: 29 30% 25%;
+  --ring: 43 44% 66%;
 
-    /* Accent */
-    --accent: 33 53% 89%;
-    --accent-foreground: 43 20% 25%;
+  /* Artist specifikus színek */
+  --artist-blue: 33 53% 89%;      /* Bézs */
+  --artist-turquoise: 43 44% 66%; /* Arany */
+  --artist-light: 33 53% 95%;
+  --artist-dark: 29 40% 15%;
 
-    --border: 43 20% 85%;
-    --input: 43 20% 90%;
-    --ring: 43 44% 66%;
+  /* Gradiens: #6E5034-ból induló átmenet */
+  --gradient-hero: linear-gradient(135deg, hsl(29 37% 32%), hsl(29 37% 20%));
+  
+  /* Árnyékok - sötétbarna tónussal */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.7);
 
-    /* Művészeti portfólió specifikus színek frissítése */
-    --artist-blue: 33 53% 89%;      /* Most már inkább "artist-beige" */
-    --artist-turquoise: 43 44% 66%; /* Most már "artist-gold" */
-    --artist-light: 33 53% 95%;
-    --artist-dark: 43 25% 15%;
-
-    /* Shadow-k frissítése, hogy melegebbek legyenek */
-    --shadow-soft: 0 4px 20px hsl(43 44% 66% / 0.15);
-    --shadow-medium: 0 8px 30px hsl(43 44% 66% / 0.2);
-  }
-
-  .dark {
-    /* Sötét mód - sötét háttér világos szöveggel */
-    --background: 215 25% 27%;
-    --foreground: 210 100% 98%;
-
-    --card: 215 20% 30%;
-    --card-foreground: 210 100% 98%;
-
-    --popover: 215 20% 30%;
-    --popover-foreground: 210 100% 98%;
-
-    --primary: 174 44% 51%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 174 54% 61%;
-
-    --secondary: 215 20% 35%;
-    --secondary-foreground: 210 100% 98%;
-
-    --muted: 215 20% 35%;
-    --muted-foreground: 210 40% 70%;
-
-    --accent: 215 20% 35%;
-    --accent-foreground: 210 100% 98%;
-
-    --destructive: 0 62% 51%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 215 20% 40%;
-    --input: 215 20% 35%;
-    --ring: 174 44% 51%;
-
-    /* Dark mode specifikus színek */
-    --artist-blue: 200 89% 78%;
-    --artist-turquoise: 174 44% 51%;
-    --artist-light: 210 100% 98%;
-    --artist-dark: 215 25% 27%;
-
-    /* Sötét mód gradientek */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(120deg, hsl(var(--artist-blue)), hsl(var(--artist-turquoise)));
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground font-light;
-  }
-
-  /* Smooth scroll behavior */
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Oldalról beúszó animációk */
-@layer utilities {
-  .slide-in-left {
-    animation: slideInLeft 0.8s ease-out forwards;
-  }
-
-  .slide-in-right {
-    animation: slideInRight 0.8s ease-out forwards;
-  }
-
-  .fade-in-up {
-    animation: fadeInUp 1s ease-out forwards;
-  }
-
-  .stagger-1 {
-    animation-delay: 0.1s;
-  }
-
-  .stagger-2 {
-    animation-delay: 0.2s;
-  }
-
-  .stagger-3 {
-    animation-delay: 0.3s;
-  }
-
-  .stagger-4 {
-    animation-delay: 0.4s;
-  }
-
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
-  }
-}
-
-/* Keyframe animációk */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  --radius: 0.75rem;
 }

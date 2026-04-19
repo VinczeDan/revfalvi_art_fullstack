@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Palette } from "lucide-react";
+import { Mail, Phone, Palette, ShieldCheck, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "@/TranslationContext";
 
@@ -79,6 +79,7 @@ const ContactSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="slide-in-left space-y-8">
+            {/* Szolgáltatások Kártya */}
             <Card className="border-0 shadow-soft">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
@@ -95,30 +96,77 @@ const ContactSection = () => {
               </CardContent>
             </Card>
 
-            <div className="space-y-6">
-              <div className="fade-in-up stagger-1 flex items-center gap-4">
-                <div className="w-12 h-12 bg-artist-blue rounded-full flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
+            {/* Vállalkozói és Elérhetőségi Adatok */}
+            <div className="space-y-6 bg-white/60 p-8 rounded-2xl border border-border/40 shadow-sm">
+              <div className="fade-in-up">
+                <h3 className="font-bold text-2xl text-foreground mb-1">
+                  Révfalvi Péter
+                </h3>
+                <p className="text-artist-blue font-semibold uppercase tracking-wide text-sm">
+                  Egyéni vállalkozó
+                </p>
+                <p className="text-muted-foreground mt-2 italic">
+                  Angol nyelvtanár, rajzoktató, képzőművész
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 border-y border-border/40">
+                <div className="flex gap-3 items-start">
+                  <ShieldCheck className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                      Adószám
+                    </p>
+                    <p className="text-foreground font-medium">xxxx</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {t("contact.emailTitle") || "Email"}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    revfalvi.peter@googlemail.com
-                  </p>
+                <div className="flex gap-3 items-start">
+                  <ShieldCheck className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                      Nyilvántartási szám
+                    </p>
+                    <p className="text-foreground font-medium">xxxx</p>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-start sm:col-span-2">
+                  <MapPin className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                      Székhely
+                    </p>
+                    <p className="text-foreground font-medium">xxxx</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="fade-in-up stagger-2 flex items-center gap-4">
-                <div className="w-12 h-12 bg-artist-turquoise rounded-full flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-artist-blue rounded-full flex items-center justify-center shrink-0">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-muted-foreground uppercase">
+                      Email
+                    </h4>
+                    <p className="text-foreground font-medium">
+                      revfalvi.peter@googlemail.com
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {t("contact.phoneTitle") || "Telefon"}
-                  </h3>
-                  <p className="text-muted-foreground">06 30 862 3832</p>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-artist-turquoise rounded-full flex items-center justify-center shrink-0">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-muted-foreground uppercase">
+                      Telefon
+                    </h4>
+                    <p className="text-foreground font-medium">
+                      06 30 862 3832
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
