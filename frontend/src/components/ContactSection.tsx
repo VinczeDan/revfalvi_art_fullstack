@@ -97,42 +97,50 @@ const ContactSection = () => {
             </Card>
 
             {/* Vállalkozói és Elérhetőségi Adatok */}
-            <div className="space-y-6 bg-white/60 p-8 rounded-2xl border border-border/40 shadow-sm">
+            <div className="slide-in-left space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
               <div className="fade-in-up">
-                <h3 className="font-bold text-2xl text-foreground mb-1">
+                <h3 className="font-bold text-3xl text-primary mb-1">
                   Révfalvi Péter
                 </h3>
-                <p className="text-artist-blue font-semibold uppercase tracking-wide text-sm">
+                <p className="text-secondary font-semibold uppercase tracking-widest text-xs">
                   Egyéni vállalkozó
                 </p>
-                <p className="text-muted-foreground mt-2 italic">
+                <p className="text-foreground/80 mt-3 italic font-light">
                   Angol nyelvtanár, rajzoktató, képzőművész
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 border-y border-border/40">
-                <div className="flex gap-3 items-start">
-                  <ShieldCheck className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-8 border-y border-white/10">
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-primary" />
+                  </div>
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
                       Adószám
                     </p>
                     <p className="text-foreground font-medium">xxxx</p>
                   </div>
                 </div>
-                <div className="flex gap-3 items-start">
-                  <ShieldCheck className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-primary" />
+                  </div>
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
                       Nyilvántartási szám
                     </p>
                     <p className="text-foreground font-medium">xxxx</p>
                   </div>
                 </div>
-                <div className="flex gap-3 items-start sm:col-span-2">
-                  <MapPin className="w-5 h-5 text-artist-blue shrink-0 mt-0.5" />
+
+                <div className="flex gap-4 items-start sm:col-span-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase">
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
                       Székhely
                     </p>
                     <p className="text-foreground font-medium">xxxx</p>
@@ -140,34 +148,40 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 pt-2">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-artist-blue rounded-full flex items-center justify-center shrink-0">
-                    <Mail className="w-6 h-6 text-white" />
+              <div className="space-y-5 pt-2">
+                <a
+                  href="mailto:revfalvi.peter@googlemail.com"
+                  className="flex items-center gap-5 group transition-all"
+                >
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
+                    <Mail className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-muted-foreground uppercase">
+                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
                       Email
                     </h4>
-                    <p className="text-foreground font-medium">
+                    <p className="text-foreground font-medium group-hover:text-primary transition-colors">
                       revfalvi.peter@googlemail.com
                     </p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-artist-turquoise rounded-full flex items-center justify-center shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
+                <a
+                  href="tel:06308623832"
+                  className="flex items-center gap-5 group transition-all"
+                >
+                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
+                    <Phone className="w-6 h-6 text-secondary-foreground" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-muted-foreground uppercase">
+                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
                       Telefon
                     </h4>
-                    <p className="text-foreground font-medium">
+                    <p className="text-foreground font-medium group-hover:text-secondary transition-colors">
                       06 30 862 3832
                     </p>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
