@@ -14,12 +14,12 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
   const { t, language, setLanguage } = useTranslation();
 
   const menuItems = [
-    { id: "home", label: "Kezdőlap", highlight: false },
-    { id: "about", label: "Rólam", highlight: false },
-    { id: "courses", label: "Tanfolyamok", highlight: true }, // ← piros kiemelés
-    { id: "news", label: "Sajtó", highlight: false },
-    { id: "portfolio", label: "Portfólió", highlight: false },
-    { id: "contact", label: "Kapcsolat", highlight: false },
+    { id: "home", label: t("navigation.home"), highlight: false },
+    { id: "about", label: t("navigation.about"), highlight: false },
+    { id: "courses", label: t("navigation.courses"), highlight: true },
+    { id: "news", label: t("navigation.news"), highlight: false },
+    { id: "portfolio", label: t("navigation.portfolio"), highlight: false },
+    { id: "contact", label: t("navigation.contact"), highlight: false },
   ];
 
   const scrollToSection = (sectionId: string) => {

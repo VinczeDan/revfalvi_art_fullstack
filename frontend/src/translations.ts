@@ -4,11 +4,9 @@ export const translations = {
     navigation: {
       home: "Kezdőlap",
       about: "Rólam",
-      news: "Sajtó", // Új kulcs a navigációban
-      watercolor: "Akvarell",
-      acrylic: "Akril",
-      oil: "Olajfestés",
-      pencil: "Ceruza munkák",
+      courses: "Tanfolyamok",
+      news: "Sajtó",
+      portfolio: "Portfólió",
       contact: "Kapcsolat",
     },
     hero: {
@@ -22,14 +20,13 @@ export const translations = {
       cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. `,
     },
     news: {
-      // Új news objektum
       title: "Friss hírek",
       description:
         "Légy naprakész a sajtómegjelenéseimről és a munkáimról szóló cikkekről.",
       loading: "Hírek betöltése...",
       error: "Hiba történt a hírek betöltése közben",
       noNews: "Nincsenek hírek.",
-      back: "Vissza a hírekhez", // 🔹 új kulcs
+      back: "Vissza a hírekhez",
     },
     contact: {
       title: "Kapcsolat",
@@ -49,27 +46,37 @@ export const translations = {
       formMessage: "Üzenet...",
       sendButton: "Üzenet küldése",
       sending: "Küldés...",
+      // Vállalkozói adatok
+      businessName: "Révfalvi Péter",
+      businessStatus: "Egyéni vállalkozó",
+      businessTitle: "Angol nyelvtanár, rajzoktató, képzőművész",
+      taxNumberLabel: "Adószám",
+      regNumberLabel: "Nyilvántartási szám",
+      locationLabel: "Székhely",
+      taxNumber: "xxxx",
+      regNumber: "xxxx",
+      location: "xxxx",
     },
     gallery: {
       watercolor: {
         title: "Akvarell",
         description:
-          "Átlátszó, könnyű technikával készült festmények, amelyek a víz és pigment harmonikus játékát mutatják be.",
+          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
       },
       acrylic: {
         title: "Akril",
         description:
-          "Élénk színekkel és gazdag textúrákkal készült akril festmények, amelyek modern technikával születtek.",
+          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
       },
       oil: {
         title: "Olajfestés",
         description:
-          "Klasszikus olajfestő technikával készült művek, amelyek mélységet és gazdagságot tükröznek.",
+          "Works made with classic oil painting techniques that reflect depth and richness.",
       },
       pencil: {
         title: "Ceruza munkák",
         description:
-          "Szén, grafit, színes és pasztell ceruzával készült finom kompozíciók és részletgazdag ábrázolások.",
+          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
       },
     },
   },
@@ -77,11 +84,9 @@ export const translations = {
     navigation: {
       home: "Home",
       about: "About",
-      news: "Press", // Új kulcs a navigációban
-      watercolor: "Watercolor",
-      acrylic: "Acrylic",
-      oil: "Oil Painting",
-      pencil: "Pencil Drawings",
+      courses: "Courses",
+      news: "Press",
+      portfolio: "Portfolio",
       contact: "Contact",
     },
     hero: {
@@ -94,21 +99,16 @@ export const translations = {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
       cardTitle: "Introduction",
-      cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface.
-
-For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil.
-
-My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
+      cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface. For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
     },
     news: {
-      // Új news objektum
       title: "Latest News",
       description:
         "Stay updated with recent press releases and articles about my work.",
       loading: "Loading news...",
       error: "Error loading news",
       noNews: "No news items found.",
-      back: "Back to news", // 🔹 új kulcs
+      back: "Back to news",
     },
     contact: {
       title: "Contact",
@@ -128,6 +128,16 @@ My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
       formMessage: "Message...",
       sendButton: "Send Message",
       sending: "Sending...",
+      // Business Info
+      businessName: "Péter Révfalvi",
+      businessStatus: "Sole Proprietor",
+      businessTitle: "English Teacher, Art Instructor, Fine Artist",
+      taxNumberLabel: "Tax Number",
+      regNumberLabel: "Registration Number",
+      locationLabel: "Headquarters",
+      taxNumber: "xxxx",
+      regNumber: "xxxx",
+      location: "xxxx",
     },
     gallery: {
       watercolor: {
