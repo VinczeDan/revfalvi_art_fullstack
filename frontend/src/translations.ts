@@ -14,8 +14,7 @@ export const translations = {
     hero: {
       title: "Üdvözöllek az oldalamon",
       subtitle:
-        "Akvarell, akril és olajfestmények, valamint ceruza munkák gyűjteménye.",
-      button: "Galéria megtekintése",
+        "Rajzokotatás, élményfestés, angol- és sakkoktatás egy helyen.",
     },
     about: {
       title: "Rólam",
@@ -89,7 +88,7 @@ export const translations = {
     hero: {
       title: "Welcome to my website",
       subtitle:
-        "A collection of watercolor, acrylic, oil paintings and pencil works.",
+        "Art education, painting experiences, English and chess lessons — all in one place.",
       button: "View Gallery",
     },
     about: {
