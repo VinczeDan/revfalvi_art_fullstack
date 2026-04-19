@@ -1,3 +1,4 @@
+// src/components/ContactSection.tsx
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -100,13 +101,13 @@ const ContactSection = () => {
             <div className="slide-in-left space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
               <div className="fade-in-up">
                 <h3 className="font-bold text-3xl text-primary mb-1">
-                  Révfalvi Péter
+                  {t("contact.businessName")}
                 </h3>
                 <p className="text-secondary font-semibold uppercase tracking-widest text-xs">
-                  Egyéni vállalkozó
+                  {t("contact.businessStatus")}
                 </p>
                 <p className="text-foreground/80 mt-3 italic font-light">
-                  Angol nyelvtanár, rajzoktató, képzőművész
+                  {t("contact.businessTitle")}
                 </p>
               </div>
 
@@ -117,9 +118,11 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      Adószám
+                      {t("contact.taxNumberLabel")}
                     </p>
-                    <p className="text-foreground font-medium">xxxx</p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.taxNumber")}
+                    </p>
                   </div>
                 </div>
 
@@ -129,9 +132,11 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      Nyilvántartási szám
+                      {t("contact.regNumberLabel")}
                     </p>
-                    <p className="text-foreground font-medium">xxxx</p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.regNumber")}
+                    </p>
                   </div>
                 </div>
 
@@ -141,9 +146,11 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      Székhely
+                      {t("contact.locationLabel")}
                     </p>
-                    <p className="text-foreground font-medium">xxxx</p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.location")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -158,7 +165,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      Email
+                      {t("contact.emailTitle")}
                     </h4>
                     <p className="text-foreground font-medium group-hover:text-primary transition-colors">
                       revfalvi.peter@googlemail.com
@@ -175,7 +182,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      Telefon
+                      {t("contact.phoneTitle")}
                     </h4>
                     <p className="text-foreground font-medium group-hover:text-secondary transition-colors">
                       06 30 862 3832

@@ -1,276 +1,127 @@
-// src/components/ContactSection.tsx
-import { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Palette, ShieldCheck, MapPin } from "lucide-react";
-import { toast } from "sonner";
+import { GraduationCap, Loader2 } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
+import { useQuery } from "@tanstack/react-query";
 
-const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+// 1. Típus definíció a backend adatokhoz
+interface Course {
+  id: number;
+  icon: string;
+  title: string; // ← nem title_hu/title_en
+  description: string; // ← nem description_hu/description_en
+  level: "beginner" | "advanced" | "all";
+  duration: string;
+  price: string;
+}
+
+// Szintek fordítása és színei a backend kulcsok alapján
+const LEVEL_MAP: Record<string, { hu: string; en: string; color: string }> = {
+  beginner: { hu: "Kezdő", en: "Beginner", color: "bg-green-500" },
+  advanced: { hu: "Haladó", en: "Advanced", color: "bg-orange-500" },
+  all: { hu: "Minden szint", en: "All levels", color: "bg-blue-500" },
+};
+
+const CoursesSection = () => {
+  const { language } = useTranslation();
+
+  // 2. Adatlekérés React Query-vel
+  // Cseréld ki az URL-t a saját backend címedre!
+  const {
+    data: courses,
+    isLoading,
+    error,
+  } = useQuery<Course[]>({
+    queryKey: ["courses", language], // Nyelv is része a kulcsnak, hogy váltáskor újra lekérdezze
+    queryFn: async () => {
+        const response = await fetch(`/api/courses/?lang=${language}`);
+      if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
+      return response.json();
+    },
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { t } = useTranslation();
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch("/api/send-contact-email/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`,
-        );
-      }
-
-      toast.success(t("contact.successTitle") || "Sikeres küldés!", {
-        description:
-          t("contact.successDescription") ||
-          "Üzenetét megkaptuk, hamarosan válaszolunk.",
-      });
-
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      toast.error(t("contact.errorTitle") || "Hiba", {
-        description: error instanceof Error ? error.message : "Ismeretlen hiba",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const scrollToContact = (courseTitle: string) => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    // Itt opcionálisan átadhatod a címet egy state-be, ha a formban ki akarod tölteni
   };
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gradient-soft">
+    <section id="courses" className="py-20 px-4 bg-gradient-soft">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center mb-16">
-          <div className="slide-in-left inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
-            <Mail className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
+            <GraduationCap className="w-8 h-8 text-white" />
           </div>
-
-          <h2 className="slide-in-right text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {t("contact.title")}
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            {language === "hu" ? "Tanfolyamok" : "Courses"}
           </h2>
-
-          <p className="fade-in-up text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("contact.text")}
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="slide-in-left space-y-8">
-            {/* Szolgáltatások Kártya */}
-            <Card className="border-0 shadow-soft">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-xl">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <Palette className="w-5 h-5 text-white" />
-                  </div>
-                  {t("contact.servicesTitle") || "Művészeti szolgáltatások"}
-                </CardTitle>
+        {/* Töltés jelzése */}
+        {isLoading && (
+          <div className="flex justify-center py-20">
+            <Loader2 className="w-10 h-10 animate-spin text-primary" />
+          </div>
+        )}
+
+        {/* Hibaüzenet */}
+        {error && (
+          <div className="text-center text-red-500 py-10">
+            {language === "hu"
+              ? "Nem sikerült betölteni a tanfolyamokat."
+              : "Failed to load courses."}
+          </div>
+        )}
+
+        {/* Dinamikus kártyák listázása */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          {courses?.map((course) => (
+            <Card
+              key={course.id}
+              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col"
+            >
+              <CardHeader className="pb-2">
+                <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
+                <span
+                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${LEVEL_MAP[course.level]?.color}`}
+                >
+                  {language === "hu"
+                    ? LEVEL_MAP[course.level]?.hu
+                    : LEVEL_MAP[course.level]?.en}
+                </span>
+                <CardTitle>{course.title}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground whitespace-pre-line">
-                  {t("contact.servicesList")}
+
+              <CardContent className="flex flex-col flex-1 gap-4">
+                <p className="text-muted-foreground text-sm flex-1">
+                  {course.description}
                 </p>
+
+                <div className="flex items-center justify-between text-sm border-t pt-3">
+                  <span className="text-muted-foreground">
+                    ⏱ {course.duration}
+                  </span>
+                  <span className="font-bold text-primary">{course.price}</span>
+                </div>
+
+                <button
+                  onClick={() =>
+                    scrollToContact(
+                      language === "hu" ? course.title_hu : course.title_en,
+                    )
+                  }
+                  className="w-full py-2.5 rounded-full text-sm font-semibold bg-red-500 hover:bg-red-600 text-white transition-all duration-200"
+                >
+                  {language === "hu" ? "Jelentkezés" : "Sign up"}
+                </button>
               </CardContent>
             </Card>
-
-            {/* Vállalkozói és Elérhetőségi Adatok */}
-            <div className="slide-in-left space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
-              <div className="fade-in-up">
-                <h3 className="font-bold text-3xl text-primary mb-1">
-                  {t("contact.businessName")}
-                </h3>
-                <p className="text-secondary font-semibold uppercase tracking-widest text-xs">
-                  {t("contact.businessStatus")}
-                </p>
-                <p className="text-foreground/80 mt-3 italic font-light">
-                  {t("contact.businessTitle")}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-8 border-y border-white/10">
-                <div className="flex gap-4 items-start">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      {t("contact.taxNumberLabel")}
-                    </p>
-                    <p className="text-foreground font-medium">
-                      {t("contact.taxNumber")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      {t("contact.regNumberLabel")}
-                    </p>
-                    <p className="text-foreground font-medium">
-                      {t("contact.regNumber")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start sm:col-span-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      {t("contact.locationLabel")}
-                    </p>
-                    <p className="text-foreground font-medium">
-                      {t("contact.location")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-5 pt-2">
-                <a
-                  href="mailto:revfalvi.peter@googlemail.com"
-                  className="flex items-center gap-5 group transition-all"
-                >
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
-                    <Mail className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      {t("contact.emailTitle")}
-                    </h4>
-                    <p className="text-foreground font-medium group-hover:text-primary transition-colors">
-                      revfalvi.peter@googlemail.com
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href="tel:06308623832"
-                  className="flex items-center gap-5 group transition-all"
-                >
-                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
-                    <Phone className="w-6 h-6 text-secondary-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
-                      {t("contact.phoneTitle")}
-                    </h4>
-                    <p className="text-foreground font-medium group-hover:text-secondary transition-colors">
-                      06 30 862 3832
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="slide-in-right">
-            <Card className="border-0 shadow-medium">
-              <CardHeader>
-                <CardTitle className="text-2xl">
-                  {t("contact.formTitle") || "Üzenet küldése"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="fade-in-up stagger-1">
-                      <Input
-                        name="name"
-                        placeholder={t("contact.formName") || "Teljes név"}
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        minLength={2}
-                        className="h-12"
-                      />
-                    </div>
-                    <div className="fade-in-up stagger-2">
-                      <Input
-                        name="email"
-                        type="email"
-                        placeholder={t("contact.formEmail") || "Email cím"}
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                        className="h-12"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="fade-in-up stagger-3">
-                    <Input
-                      name="subject"
-                      placeholder={t("contact.formSubject") || "Tárgy"}
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      minLength={3}
-                      className="h-12"
-                    />
-                  </div>
-
-                  <div className="fade-in-up stagger-4">
-                    <Textarea
-                      name="message"
-                      placeholder={t("contact.formMessage") || "Üzenet..."}
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      minLength={10}
-                      rows={6}
-                      className="resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-primary hover:opacity-90 transition-opacity text-white font-medium h-12 rounded-full"
-                  >
-                    {isSubmitting
-                      ? t("contact.sending") || "Küldés..."
-                      : t("contact.sendButton") || "Üzenet küldése"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default ContactSection;
+export default CoursesSection;
