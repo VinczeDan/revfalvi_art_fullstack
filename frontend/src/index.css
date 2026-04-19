@@ -8,44 +8,43 @@ Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
 
 @layer base {
   :root {
-    /* Fő barna színünk (#6E5034) HSL-re váltva: 29 37% 32% */
-    --background: 29 37% 28%; /* Mélyebb barna háttér */
-    --foreground: 33 53% 89%; /* Bézs (#F3E3D0) szöveg a jó kontrasztért */
+    /* Alapszínek: #F3E3D0 (Bézs) és #CDB885 (Arany) */
+    /* Domináns barna: #6E5034 (csak szövegnek és kontrasztnak) */
 
-    --card: 29 37% 32%; /* Az eredeti #6E5034 a kártyáknak */
-    --card-foreground: 33 53% 89%;
+    --background: 33 53% 97%; /* Nagyon-nagyon világos bézs (majdnem fehér) */
+    --foreground: 29 37% 20%; /* A sötétbarna (#6E5034) sötétített verziója szövegnek */
+
+    --card: 0 0% 100%; /* Tiszta fehér kártyák */
+    --card-foreground: 29 37% 20%;
 
     /* Elsődleges Arany (#CDB885) */
     --primary: 43 44% 66%;
-    --primary-foreground: 29 37% 15%; /* Sötét szöveg az arany felületeken */
+    --primary-foreground: 0 0% 100%;
     --primary-glow: 43 54% 76%;
 
     /* Bézs Accent (#F3E3D0) */
     --secondary: 33 53% 89%;
-    --secondary-foreground: 29 37% 20%;
+    --secondary-foreground: 29 37% 32%;
 
-    --muted: 29 30% 22%;
-    --muted-foreground: 33 20% 70%;
+    --muted: 33 30% 92%;
+    --muted-foreground: 29 20% 45%;
 
-    --accent: 43 44% 66%;
-    --accent-foreground: 29 37% 15%;
+    --accent: 33 53% 89%;
+    --accent-foreground: 29 37% 32%;
 
-    --border: 29 30% 38%; /* Finom, barnás keretek */
-    --input: 29 30% 25%;
+    --border: 29 30% 88%; /* Nagyon halvány barna keretek */
+    --input: 33 30% 95%;
     --ring: 43 44% 66%;
 
-    /* Artist specifikus színek */
-    --artist-blue: 33 53% 89%; /* Bézs */
-    --artist-turquoise: 43 44% 66%; /* Arany */
-    --artist-light: 33 53% 95%;
-    --artist-dark: 29 40% 15%;
+    /* Artist specifikus színek a komponenseknek */
+    --artist-blue: 43 44% 66%; /* Arany */
+    --artist-turquoise: 29 37% 32%; /* Sötétbarna */
+    --artist-light: 33 53% 98%;
+    --artist-dark: 29 37% 20%;
 
-    /* Gradiens: #6E5034-ból induló átmenet */
-    --gradient-hero: linear-gradient(135deg, hsl(29 37% 32%), hsl(29 37% 20%));
-
-    /* Árnyékok - sötétbarna tónussal */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.5);
-    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.7);
+    /* Árnyékok - finomabb, elegánsabb */
+    --shadow-soft: 0 10px 30px rgba(110, 80, 52, 0.08);
+    --shadow-medium: 0 20px 40px rgba(110, 80, 52, 0.12);
 
     --radius: 0.75rem;
   }
