@@ -75,17 +75,17 @@ const CoursesSection = () => {
           </div>
         )}
 
-        {/* Dinamikus kártyák listázása - Flexbox-szal az egyenletes elosztásért */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10">
+        {/* Dinamikus kártyák listázása - Szélesebb elrendezés */}
+        <div className="flex flex-wrap justify-center gap-8 mb-10">
           {courses?.map((course) => (
             <Card
               key={course.id}
-              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] min-w-[280px] max-w-[350px]"
+              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px]"
             >
               <CardHeader className="pb-2">
                 <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
                 <span
-                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${
+                  className={`inline-block self-start px-3 py-1 rounded-full text-xs font-bold text-white mb-2 ${
                     LEVEL_MAP[course.level]?.color || "bg-gray-500"
                   }`}
                 >
@@ -93,27 +93,33 @@ const CoursesSection = () => {
                     ? LEVEL_MAP[course.level]?.hu
                     : LEVEL_MAP[course.level]?.en}
                 </span>
-                <CardTitle>{course.title}</CardTitle>
+                <CardTitle className="text-xl md:text-2xl">
+                  {course.title}
+                </CardTitle>
               </CardHeader>
 
-              <CardContent className="flex flex-col flex-1 gap-4">
-                {/* whitespace-pre-line biztosítja a sortörések megjelenítését */}
-                <p className="text-muted-foreground text-sm flex-1 whitespace-pre-line">
+              <CardContent className="flex flex-col flex-1 gap-6">
+                {/* whitespace-pre-line a sortörésekhez */}
+                <p className="text-muted-foreground text-base flex-1 whitespace-pre-line leading-relaxed">
                   {course.description}
                 </p>
 
-                <div className="flex items-center justify-between text-sm border-t pt-3">
-                  <span className="text-muted-foreground">
+                <div className="flex items-center justify-between text-sm border-t pt-4">
+                  <span className="text-muted-foreground font-medium">
                     ⏱ {course.duration}
                   </span>
-                  <span className="font-bold text-primary">{course.price}</span>
+                  <span className="font-bold text-primary text-lg">
+                    {course.price}
+                  </span>
                 </div>
 
                 <button
                   onClick={() => scrollToContact(course.title)}
-                  className="w-full py-2.5 rounded-full text-sm font-semibold bg-red-500 hover:bg-red-600 text-white transition-all duration-200"
+                  className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  {language === "hu" ? "Jelentkezés" : "Sign up"}
+                  {language === "hu"
+                    ? "Jelentkezés a tanfolyamra"
+                    : "Sign up for course"}
                 </button>
               </CardContent>
             </Card>
