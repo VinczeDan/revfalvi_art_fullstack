@@ -28,6 +28,29 @@ export const translations = {
       noNews: "Nincsenek hírek.",
       back: "Vissza a hírekhez",
     },
+
+    gallery: {
+      watercolor: {
+        title: "Akvarell",
+        description:
+          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
+      },
+      acrylic: {
+        title: "Akril",
+        description:
+          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
+      },
+      oil: {
+        title: "Olajfestés",
+        description:
+          "Works made with classic oil painting techniques that reflect depth and richness.",
+      },
+      pencil: {
+        title: "Ceruza munkák",
+        description:
+          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
+      },
+    },
     contact: {
       title: "Kapcsolat",
       text: "Ha érdeklődsz egy rajz-, vagy angol - vagy sakktanfolyam iránt, illetve valamilyen grafikai munkám vagy festményem iránt, amellyel szebbé tennéd az otthonodat, töltsd ki az alábbi űrlapot,  és küldd el nekem. Rövid időn belül válaszolok.",
@@ -56,28 +79,6 @@ export const translations = {
       taxNumber: "xxxx",
       regNumber: "xxxx",
       location: "xxxx",
-    },
-    gallery: {
-      watercolor: {
-        title: "Akvarell",
-        description:
-          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
-      },
-      acrylic: {
-        title: "Akril",
-        description:
-          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
-      },
-      oil: {
-        title: "Olajfestés",
-        description:
-          "Works made with classic oil painting techniques that reflect depth and richness.",
-      },
-      pencil: {
-        title: "Ceruza munkák",
-        description:
-          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
-      },
     },
   },
   en: {
@@ -110,6 +111,29 @@ export const translations = {
       noNews: "No news items found.",
       back: "Back to news",
     },
+
+    gallery: {
+      watercolor: {
+        title: "Watercolor",
+        description:
+          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
+      },
+      acrylic: {
+        title: "Acrylic",
+        description:
+          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
+      },
+      oil: {
+        title: "Oil Painting",
+        description:
+          "Works made with classic oil painting techniques that reflect depth and richness.",
+      },
+      pencil: {
+        title: "Pencil Drawings",
+        description:
+          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
+      },
+    },
     contact: {
       title: "Contact",
       text: "If you’re interested in drawing, English, or chess courses, or in one of my artworks or paintings to enhance your home, feel free to fill out the form below and send it to me—I’ll get back to you soon.",
@@ -138,28 +162,6 @@ export const translations = {
       taxNumber: "xxxx",
       regNumber: "xxxx",
       location: "xxxx",
-    },
-    gallery: {
-      watercolor: {
-        title: "Watercolor",
-        description:
-          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
-      },
-      acrylic: {
-        title: "Acrylic",
-        description:
-          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
-      },
-      oil: {
-        title: "Oil Painting",
-        description:
-          "Works made with classic oil painting techniques that reflect depth and richness.",
-      },
-      pencil: {
-        title: "Pencil Drawings",
-        description:
-          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
-      },
     },
   },
 };
