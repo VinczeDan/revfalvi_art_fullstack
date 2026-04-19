@@ -8,8 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 interface Course {
   id: number;
   icon: string;
-  title: string; // ← nem title_hu/title_en
-  description: string; // ← nem description_hu/description_en
+  title: string;
+  description: string;
   level: "beginner" | "advanced" | "all";
   duration: string;
   price: string;
@@ -26,23 +26,24 @@ const CoursesSection = () => {
   const { language } = useTranslation();
 
   // 2. Adatlekérés React Query-vel
-  // Cseréld ki az URL-t a saját backend címedre!
   const {
     data: courses,
     isLoading,
     error,
   } = useQuery<Course[]>({
-    queryKey: ["courses", language], // Nyelv is része a kulcsnak, hogy váltáskor újra lekérdezze
+    queryKey: ["courses", language],
     queryFn: async () => {
-        const response = await fetch(`/api/courses/?lang=${language}`);
+      const response = await fetch(`/api/courses/?lang=${language}`);
       if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
       return response.json();
     },
   });
 
   const scrollToContact = (courseTitle: string) => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-    // Itt opcionálisan átadhatod a címet egy state-be, ha a formban ki akarod tölteni
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -74,17 +75,19 @@ const CoursesSection = () => {
           </div>
         )}
 
-        {/* Dinamikus kártyák listázása */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        {/* Dinamikus kártyák listázása - Flexbox-szal az egyenletes elosztásért */}
+        <div className="flex flex-wrap justify-center gap-6 mb-10">
           {courses?.map((course) => (
             <Card
               key={course.id}
-              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] min-w-[280px] max-w-[350px]"
             >
               <CardHeader className="pb-2">
                 <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
                 <span
-                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${LEVEL_MAP[course.level]?.color}`}
+                  className={`inline-block self-start px-2 py-0.5 rounded-full text-xs font-bold text-white mb-2 ${
+                    LEVEL_MAP[course.level]?.color || "bg-gray-500"
+                  }`}
                 >
                   {language === "hu"
                     ? LEVEL_MAP[course.level]?.hu
@@ -94,7 +97,8 @@ const CoursesSection = () => {
               </CardHeader>
 
               <CardContent className="flex flex-col flex-1 gap-4">
-                <p className="text-muted-foreground text-sm flex-1">
+                {/* whitespace-pre-line biztosítja a sortörések megjelenítését */}
+                <p className="text-muted-foreground text-sm flex-1 whitespace-pre-line">
                   {course.description}
                 </p>
 
@@ -106,11 +110,7 @@ const CoursesSection = () => {
                 </div>
 
                 <button
-                  onClick={() =>
-                    scrollToContact(
-                      language === "hu" ? course.title_hu : course.title_en,
-                    )
-                  }
+                  onClick={() => scrollToContact(course.title)}
                   className="w-full py-2.5 rounded-full text-sm font-semibold bg-red-500 hover:bg-red-600 text-white transition-all duration-200"
                 >
                   {language === "hu" ? "Jelentkezés" : "Sign up"}
