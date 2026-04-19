@@ -8,46 +8,48 @@ Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
 
 @layer base {
   :root {
-    /* Alapszínek: #F3E3D0 (Bézs) és #CDB885 (Arany) */
-    /* Domináns barna: #6E5034 (csak szövegnek és kontrasztnak) */
+  /* Alapszínek HSL-ben */
+  /* #F3E3D0 (Bézs) -> 33 53% 89% */
+  /* #CDB885 (Arany) -> 43 44% 66% */
+  /* #6E5034 (Barna) -> 29 37% 32% */
 
-    --background: 33 53% 97%; /* Nagyon-nagyon világos bézs (majdnem fehér) */
-    --foreground: 29 37% 20%; /* A sötétbarna (#6E5034) sötétített verziója szövegnek */
+  --background: 33 40% 92%;      /* Meleg, közepesen világos tejeskávé szín */
+  --foreground: 29 37% 20%;      /* Sötétbarna a szövegeknek */
 
-    --card: 0 0% 100%; /* Tiszta fehér kártyák */
-    --card-foreground: 29 37% 20%;
+  --card: 33 30% 95%;            /* A kártyák egy leheletnyivel világosabbak */
+  --card-foreground: 29 37% 20%;
 
-    /* Elsődleges Arany (#CDB885) */
-    --primary: 43 44% 66%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 43 54% 76%;
+  /* Elsődleges Arany (#CDB885) */
+  --primary: 43 44% 66%;
+  --primary-foreground: 29 37% 15%;
+  --primary-glow: 43 54% 76%;
 
-    /* Bézs Accent (#F3E3D0) */
-    --secondary: 33 53% 89%;
-    --secondary-foreground: 29 37% 32%;
+  /* Bézs Accent (#F3E3D0) */
+  --secondary: 33 53% 89%;
+  --secondary-foreground: 29 37% 25%;
 
-    --muted: 33 30% 92%;
-    --muted-foreground: 29 20% 45%;
+  --muted: 33 20% 85%;
+  --muted-foreground: 29 15% 40%;
 
-    --accent: 33 53% 89%;
-    --accent-foreground: 29 37% 32%;
+  --accent: 43 44% 66%;
+  --accent-foreground: 29 37% 15%;
 
-    --border: 29 30% 88%; /* Nagyon halvány barna keretek */
-    --input: 33 30% 95%;
-    --ring: 43 44% 66%;
+  --border: 29 20% 80%;          /* Halvány barna keretek */
+  --input: 33 30% 88%;
+  --ring: 43 44% 66%;
 
-    /* Artist specifikus színek a komponenseknek */
-    --artist-blue: 43 44% 66%; /* Arany */
-    --artist-turquoise: 29 37% 32%; /* Sötétbarna */
-    --artist-light: 33 53% 98%;
-    --artist-dark: 29 37% 20%;
+  /* Artist specifikus változók */
+  --artist-blue: 33 53% 89%;      
+  --artist-turquoise: 29 37% 32%; 
+  --artist-light: 33 53% 94%;
+  --artist-dark: 29 37% 20%;
 
-    /* Árnyékok - finomabb, elegánsabb */
-    --shadow-soft: 0 10px 30px rgba(110, 80, 52, 0.08);
-    --shadow-medium: 0 20px 40px rgba(110, 80, 52, 0.12);
+  /* Árnyékok - barnás tónussal */
+  --shadow-soft: 0 4px 20px hsla(29, 37%, 20%, 0.1);
+  --shadow-medium: 0 8px 30px hsla(29, 37%, 20%, 0.15);
 
-    --radius: 0.75rem;
-  }
+  --radius: 0.75rem;
+}
 
   .dark {
     /* Sötét mód - sötét háttér világos szöveggel */
