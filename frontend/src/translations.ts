@@ -112,7 +112,7 @@ My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
     },
     contact: {
       title: "Contact",
-      text: "Interested in a custom order or have questions about my works? Get in touch with me!",
+      text: "If you’re interested in drawing, English, or chess courses, or in one of my artworks or paintings to enhance your home, feel free to fill out the form below and send it to me—I’ll get back to you soon.",
       successTitle: "Message Sent!",
       successDescription: "We received your message, we will reply soon.",
       errorTitle: "Error",
