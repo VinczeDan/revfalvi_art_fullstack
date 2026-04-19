@@ -102,13 +102,7 @@ const GallerySection = ({
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div
-            className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${colorVariants[color]} mb-6`}
-          >
-            <span className="text-2xl text-white font-bold">
-              {title.charAt(0)}
-            </span>
-          </div>
+          
 
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {title}
