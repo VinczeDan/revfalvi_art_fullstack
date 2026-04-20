@@ -12,12 +12,39 @@ export const translations = {
     hero: {
       title: "Üdvözöllek az oldalamon",
       subtitle: "Rajzoktatás, élményfestés, angol- és sakkoktatás egy helyen.",
+      button: "Galéria megtekintése",
     },
     about: {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
       cardTitle: "Küldetésnyilatkozat",
-      cardContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. `,
+      cardContent: `Kedves Nyelvtanuló! 
+
+
+
+Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
+
+
+Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában. Sok-sok évvel ezelőtt, én is kerestem azt a lehetőséget, azt a személyt, aki segített eligazodni egy idegen nyelv használatában. Tanultam a suliban, de igazából nem kaptam 100%-os figyelmet. A csoportbontásról már ne is beszéljünk. Túl sokan voltunk, és tudásunk nagyon eltérő volt. 
+
+
+Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt! 
+
+
+
+Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
+
+
+Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen hallgatni és beszélni az angolt. Ez volt a csúcsok csúcsa! Nem bántam meg!!! 
+
+
+Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
+
+
+Hogy mit kapsz a pénzedért cserébe? 
+
+
+100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz! `,
     },
     news: {
       title: "Friss hírek",
