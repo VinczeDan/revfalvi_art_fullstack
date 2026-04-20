@@ -121,9 +121,7 @@ const CoursesSection = () => {
                   onClick={() => scrollToContact(course.title)}
                   className="w-full py-4 rounded-full text-lg font-bold bg-red-500 hover:bg-red-600 text-white shadow-md hover:shadow-lg transition-all duration-300 active:scale-[0.98]"
                 >
-                  {language === "hu"
-                    ? "Jelentkezés a tanfolyamra"
-                    : "Sign up for course"}
+                  {language === "hu" ? "Jelentkezés a tanfolyamra" : "Sign up for course"}
                 </button>
               </CardContent>
             </Card>
