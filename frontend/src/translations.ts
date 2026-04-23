@@ -125,8 +125,8 @@ Hogy mit kapsz a pénzedért cserébe?
 
 In both my landscapes and my portrayals of the human individual, there is a painterly brushstroke or a line of pencil that helps bring these lived experiences to the surface. For me, the importance of color is indispensable in my creations. Without it, our world would be like a well without water—empty.
 
-This is why I aim for colors, as primary protagonists, to be present and, not least, to exist in harmony within my works. This driving force is what brings me to sit before the canvas or paper and guides my hand to pick up a brush or pencil. My preferred media include charcoal pencil, soft pastel, watercolor, and oil paint.`,
-    }
+This is why I aim for colors, as primary protagonists, to be present and, not least, to exist in harmony within my works. This driving force is what brings me to sit before the canvas or paper and guides my hand to pick up a brush or pencil. My preferred media include charcoal pencil, soft pastel, watercolor, and oil paint.
+`,
     },
     news: {
       title: "Latest News",
