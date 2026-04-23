@@ -124,28 +124,14 @@ Hogy mit kapsz a pénzedért cserébe?
 
 
 Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
-
-
 Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában. Sok-sok évvel ezelőtt, én is kerestem azt a lehetőséget, azt a személyt, aki segített eligazodni egy idegen nyelv használatában. Tanultam a suliban, de igazából nem kaptam 100%-os figyelmet. A csoportbontásról már ne is beszéljünk. Túl sokan voltunk, és tudásunk nagyon eltérő volt. 
-
-
 Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt! 
-
-
-
 Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
-
-
 Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen hallgatni és beszélni az angolt. Ez volt a csúcsok csúcsa! Nem bántam meg!!! 
-
-
 Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
-
-
 Hogy mit kapsz a pénzedért cserébe? 
-
-
 100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!`,
+
       introTitle: "Mission statement",
       introContent: `Welcome to my website! My name is Péter Révfalvi, and I have been engaged in the visual arts for several years. Through my work, I strive to depict a constantly evolving world—one that can transport viewers, in thought, to places that hold memories and lived moments for them.
 
