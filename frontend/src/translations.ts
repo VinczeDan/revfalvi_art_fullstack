@@ -17,8 +17,7 @@ export const translations = {
     about: {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
-      cardTitle: "Küldetésnyilatkozat",
-      cardContent: `Kedves Nyelvtanuló! 
+      leftContent: `Kedves Nyelvtanuló! 
 
 Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
 
@@ -34,7 +33,8 @@ Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy verse
 
 Hogy mit kapsz a pénzedért cserébe? 
 
-100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz! `,
+100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, if valamit nem értesz!`,
+      rightContent: `Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. Amiben úgy érzem, hogy más vagyok mint festő vagy grafikus társaim, az az, hogy meg tudok állni egy pillanatra, észre tudom venni azt az egyediséget, ami elragad és alkotásra késztet.`,
     },
     news: {
       title: "Friss hírek",
@@ -113,11 +113,29 @@ Hogy mit kapsz a pénzedért cserébe?
         "Art education, painting experiences, English and chess lessons — all in one place.",
       button: "View Gallery",
     },
+    en: {
+    // ... a többi rész változatlan
     about: {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
-      cardTitle: "Introduction",
-      cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface. For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
+      leftContent: `Dear Language Learner!
+
+I am Péter Révfalvi, an English teacher by profession.
+
+You are in the right place if you need help learning English. Many years ago, I too was looking for that opportunity, that person who helped me navigate the use of a foreign language. I studied in school, but I didn't really get 100% attention. Let's not even talk about group splits. There were too many of us, and our knowledge was very different.
+
+I also attended courses where I felt much better and dared to speak English. We studied in small groups, and the teacher had much more time to focus on me. It was truly motivating!
+
+After that, I also took individual lessons. I think this is where I received the full attention I always longed for as a learner. I remember Tom, who was American. He taught me several expressions that I remember to this day.
+
+Then came the United Kingdom. That was the real "deep water"! For years, I had the opportunity to listen to and speak English in London, in a native environment. It was the peak of peaks! I didn't regret it!!!
+
+Then I came home, and since then I have been helping those here at home who want to have a more competitive knowledge of English.
+
+What do you get for your money?
+
+100% attention, consideration of individual needs, encouragement, and lots of help if you don't understand something!`,
+      rightContent: `Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. What I feel makes me different from my fellow painters or graphic artists is that I can stop for a moment and notice the uniqueness that captivates me and drives me to create.`,
     },
     news: {
       title: "Latest News",

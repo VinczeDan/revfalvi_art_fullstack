@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Palette, User } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Palette } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 
 const AboutMe = () => {
@@ -21,29 +21,24 @@ const AboutMe = () => {
           <p className="text-lg text-muted-foreground">{t("about.text")}</p>
         </div>
 
-        {/* Kétkártyás elrendezés */}
+        {/* Kétkártyás elrendezés címek nélkül */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Első kártya (Küldetésnyilatkozat / Angol tanár) */}
+          {/* Bal oldali kártya (Angol oktatás szöveg) */}
           <Card className="border-0 shadow-soft h-full">
-            <CardHeader>
-              <CardTitle className="text-xl">{t("about.cardTitle")}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground whitespace-pre-line">
-                {t("about.cardContent")}
+            <CardContent className="pt-6">
+              {" "}
+              {/* Adtam egy kis felső margót a szövegnek */}
+              <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                {t("about.leftContent")}
               </p>
             </CardContent>
           </Card>
 
-          {/* Második kártya (Művészi Bemutatkozás) */}
+          {/* Jobb oldali kártya (Művészeti bemutatkozás) */}
           <Card className="border-0 shadow-soft h-full">
-            <CardHeader className="flex flex-row items-center gap-2">
-              <User className="w-5 h-5 text-primary" />
-              <CardTitle className="text-xl">{t("about.introTitle")}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground whitespace-pre-line">
-                {t("about.introContent")}
+            <CardContent className="pt-6">
+              <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                {t("about.rightContent")}
               </p>
             </CardContent>
           </Card>
