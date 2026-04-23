@@ -113,8 +113,6 @@ Hogy mit kapsz a pénzedért cserébe?
         "Art education, painting experiences, English and chess lessons — all in one place.",
       button: "View Gallery",
     },
-    en: {
-    // ... a többi rész változatlan
     about: {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
