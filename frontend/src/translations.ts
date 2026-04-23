@@ -35,8 +35,6 @@ Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy verse
 Hogy mit kapsz a pénzedért cserébe? 
 
 100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz! `,
-      introTitle: "Bemutatkozás",
-      introContent: `Üdvözöllek az oldalamon! Révfalvi Péter vagyok, a képzőművészettel már több éve foglalkozom. Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték.`,
     },
     news: {
       title: "Friss hírek",
@@ -119,26 +117,7 @@ Hogy mit kapsz a pénzedért cserébe?
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
       cardTitle: "Introduction",
-      cardContent: `Kedves Nyelvtanuló! 
-
-
-
-Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
-Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában. Sok-sok évvel ezelőtt, én is kerestem azt a lehetőséget, azt a személyt, aki segített eligazodni egy idegen nyelv használatában. Tanultam a suliban, de igazából nem kaptam 100%-os figyelmet. A csoportbontásról már ne is beszéljünk. Túl sokan voltunk, és tudásunk nagyon eltérő volt. 
-Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt! 
-Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
-Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen hallgatni és beszélni az angolt. Ez volt a csúcsok csúcsa! Nem bántam meg!!! 
-Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
-Hogy mit kapsz a pénzedért cserébe? 
-100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!`,
-
-      introTitle: "Mission statement",
-      introContent: `Welcome to my website! My name is Péter Révfalvi, and I have been engaged in the visual arts for several years. Through my work, I strive to depict a constantly evolving world—one that can transport viewers, in thought, to places that hold memories and lived moments for them.
-
-In both my landscapes and my portrayals of the human individual, there is a painterly brushstroke or a line of pencil that helps bring these lived experiences to the surface. For me, the importance of color is indispensable in my creations. Without it, our world would be like a well without water—empty.
-
-This is why I aim for colors, as primary protagonists, to be present and, not least, to exist in harmony within my works. This driving force is what brings me to sit before the canvas or paper and guides my hand to pick up a brush or pencil. My preferred media include charcoal pencil, soft pastel, watercolor, and oil paint.
-`,
+      cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface. For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
     },
     news: {
       title: "Latest News",
