@@ -120,6 +120,13 @@ Hogy mit kapsz a pénzedért cserébe?
       text: "Get to know me better and explore the story behind my art.",
       cardTitle: "Introduction",
       cardContent: `Welcome to my page! I am Péter Révfalvi, and I have been engaged in the world of fine arts for several years. Through my art, I strive to depict a constantly changing world—one that can transport people in their thoughts to places that evoke memories and lived moments. In both my landscapes and my portrayals of the human figure, there is always a brushstroke or a pencil line that helps bring these moments to the surface. For me, the importance of color is indispensable in my creations. Without color, our world would be like a well without water—empty. That is why I aim for colors to take on a leading role in my works, to be ever-present, and above all, to exist in harmony. This is the driving force that draws me to the canvas or the paper, and inspires me to pick up a brush or a pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint.`,
+      introTitle: "Mission statement",
+      introContent: `Welcome to my website! My name is Péter Révfalvi, and I have been engaged in the visual arts for several years. Through my work, I strive to depict a constantly evolving world—one that can transport viewers, in thought, to places that hold memories and lived moments for them.
+
+In both my landscapes and my portrayals of the human individual, there is a painterly brushstroke or a line of pencil that helps bring these lived experiences to the surface. For me, the importance of color is indispensable in my creations. Without it, our world would be like a well without water—empty.
+
+This is why I aim for colors, as primary protagonists, to be present and, not least, to exist in harmony within my works. This driving force is what brings me to sit before the canvas or paper and guides my hand to pick up a brush or pencil. My preferred media include charcoal pencil, soft pastel, watercolor, and oil paint.`,
+    }
     },
     news: {
       title: "Latest News",
