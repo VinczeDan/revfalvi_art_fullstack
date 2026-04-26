@@ -42,6 +42,7 @@ const VideoSection = () => {
 
   if (error || videos.length === 0) return null;
 
+  // src/components/VideoSection.tsx részlet a return-nél
 
   return (
     <section id="videos" className="py-20 bg-[#E8D8C3]">
