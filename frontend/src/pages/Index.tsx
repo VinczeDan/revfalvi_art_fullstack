@@ -7,6 +7,7 @@ import ContactSection from "@/components/ContactSection";
 import AboutMe from "@/components/AboutMe";
 import NewsSection from "@/components/NewsSection";
 import CoursesSection from "@/components/CoursesSection";
+import VideoSection from "@/components/VideoSection"; // ← ÚJ IMPORT
 import { useTranslation } from "@/TranslationContext";
 
 const Index = () => {
@@ -18,11 +19,13 @@ const Index = () => {
       const sections = [
         "home",
         "about",
-        "courses", // ← ÚJ
+        "courses",
+        "videos", // ← ÚJ: Scroll figyeléshez
         "news",
-        "portfolio", // ← a gallery wrapper id-je
+        "portfolio",
         "contact",
       ];
+      // ... a többi scroll logika marad változatlan ...
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -60,13 +63,15 @@ const Index = () => {
       />
       <AboutMe />
 
-      {/* ÚJ: Tanfolyamok szekció – közvetlenül a Rólam után */}
       <CoursesSection />
+
+      {/* ÚJ: Videó szekció a Tanfolyamok és Hírek közé */}
+      <VideoSection />
 
       <NewsSection />
 
-      {/* Portfolio wrapper – a navigáció a "portfolio" id-re scrolloz */}
       <div id="portfolio">
+        {/* ... Galériák maradnak ... */}
         <GallerySection
           id="watercolor"
           title={t("gallery.watercolor.title")}

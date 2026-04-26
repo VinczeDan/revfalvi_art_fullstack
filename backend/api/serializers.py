@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Todo, Painting, News, NewsImage, Course
+from .models import Todo, Painting, News, NewsImage, Course, Video
 
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -133,3 +133,32 @@ class CourseSerializer(serializers.ModelSerializer):
         if lang == "en" and obj.description_en:
             return obj.description_en
         return obj.description_hu
+    
+class VideoSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    video_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Video
+        fields = ['id', 'title', 'description', 'video_url', 'order']
+
+    def get_title(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.title_en:
+            return obj.title_en
+        return obj.title_hu
+
+    def get_description(self, obj):
+        lang = self.context.get("lang", "hu")
+        if lang == "en" and obj.description_en:
+            return obj.description_en
+        return obj.description_hu
+
+    def get_video_url(self, obj):
+        if obj.video_file:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(obj.video_file.url)
+            return obj.video_file.url
+        return None

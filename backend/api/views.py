@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Todo, Painting, News, Course
-from .serializers import TodoSerializer, PaintingSerializer, NewsSerializer, CourseSerializer
+from .models import Todo, Painting, News, Course, Video
+from .serializers import TodoSerializer, PaintingSerializer, NewsSerializer, CourseSerializer, VideoSerializer
 from django.shortcuts import render
 from django.core.mail import EmailMessage
 from django.http import JsonResponse
@@ -161,3 +161,15 @@ def send_test_email(request):
         return JsonResponse({"status": "success", "message": "Email elküldve"})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)})
+# views.py-hoz add hozzá (ne felejtsd el importálni a Videót és a VideoSerializert az elején!)
+
+
+
+class VideoViewSet(viewsets.ModelViewSet):
+    queryset = Video.objects.filter(is_active=True)
+    serializer_class = VideoSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['lang'] = self.request.query_params.get('lang', 'hu')
+        return context

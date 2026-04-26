@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Painting, News, NewsImage
+from .models import Course, Painting, News, NewsImage, Video
 
 
 @admin.register(Painting)
@@ -73,3 +73,8 @@ class CourseAdmin(admin.ModelAdmin):
     def get_title(self, obj):
         return obj.title_hu or obj.title_en
     get_title.short_description = "Cím"
+    
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('title_hu', 'is_active', 'order', 'created_at')
+    list_editable = ('is_active', 'order')

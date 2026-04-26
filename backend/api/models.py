@@ -114,3 +114,29 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title_hu
+
+
+class Video(models.Model):
+    title_hu = models.CharField(max_length=200, verbose_name="Cím (magyar)")
+    title_en = models.CharField(max_length=200, verbose_name="Cím (angol)", blank=True, null=True)
+    
+    description_hu = models.TextField(verbose_name="Leírás (magyar)", blank=True, null=True)
+    description_en = models.TextField(verbose_name="Leírás (angol)", blank=True, null=True)
+    
+    video_file = models.FileField(
+        upload_to='videos/', 
+        verbose_name="Videófájl",
+        help_text="MP4 formátum ajánlott"
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Feltöltve")
+    is_active = models.BooleanField(default=True, verbose_name="Aktív")
+    order = models.PositiveIntegerField(default=0, verbose_name="Sorrend")
+
+    class Meta:
+        ordering = ['order', '-created_at']
+        verbose_name = "Videó"
+        verbose_name_plural = "Videók"
+
+    def __str__(self):
+        return self.title_hu
