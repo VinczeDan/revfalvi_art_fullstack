@@ -51,12 +51,7 @@ const VideoSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             {language === "en" ? "Videos" : "Videók"}
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
-          <p className="text-foreground/80 max-w-2xl mx-auto text-lg italic">
-            {language === "en"
-              ? "Check out my latest creative videos."
-              : "Tekintse meg legújabb alkotói videóimat."}
-          </p>
+          
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
