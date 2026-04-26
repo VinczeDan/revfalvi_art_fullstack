@@ -79,6 +79,7 @@ const NewsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("news.title")}
           </h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("news.description")}
           </p>

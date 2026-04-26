@@ -57,6 +57,7 @@ const CoursesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {language === "hu" ? "Tanfolyamok" : "Courses"}
           </h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
         </div>
 
         {/* Töltés jelzése */}
