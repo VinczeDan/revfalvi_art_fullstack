@@ -8,6 +8,7 @@ router.register(r'paintings', views.PaintingViewSet)
 router.register(r'todos', views.TodoViewSet)
 router.register(r'news', views.NewsViewSet)
 router.register(r'courses', views.CourseViewSet)
+router.register(r'videos', views.VideoViewSet) # ← ÚJ SOR
 
 urlpatterns = router.urls + [
     # Most már a views.függvénynév formátum működni fog
