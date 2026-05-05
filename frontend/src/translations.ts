@@ -34,7 +34,9 @@ Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy verse
 Hogy mit kapsz a pénzedért cserébe? 
 
 100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, if valamit nem értesz!`,
-      rightContent: `Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. Amiben úgy érzem, hogy más vagyok mint festő vagy grafikus társaim, az az, hogy meg tudok állni egy pillanatra, észre tudom venni azt az egyediséget, ami elragad és alkotásra késztet.`,
+      rightContent: `Kedves Művész Növendékek!
+      
+      Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték. Amiben úgy érzem, hogy más vagyok mint festő vagy grafikus társaim, az az, hogy meg tudok állni egy pillanatra, észre tudom venni azt az egyediséget, ami elragad és alkotásra késztet.`,
     },
     videos: {
       title: "Videók",
@@ -120,7 +122,7 @@ Hogy mit kapsz a pénzedért cserébe?
     about: {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
-      leftContent: `Dear Language Learner!
+      leftContent: `Dear Language Learner,
 
 I am Péter Révfalvi, an English teacher by profession.
 
@@ -137,7 +139,9 @@ Then I came home, and since then I have been helping those here at home who want
 What do you get for your money?
 
 100% attention, consideration of individual needs, encouragement, and lots of help if you don't understand something!`,
-      rightContent: `Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. What I feel makes me different from my fellow painters or graphic artists is that I can stop for a moment and notice the uniqueness that captivates me and drives me to create.`,
+      rightContent: `Dear Art Students, 
+
+      Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. What I feel makes me different from my fellow painters or graphic artists is that I can stop for a moment and notice the uniqueness that captivates me and drives me to create.`,
     },
     videos: {
       title: "Videos",
