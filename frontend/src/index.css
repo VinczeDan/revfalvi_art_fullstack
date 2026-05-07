@@ -169,25 +169,7 @@ Türkiz kék, világos kék, fehér harmónia, oldalról beúszó animációkkal
     transform: translateY(-4px);
     box-shadow: var(--shadow-medium);
   }
-  /* Alapállapot: láthatatlan és kicsit lejjebb van */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-  }
-
-  /* Amikor láthatóvá válik */
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Késleltetések (Stagger effect) a sorban érkező képekhez */
-  .delay-100 { transition-delay: 100ms; }
-  .delay-200 { transition-delay: 200ms; }
-  .delay-300 { transition-delay: 300ms; }
-  .delay-400 { transition-delay: 400ms; }
-  .delay-500 { transition-delay: 500ms; }
+  
 }
 
 /* Keyframe animációk */
