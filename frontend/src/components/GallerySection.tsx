@@ -22,39 +22,18 @@ interface GallerySectionProps {
   color: "watercolor" | "acrylic" | "oil" | "pencil";
 }
 
-const TECHNIQUE_LABELS: Record<
-  string,
-  { hu: string; en: string; color: string }
-> = {
-  watercolor: { hu: "Akvarell", en: "Watercolor", color: "bg-blue-500" },
-  acrylic: { hu: "Akril", en: "Acrylic", color: "bg-purple-500" },
-  oil: { hu: "Olaj", en: "Oil", color: "bg-yellow-600" },
-  pencil: { hu: "Ceruza", en: "Pencil", color: "bg-gray-500" },
-};
-
 const PaintingCard = ({
   painting,
   index,
   onSelect,
-  language,
 }: {
   painting: Painting;
   index: number;
   onSelect: (p: Painting) => void;
-  language: string;
 }) => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
   const delays = ["", "reveal-delay-2", "reveal-delay-3"];
   const delay = delays[index % 3];
-
-  const techniqueKey = painting.technique?.toLowerCase();
-  const techniqueInfo = TECHNIQUE_LABELS[techniqueKey];
-  const techniqueLabel = techniqueInfo
-    ? language === "hu"
-      ? techniqueInfo.hu
-      : techniqueInfo.en
-    : painting.technique;
-  const techniqueColor = techniqueInfo?.color ?? "bg-gray-400";
 
   return (
     <div
@@ -72,18 +51,7 @@ const PaintingCard = ({
               alt={painting.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-
-            {/* Technika badge - mindig látható, bal felső sarok */}
-            <div className="absolute top-3 left-3 z-10">
-              <span
-                className={`inline-block px-2.5 py-1 rounded-full text-xs font-bold text-white shadow ${techniqueColor}`}
-              >
-                {techniqueLabel}
-              </span>
-            </div>
-
-            {/* Hover overlay - cím és leírás */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-4 left-4 right-4">
                 <h3 className="text-white font-semibold text-lg mb-1">
                   {painting.title}
@@ -141,6 +109,13 @@ const GallerySection = ({
     fetchPaintings();
   }, [id, language]);
 
+  const colorVariants = {
+    watercolor: "from-blue-400 to-blue-600",
+    acrylic: "from-purple-500 to-pink-500",
+    oil: "from-yellow-500 to-orange-500",
+    pencil: "from-gray-400 to-gray-600",
+  };
+
   const visiblePaintings = expanded ? paintings : paintings.slice(0, 3);
   const hasMore = paintings.length > 3;
 
@@ -172,7 +147,7 @@ const GallerySection = ({
   return (
     <section id={id} className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
+        {/* Section Header - nagy cím felül, pont mint az eredetiben */}
         <div
           ref={header.ref}
           className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
@@ -194,7 +169,6 @@ const GallerySection = ({
               painting={painting}
               index={index}
               onSelect={setSelectedPainting}
-              language={language}
             />
           ))}
         </div>
@@ -271,15 +245,7 @@ const GallerySection = ({
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
                       <p className="text-lg capitalize">
-                        {(() => {
-                          const key = selectedPainting.technique?.toLowerCase();
-                          const info = TECHNIQUE_LABELS[key];
-                          return info
-                            ? language === "hu"
-                              ? info.hu
-                              : info.en
-                            : selectedPainting.technique;
-                        })()}
+                        {selectedPainting.technique}
                       </p>
                     </div>
                     <div>
