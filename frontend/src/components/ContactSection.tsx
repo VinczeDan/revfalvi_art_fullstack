@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Palette, ShieldCheck, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "@/TranslationContext";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,10 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { t } = useTranslation();
+
+  const header = useScrollReveal({ threshold: 0.2 });
+  const leftCol = useScrollReveal({ threshold: 0.1 });
+  const rightCol = useScrollReveal({ threshold: 0.1 });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -64,23 +69,30 @@ const ContactSection = () => {
     <section id="contact" className="py-20 px-4 bg-gradient-soft">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="slide-in-left inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
+        <div
+          ref={header.ref}
+          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
             <Mail className="w-8 h-8 text-white" />
           </div>
 
-          <h2 className="slide-in-right text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("contact.title")}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
 
-          <p className="fade-in-up text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("contact.text")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="slide-in-left space-y-8">
+          {/* Bal oldal */}
+          <div
+            ref={leftCol.ref}
+            className={`reveal reveal-left ${leftCol.isVisible ? "is-visible" : ""} space-y-8`}
+          >
             {/* Szolgáltatások Kártya */}
             <Card className="border-0 shadow-soft">
               <CardHeader>
@@ -99,8 +111,8 @@ const ContactSection = () => {
             </Card>
 
             {/* Vállalkozói és Elérhetőségi Adatok */}
-            <div className="slide-in-left space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
-              <div className="fade-in-up">
+            <div className="space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
+              <div>
                 <h3 className="font-bold text-3xl text-primary mb-1">
                   {t("contact.businessName")}
                 </h3>
@@ -195,7 +207,10 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="slide-in-right">
+          <div
+            ref={rightCol.ref}
+            className={`reveal reveal-right reveal-delay-2 ${rightCol.isVisible ? "is-visible" : ""}`}
+          >
             <Card className="border-0 shadow-medium">
               <CardHeader>
                 <CardTitle className="text-2xl">
@@ -205,7 +220,7 @@ const ContactSection = () => {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="fade-in-up stagger-1">
+                    <div>
                       <Input
                         name="name"
                         placeholder={t("contact.formName") || "Teljes név"}
@@ -216,7 +231,7 @@ const ContactSection = () => {
                         className="h-12"
                       />
                     </div>
-                    <div className="fade-in-up stagger-2">
+                    <div>
                       <Input
                         name="email"
                         type="email"
@@ -230,7 +245,7 @@ const ContactSection = () => {
                     </div>
                   </div>
 
-                  <div className="fade-in-up stagger-3">
+                  <div>
                     <Input
                       name="subject"
                       placeholder={t("contact.formSubject") || "Tárgy"}
@@ -242,7 +257,7 @@ const ContactSection = () => {
                     />
                   </div>
 
-                  <div className="fade-in-up stagger-4">
+                  <div>
                     <Textarea
                       name="message"
                       placeholder={t("contact.formMessage") || "Üzenet..."}

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GraduationCap, Loader2 } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 import { useQuery } from "@tanstack/react-query";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 // 1. Típus definíció a backend adatokhoz
 interface Course {
@@ -22,10 +23,81 @@ const LEVEL_MAP: Record<string, { hu: string; en: string; color: string }> = {
   all: { hu: "Minden szint", en: "All levels", color: "bg-blue-500" },
 };
 
+// Egyedi kártya komponens scroll reveal-lel és késleltetéssel
+const CourseCard = ({
+  course,
+  language,
+  index,
+  scrollToContact,
+}: {
+  course: Course;
+  language: string;
+  index: number;
+  scrollToContact: (title: string) => void;
+}) => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const delays = [
+    "",
+    "reveal-delay-1",
+    "reveal-delay-2",
+    "reveal-delay-3",
+    "reveal-delay-4",
+    "reveal-delay-5",
+  ];
+  const delay = delays[index % delays.length];
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""} flex w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px]`}
+    >
+      <Card className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full">
+        <CardHeader className="pb-2">
+          <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
+          <span
+            className={`inline-block self-start px-3 py-1 rounded-full text-xs font-bold text-white mb-2 ${
+              LEVEL_MAP[course.level]?.color || "bg-gray-500"
+            }`}
+          >
+            {language === "hu"
+              ? LEVEL_MAP[course.level]?.hu
+              : LEVEL_MAP[course.level]?.en}
+          </span>
+          <CardTitle className="text-xl md:text-2xl">{course.title}</CardTitle>
+        </CardHeader>
+
+        <CardContent className="flex flex-col flex-1 gap-6">
+          <p className="text-muted-foreground text-base flex-1 whitespace-pre-line leading-relaxed">
+            {course.description}
+          </p>
+
+          <div className="flex items-center justify-between text-sm border-t pt-4">
+            <span className="text-muted-foreground font-medium">
+              ⏱ {course.duration}
+            </span>
+            <span className="font-bold text-primary text-lg">
+              {course.price}
+            </span>
+          </div>
+
+          <button
+            onClick={() => scrollToContact(course.title)}
+            className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
+          >
+            {language === "hu"
+              ? "Jelentkezés a tanfolyamra"
+              : "Sign up for course"}
+          </button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
 const CoursesSection = () => {
   const { language } = useTranslation();
+  const header = useScrollReveal({ threshold: 0.2 });
 
-  // 2. Adatlekérés React Query-vel
   const {
     data: courses,
     isLoading,
@@ -50,7 +122,10 @@ const CoursesSection = () => {
     <section id="courses" className="py-20 px-4 bg-gradient-soft">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div
+          ref={header.ref}
+          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
+        >
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
@@ -76,54 +151,16 @@ const CoursesSection = () => {
           </div>
         )}
 
-        {/* Dinamikus kártyák listázása - Szélesebb elrendezés */}
+        {/* Dinamikus kártyák */}
         <div className="flex flex-wrap justify-center gap-8 mb-10">
-          {courses?.map((course) => (
-            <Card
+          {courses?.map((course, index) => (
+            <CourseCard
               key={course.id}
-              className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px]"
-            >
-              <CardHeader className="pb-2">
-                <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
-                <span
-                  className={`inline-block self-start px-3 py-1 rounded-full text-xs font-bold text-white mb-2 ${
-                    LEVEL_MAP[course.level]?.color || "bg-gray-500"
-                  }`}
-                >
-                  {language === "hu"
-                    ? LEVEL_MAP[course.level]?.hu
-                    : LEVEL_MAP[course.level]?.en}
-                </span>
-                <CardTitle className="text-xl md:text-2xl">
-                  {course.title}
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="flex flex-col flex-1 gap-6">
-                {/* whitespace-pre-line a sortörésekhez */}
-                <p className="text-muted-foreground text-base flex-1 whitespace-pre-line leading-relaxed">
-                  {course.description}
-                </p>
-
-                <div className="flex items-center justify-between text-sm border-t pt-4">
-                  <span className="text-muted-foreground font-medium">
-                    ⏱ {course.duration}
-                  </span>
-                  <span className="font-bold text-primary text-lg">
-                    {course.price}
-                  </span>
-                </div>
-
-                <button
-                  onClick={() => scrollToContact(course.title)}
-                  className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
-                >
-                  {language === "hu"
-                    ? "Jelentkezés a tanfolyamra"
-                    : "Sign up for course"}
-                </button>
-              </CardContent>
-            </Card>
+              course={course}
+              language={language}
+              index={index}
+              scrollToContact={scrollToContact}
+            />
           ))}
         </div>
       </div>

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/TranslationContext";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface Painting {
   id: number;
@@ -22,6 +22,53 @@ interface GallerySectionProps {
   color: "watercolor" | "acrylic" | "oil" | "pencil";
 }
 
+// Egyedi kártya komponens saját scroll reveal-lel
+const PaintingCard = ({
+  painting,
+  index,
+  onSelect,
+}: {
+  painting: Painting;
+  index: number;
+  onSelect: (p: Painting) => void;
+}) => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const delays = ["", "reveal-delay-2", "reveal-delay-3"];
+  const delay = delays[index % 3];
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""}`}
+    >
+      <Card
+        className="group hover-lift cursor-pointer border-0 shadow-soft hover:shadow-medium overflow-hidden"
+        onClick={() => onSelect(painting)}
+      >
+        <CardContent className="p-0">
+          <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
+            <img
+              src={painting.image_url}
+              alt={painting.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-white font-semibold text-lg mb-1">
+                  {painting.title}
+                </h3>
+                <p className="text-white/90 text-sm line-clamp-2">
+                  {painting.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
 const GallerySection = ({
   id,
   title,
@@ -34,15 +81,15 @@ const GallerySection = ({
   const [selectedPainting, setSelectedPainting] = useState<Painting | null>(
     null,
   );
-  // ← ÚJ: bővített állapot kezelése kategóriánként
   const [expanded, setExpanded] = useState(false);
 
   const { language } = useTranslation();
+  const header = useScrollReveal({ threshold: 0.2 });
+  const expandBtn = useScrollReveal({ threshold: 0.1 });
 
   useEffect(() => {
     const fetchPaintings = async () => {
       setLoading(true);
-      // Kategória váltásnál mindig összecsukjuk
       setExpanded(false);
       try {
         const response = await fetch(
@@ -70,7 +117,6 @@ const GallerySection = ({
     pencil: "from-gray-400 to-gray-600",
   };
 
-  // Az első 3 mindig látható, bővítésnél az összes
   const visiblePaintings = expanded ? paintings : paintings.slice(0, 3);
   const hasMore = paintings.length > 3;
 
@@ -103,7 +149,10 @@ const GallerySection = ({
     <section id={id} className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div
+          ref={header.ref}
+          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {title}
           </h2>
@@ -113,63 +162,49 @@ const GallerySection = ({
           </p>
         </div>
 
-        {/* Gallery Grid – csak a látható képek */}
+        {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {visiblePaintings.map((painting) => (
-            <Card
+          {visiblePaintings.map((painting, index) => (
+            <PaintingCard
               key={painting.id}
-              className="group hover-lift cursor-pointer border-0 shadow-soft hover:shadow-medium overflow-hidden"
-              onClick={() => setSelectedPainting(painting)}
-            >
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
-                  <img
-                    src={painting.image_url}
-                    alt={painting.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-semibold text-lg mb-1">
-                        {painting.title}
-                      </h3>
-                      <p className="text-white/90 text-sm line-clamp-2">
-                        {painting.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              painting={painting}
+              index={index}
+              onSelect={setSelectedPainting}
+            />
           ))}
         </div>
 
-        {/* ← ÚJ: Bővítő/összecsukó gomb – csak ha több mint 3 kép van */}
+        {/* Bővítő/összecsukó gomb */}
         {hasMore && (
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="
-              mt-6 w-full flex items-center justify-center gap-3
-              py-4 px-6 rounded-lg border-2 border-dashed
-              border-muted-foreground/30 text-muted-foreground
-              hover:border-primary hover:text-primary hover:bg-primary/5
-              transition-all duration-200 font-medium text-sm
-            "
+          <div
+            ref={expandBtn.ref}
+            className={`reveal reveal-up reveal-delay-2 ${expandBtn.isVisible ? "is-visible" : ""}`}
           >
-            {expanded ? (
-              <>
-                <ChevronUp className="w-4 h-4" />
-                {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
-              </>
-            ) : (
-              <>
-                <ChevronDown className="w-4 h-4" />
-                {language === "en"
-                  ? `View all ${title} works (${paintings.length} pieces)`
-                  : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
-              </>
-            )}
-          </button>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="
+                mt-6 w-full flex items-center justify-center gap-3
+                py-4 px-6 rounded-lg border-2 border-dashed
+                border-muted-foreground/30 text-muted-foreground
+                hover:border-primary hover:text-primary hover:bg-primary/5
+                transition-all duration-200 font-medium text-sm
+              "
+            >
+              {expanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                  {language === "en"
+                    ? `View all ${title} works (${paintings.length} pieces)`
+                    : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
+                </>
+              )}
+            </button>
+          </div>
         )}
 
         {/* Modal */}
