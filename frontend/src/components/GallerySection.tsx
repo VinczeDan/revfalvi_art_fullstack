@@ -31,7 +31,7 @@ const PaintingCard = ({
   index: number;
   onSelect: (p: Painting) => void;
 }) => {
-  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.05 });
   const delays = ["", "reveal-delay-2", "reveal-delay-3"];
   const delay = delays[index % 3];
 
@@ -83,8 +83,7 @@ const GallerySection = ({
   const [expanded, setExpanded] = useState(false);
 
   const { language } = useTranslation();
-  const header = useScrollReveal({ threshold: 0.2 });
-  const expandBtn = useScrollReveal({ threshold: 0.1 });
+  const header = useScrollReveal({ threshold: 0.05 });
 
   useEffect(() => {
     const fetchPaintings = async () => {
@@ -147,7 +146,7 @@ const GallerySection = ({
   return (
     <section id={id} className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header - nagy cím felül, pont mint az eredetiben */}
+        {/* Section Header */}
         <div
           ref={header.ref}
           className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
@@ -173,37 +172,32 @@ const GallerySection = ({
           ))}
         </div>
 
-        {/* Bővítő/összecsukó gomb */}
+        {/* Bővítő/összecsukó gomb — NEM reveal, mindig látható */}
         {hasMore && (
-          <div
-            ref={expandBtn.ref}
-            className={`reveal reveal-up reveal-delay-2 ${expandBtn.isVisible ? "is-visible" : ""}`}
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="
+              mt-6 w-full flex items-center justify-center gap-3
+              py-4 px-6 rounded-lg border-2 border-dashed
+              border-muted-foreground/30 text-muted-foreground
+              hover:border-primary hover:text-primary hover:bg-primary/5
+              transition-all duration-200 font-medium text-sm
+            "
           >
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="
-                mt-6 w-full flex items-center justify-center gap-3
-                py-4 px-6 rounded-lg border-2 border-dashed
-                border-muted-foreground/30 text-muted-foreground
-                hover:border-primary hover:text-primary hover:bg-primary/5
-                transition-all duration-200 font-medium text-sm
-              "
-            >
-              {expanded ? (
-                <>
-                  <ChevronUp className="w-4 h-4" />
-                  {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-4 h-4" />
-                  {language === "en"
-                    ? `View all ${title} works (${paintings.length} pieces)`
-                    : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
-                </>
-              )}
-            </button>
-          </div>
+            {expanded ? (
+              <>
+                <ChevronUp className="w-4 h-4" />
+                {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-4 h-4" />
+                {language === "en"
+                  ? `View all ${title} works (${paintings.length} pieces)`
+                  : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
+              </>
+            )}
+          </button>
         )}
 
         {/* Modal */}

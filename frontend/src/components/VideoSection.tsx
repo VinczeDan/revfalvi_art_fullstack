@@ -10,9 +10,8 @@ interface Video {
   order: number;
 }
 
-// Egyedi videó kártya komponens saját scroll reveal-lel
 const VideoCard = ({ video, index }: { video: Video; index: number }) => {
-  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.05 });
   const delays = ["", "reveal-delay-2", "reveal-delay-3", "reveal-delay-4"];
   const delay = delays[index % 4];
 
@@ -51,7 +50,6 @@ const VideoSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { language } = useTranslation();
-  const header = useScrollReveal({ threshold: 0.2 });
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -83,10 +81,8 @@ const VideoSection = () => {
   return (
     <section id="videos" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div
-          ref={header.ref}
-          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
-        >
+        {/* Fejléc — NEM reveal osztállyal, hogy mindig látszódjon */}
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             {language === "en" ? "Videos" : "Videók"}
           </h2>

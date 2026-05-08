@@ -11,8 +11,8 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   options: UseScrollRevealOptions = {},
 ) {
   const {
-    threshold = 0.15,
-    rootMargin = "0px 0px -60px 0px",
+    threshold = 0.1,
+    rootMargin = "0px 0px -40px 0px",
     once = true,
   } = options;
   const ref = useRef<T>(null);
@@ -21,6 +21,13 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    // Ha az elem már a viewport-ban van betöltéskor, azonnal látható legyen
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
