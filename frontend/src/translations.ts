@@ -25,18 +25,18 @@ Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában.
 
 Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt! 
 
-Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
+Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg azt, az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
 
 Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen hallgatni és beszélni az angolt. Ez volt a csúcsok csúcsa! Nem bántam meg!!! 
 
-Majd hazajöttem, és azóta itthon segítek azokat, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
+Majd hazajöttem, és azóta itthon segítek azoknak, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
 
 Hogy mit kapsz a pénzedért cserébe? 
 
-100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, if valamit nem értesz!`,
+100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!`,
       rightContent: `Kedves Művész Növendékek!
       
-      Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell és az olajfesték.`,
+      Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell, és az olajfesték.`,
     },
     videos: {
       title: "Videók",
