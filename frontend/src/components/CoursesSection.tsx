@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Loader2 } from "lucide-react";
+import { GraduationCap, Loader2, ChevronDown } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 import { useQuery } from "@tanstack/react-query";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -23,7 +23,7 @@ const LEVEL_MAP: Record<string, { hu: string; en: string; color: string }> = {
   all: { hu: "Minden szint", en: "All levels", color: "bg-blue-500" },
 };
 
-// Egyedi kártya komponens scroll reveal-lel és késleltetéssel
+// Egyedi kártya komponens lenyitható (Accordion) funkcióval
 const CourseCard = ({
   course,
   language,
@@ -36,6 +36,8 @@ const CourseCard = ({
   scrollToContact: (title: string) => void;
 }) => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const [isOpen, setIsOpen] = useState(false); // Lenyitás állapota
+
   const delays = [
     "",
     "reveal-delay-1",
@@ -49,46 +51,76 @@ const CourseCard = ({
   return (
     <div
       ref={ref}
-      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""} flex w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px]`}
+      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""} flex w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px] h-fit`}
     >
-      <Card className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 flex flex-col w-full">
-        <CardHeader className="pb-2">
-          <div className="text-4xl mb-3">{course.icon || "🎨"}</div>
-          <span
-            className={`inline-block self-start px-3 py-1 rounded-full text-xs font-bold text-white mb-2 ${
-              LEVEL_MAP[course.level]?.color || "bg-gray-500"
-            }`}
-          >
-            {language === "hu"
-              ? LEVEL_MAP[course.level]?.hu
-              : LEVEL_MAP[course.level]?.en}
-          </span>
-          <CardTitle className="text-xl md:text-2xl">{course.title}</CardTitle>
-        </CardHeader>
+      <Card className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 flex flex-col w-full overflow-hidden bg-card">
+        {/* Kattintható fejléc: Ikon, Szint, Ár és Cím */}
+        <div
+          className="cursor-pointer p-6 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className="flex justify-between items-start mb-4">
+            <div className="text-4xl">{course.icon || "🎨"}</div>
+            <div
+              className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+            >
+              <ChevronDown className="w-5 h-5 text-muted-foreground" />
+            </div>
+          </div>
 
-        <CardContent className="flex flex-col flex-1 gap-6">
-          <p className="text-muted-foreground text-base flex-1 whitespace-pre-line leading-relaxed">
-            {course.description}
-          </p>
-
-          <div className="flex items-center justify-between text-sm border-t pt-4">
-            <span className="text-muted-foreground font-medium">
-              ⏱ {course.duration}
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span
+              className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold text-white ${
+                LEVEL_MAP[course.level]?.color || "bg-gray-500"
+              }`}
+            >
+              {language === "hu"
+                ? LEVEL_MAP[course.level]?.hu
+                : LEVEL_MAP[course.level]?.en}
             </span>
-            <span className="font-bold text-primary text-lg">
+            <span className="px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold bg-muted text-muted-foreground">
               {course.price}
             </span>
           </div>
 
-          <button
-            onClick={() => scrollToContact(course.title)}
-            className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
-          >
-            {language === "hu"
-              ? "Jelentkezés a tanfolyamra"
-              : "Sign up for course"}
-          </button>
-        </CardContent>
+          <h3 className="text-xl md:text-2xl font-bold leading-tight">
+            {course.title}
+          </h3>
+        </div>
+
+        {/* Lenyitható tartalom: Leírás, Időtartam és Jelentkezés gomb */}
+        <div
+          className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+            isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <CardContent className="pt-0 pb-6 flex flex-col gap-6">
+              <div className="h-px bg-border w-full mb-2" />
+
+              <p className="text-muted-foreground text-base whitespace-pre-line leading-relaxed">
+                {course.description}
+              </p>
+
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <span className="text-lg">⏱</span>
+                <span>{course.duration}</span>
+              </div>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Ne csukódjon be a kártya a gombra kattintáskor
+                  scrollToContact(course.title);
+                }}
+                className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all active:scale-95"
+              >
+                {language === "hu"
+                  ? "Jelentkezés a tanfolyamra"
+                  : "Sign up for course"}
+              </button>
+            </CardContent>
+          </div>
+        </div>
       </Card>
     </div>
   );
@@ -151,8 +183,8 @@ const CoursesSection = () => {
           </div>
         )}
 
-        {/* Dinamikus kártyák */}
-        <div className="flex flex-wrap justify-center gap-8 mb-10">
+        {/* Dinamikus kártyák flexibilis elrendezéssel */}
+        <div className="flex flex-wrap justify-center gap-8 mb-10 items-start">
           {courses?.map((course, index) => (
             <CourseCard
               key={course.id}
