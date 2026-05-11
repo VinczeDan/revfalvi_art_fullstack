@@ -36,11 +36,14 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/send-contact-email/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://139.59.154.26:8000/api/send-contact-email/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
 
       if (!response.ok) {
         let message = `HTTP ${response.status}`;
