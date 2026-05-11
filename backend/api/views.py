@@ -18,7 +18,20 @@ import requests
 
 logger = logging.getLogger(__name__)
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
-SENDER_EMAIL = "daniel.vincze15@gmail.com"
+# Utolsó esély a feladó címhez (Brevóban ellenőrzött cím kell); előnyben: settings.DEFAULT_FROM_EMAIL
+SENDER_EMAIL_FALLBACK = "daniel.vincze15@gmail.com"
+
+
+def _brevo_sender_email():
+    return getattr(settings, "DEFAULT_FROM_EMAIL", None) or SENDER_EMAIL_FALLBACK
+
+
+# Kapcsolati űrlap admin másolata — tesztelés alatt fix cím; élesben: CONTACT_FORM_ADMIN_TO a local_settings-ben.
+CONTACT_FORM_ADMIN_TO_DEFAULT = "daniel.vincze15@gmail.com"
+
+
+def _contact_form_admin_recipient():
+    return getattr(settings, "CONTACT_FORM_ADMIN_TO", None) or CONTACT_FORM_ADMIN_TO_DEFAULT
 
 
 def send_brevo_email(subject, html_content, to_email):
@@ -74,13 +87,16 @@ def send_contact_email(request):
             safe_message = escape(str(message))
             safe_user_email = escape(str(user_email)) if user_email else ""
 
-            # 1. EMAIL NEKED (Admin értesítés)
+            sender_addr = _brevo_sender_email()
+            admin_to = _contact_form_admin_recipient()
+
+            # 1. EMAIL az admin címre (alapból teszt: daniel…; felülírható: CONTACT_FORM_ADMIN_TO local_settings-ben)
             admin_resp = requests.post(
                 "https://api.brevo.com/v3/smtp/email",
                 headers=headers,
                 json={
-                    "sender": {"name": "Revfalvi Art Rendszer", "email": SENDER_EMAIL},
-                    "to": [{"email": SENDER_EMAIL}],
+                    "sender": {"name": "Revfalvi Art Rendszer", "email": sender_addr},
+                    "to": [{"email": admin_to}],
                     "subject": f"ÚJ ÜZENET: {subject}",
                     "htmlContent": (
                         "<h3>Új kapcsolatfelvétel</h3>"
@@ -99,7 +115,7 @@ def send_contact_email(request):
                     "https://api.brevo.com/v3/smtp/email",
                     headers=headers,
                     json={
-                        "sender": {"name": "Révfalvi Péter", "email": SENDER_EMAIL},
+                        "sender": {"name": "Révfalvi Péter", "email": sender_addr},
                         "to": [{"email": user_email}],
                         "subject": "Köszönöm a megkeresést – Revfalvi Art",
                         "htmlContent": f"""
