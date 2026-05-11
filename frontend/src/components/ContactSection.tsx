@@ -43,10 +43,15 @@ const ContactSection = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`,
-        );
+        let message = `HTTP ${response.status}`;
+        const raw = await response.text();
+        try {
+          const errorData = JSON.parse(raw) as { error?: string };
+          message = errorData.error || message;
+        } catch {
+          if (raw) message = raw.slice(0, 200);
+        }
+        throw new Error(message);
       }
 
       toast.success(t("contact.successTitle") || "Sikeres küldés!", {

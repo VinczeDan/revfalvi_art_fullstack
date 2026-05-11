@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from django.core.mail import send_mail
 import logging
 from django.conf import settings
+from django.utils.html import escape
 import requests
 
 
@@ -55,28 +56,46 @@ def send_contact_email(request):
             message = data.get('message', '')
 
             api_key = getattr(settings, 'BREVO_API_KEY', None)
+            if not api_key:
+                logger.error("BREVO_API_KEY nincs beállítva (local_settings).")
+                return JsonResponse(
+                    {'error': 'Az üzenetküldés nincs konfigurálva a szerveren.'},
+                    status=503,
+                )
+
             headers = {
                 "api-key": api_key,
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             }
 
+            safe_name = escape(str(name))
+            safe_subject = escape(str(subject))
+            safe_message = escape(str(message))
+            safe_user_email = escape(str(user_email)) if user_email else ""
+
             # 1. EMAIL NEKED (Admin értesítés)
-            requests.post(
+            admin_resp = requests.post(
                 "https://api.brevo.com/v3/smtp/email",
                 headers=headers,
                 json={
                     "sender": {"name": "Revfalvi Art Rendszer", "email": SENDER_EMAIL},
                     "to": [{"email": SENDER_EMAIL}],
                     "subject": f"ÚJ ÜZENET: {subject}",
-                    "htmlContent": f"<h3>Új kapcsolatfelvétel</h3><p><b>Név:</b> {name}</p><p><b>Email:</b> {user_email}</p><p><b>Üzenet:</b> {message}</p>"
+                    "htmlContent": (
+                        "<h3>Új kapcsolatfelvétel</h3>"
+                        f"<p><b>Név:</b> {safe_name}</p>"
+                        f"<p><b>Email:</b> {safe_user_email}</p>"
+                        f"<p><b>Üzenet:</b> {safe_message}</p>"
+                    ),
                 },
-                timeout=10
+                timeout=10,
             )
+            admin_resp.raise_for_status()
 
             # 2. EMAIL AZ ÜGYFÉLNEK (Visszaigazolás)
             if user_email:
-                requests.post(
+                client_resp = requests.post(
                     "https://api.brevo.com/v3/smtp/email",
                     headers=headers,
                     json={
@@ -84,18 +103,33 @@ def send_contact_email(request):
                         "to": [{"email": user_email}],
                         "subject": "Köszönöm a megkeresést – Revfalvi Art",
                         "htmlContent": f"""
-                            <p>Kedves {name}!</p>
-                            <p>Köszönöm, hogy írtál! Megkaptam az üzenetedet a következő témában: <b>{subject}</b>.</p>
+                            <p>Kedves {safe_name}!</p>
+                            <p>Köszönöm, hogy írtál! Megkaptam az üzenetedet a következő témában: <b>{safe_subject}</b>.</p>
                             <p>Hamarosan jelentkezem a válaszommal!</p>
                             <br>
                             <p>Üdvözlettel,<br>Révfalvi Péter<br><a href="https://revfalvi-art.hu">revfalvi-art.hu</a></p>
-                        """
+                        """,
                     },
-                    timeout=10
+                    timeout=10,
                 )
+                client_resp.raise_for_status()
 
             return JsonResponse({'status': 'success'})
 
+        except requests.HTTPError as e:
+            detail = ""
+            if e.response is not None:
+                try:
+                    detail = e.response.json()
+                except ValueError:
+                    detail = e.response.text[:500]
+            logger.error("Brevo API hiba: %s %s", e, detail)
+            return JsonResponse(
+                {'error': 'Az e-mail küldése sikertelen. Próbáld újra később.'},
+                status=502,
+            )
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Érvénytelen kérés.'}, status=400)
         except Exception as e:
             logger.error(f"Szerver hiba: {str(e)}")
             return JsonResponse({'error': 'Belső szerverhiba történt.'}, status=500)

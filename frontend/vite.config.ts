@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
         target: 'http://139.59.154.26:8000',  // Django backend címe
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // Ne írjuk át az útvonalat: a Django urlpatterns `path("api/", include("api.urls"))`.
         headers: {
           "Connection": "keep-alive"
         }
