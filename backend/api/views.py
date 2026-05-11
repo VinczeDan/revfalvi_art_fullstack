@@ -18,7 +18,6 @@ import requests
 
 logger = logging.getLogger(__name__)
 BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
-# Utolsó esély a feladó címhez (Brevóban ellenőrzött cím kell); előnyben: settings.DEFAULT_FROM_EMAIL
 SENDER_EMAIL_FALLBACK = "daniel.vincze15@gmail.com"
 
 
