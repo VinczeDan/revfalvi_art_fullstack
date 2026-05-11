@@ -46,61 +46,27 @@ def send_brevo_email(subject, html_content, to_email):
 
 @csrf_exempt
 def send_contact_email(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             data = json.loads(request.body)
-            name = data.get('name', 'Névtelen')
-            user_email = data.get('email')
-            subject = data.get('subject', 'Weboldal üzenet')
-            message = data.get('message', '')
+            name = data.get("name")
+            email = data.get("email")
+            subject = data.get("subject")
+            message = data.get("message")
 
-            api_key = getattr(settings, 'BREVO_API_KEY', None)
-            headers = {
-                "api-key": api_key,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            }
+            full_message = f"Feladó: {name} ({email})\n\nTárgy: {subject}\n\nÜzenet:\n{message}"
 
-            # 1. EMAIL NEKED (Admin értesítés)
-            requests.post(
-                "https://api.brevo.com/v3/smtp/email",
-                headers=headers,
-                json={
-                    "sender": {"name": "Revfalvi Art Rendszer", "email": SENDER_EMAIL},
-                    "to": [{"email": SENDER_EMAIL}],
-                    "subject": f"ÚJ ÜZENET: {subject}",
-                    "htmlContent": f"<h3>Új kapcsolatfelvétel</h3><p><b>Név:</b> {name}</p><p><b>Email:</b> {user_email}</p><p><b>Üzenet:</b> {message}</p>"
-                },
-                timeout=10
+            send_mail(
+                subject=f"Weboldal üzenet: {subject}",
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
             )
-
-            # 2. EMAIL AZ ÜGYFÉLNEK (Visszaigazolás)
-            if user_email:
-                requests.post(
-                    "https://api.brevo.com/v3/smtp/email",
-                    headers=headers,
-                    json={
-                        "sender": {"name": "Révfalvi Péter", "email": SENDER_EMAIL},
-                        "to": [{"email": user_email}],
-                        "subject": "Köszönöm a megkeresést – Revfalvi Art",
-                        "htmlContent": f"""
-                            <p>Kedves {name}!</p>
-                            <p>Köszönöm, hogy írtál! Megkaptam az üzenetedet a következő témában: <b>{subject}</b>.</p>
-                            <p>Hamarosan jelentkezem a válaszommal!</p>
-                            <br>
-                            <p>Üdvözlettel,<br>Révfalvi Péter<br><a href="https://revfalvi-art.hu">revfalvi-art.hu</a></p>
-                        """
-                    },
-                    timeout=10
-                )
-
-            return JsonResponse({'status': 'success'})
-
+            return JsonResponse({"status": "success", "message": "Email sikeresen elküldve!"})
         except Exception as e:
-            logger.error(f"Szerver hiba: {str(e)}")
-            return JsonResponse({'error': 'Belső szerverhiba történt.'}, status=500)
-
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    return JsonResponse({"error": "Invalid method"}, status=405)
 
 def index_view(request):
     return render(request, 'index.html')

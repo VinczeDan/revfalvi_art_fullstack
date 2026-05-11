@@ -104,7 +104,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 DEFAULT_FROM_EMAIL = "daniel.vincze15@gmail.com"
 DEFAULT_TO_EMAIL = "daniel.vincze15@gmail.com"
-
+BREVO_API_KEY = None
 
 # --- Local settings import ---
 try:
