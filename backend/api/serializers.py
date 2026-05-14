@@ -23,7 +23,8 @@ class PaintingSerializer(serializers.ModelSerializer):
             'technique',
             'technique_display',
             'image_url',
-            'created_at'
+            'created_at',
+            'price',
         ]
 
     def get_image_url(self, obj):

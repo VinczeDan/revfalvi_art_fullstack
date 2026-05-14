@@ -13,6 +13,7 @@ interface Painting {
   technique: string;
   image_url: string;
   created_at: string;
+  price: string;
 }
 
 interface GallerySectionProps {
@@ -233,19 +234,22 @@ const GallerySection = ({
                     {selectedPainting.title}
                   </h3>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-6">
                     <div>
                       <p className="text-sm font-medium text-gray-500">
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
+
                       <p className="text-lg capitalize">
                         {selectedPainting.technique}
                       </p>
                     </div>
+
                     <div>
                       <p className="text-sm font-medium text-gray-500">
                         {language === "en" ? "Created" : "Készült"}
                       </p>
+
                       <p className="text-lg">
                         {new Date(
                           selectedPainting.created_at,
@@ -253,6 +257,19 @@ const GallerySection = ({
                           language === "en" ? "en-US" : "hu-HU",
                         )}
                       </p>
+                    </div>
+
+                    {/* ÁR */}
+                    <div className="col-span-2">
+                      <div className="bg-gradient-to-r from-amber-100 to-yellow-50 border border-amber-200 rounded-xl p-5">
+                        <p className="text-sm uppercase tracking-wide text-amber-700 font-medium mb-1">
+                          {language === "en" ? "Price" : "Ár"}
+                        </p>
+
+                        <p className="text-4xl font-bold text-amber-900">
+                          {Number(selectedPainting.price).toLocaleString("hu-HU")} Ft
+                        </p>
+                      </div>
                     </div>
                   </div>
 

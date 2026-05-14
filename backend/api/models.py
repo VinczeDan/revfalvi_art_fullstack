@@ -28,6 +28,12 @@ class Painting(models.Model):
         upload_to='paintings/',
         verbose_name="Képfájl"
     )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=0,
+        verbose_name="Ár",
+        default=0
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     is_featured = models.BooleanField(default=False)
 
