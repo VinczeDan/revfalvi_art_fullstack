@@ -16,7 +16,7 @@ class PaintingAdmin(admin.ModelAdmin):
             'fields': ('description_hu', 'description_en')
         }),
         ("Egyéb adatok", {
-            'fields': ('technique', 'image', 'is_featured')
+            'fields': ('technique', 'price', 'image', 'is_featured')
         }),
     )
 
