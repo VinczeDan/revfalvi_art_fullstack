@@ -265,9 +265,13 @@ const GallerySection = ({
                         <p className="text-sm uppercase tracking-wide text-amber-700 font-medium mb-1">
                           {language === "en" ? "Price" : "Ár"}
                         </p>
-
                         <p className="text-4xl font-bold text-amber-900">
-                          {Number(selectedPainting.price).toLocaleString("hu-HU")} Ft
+                          {selectedPainting.price &&
+                          Number(selectedPainting.price) > 0
+                            ? `${Number(selectedPainting.price).toLocaleString("hu-HU")} Ft`
+                            : language === "en"
+                              ? "Not for sale / Inquire"
+                              : "Nem eladó / Érdeklődjön"}
                         </p>
                       </div>
                     </div>
