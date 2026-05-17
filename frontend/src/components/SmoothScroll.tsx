@@ -1,33 +1,42 @@
-// src/components/SmoothScroll.tsx módosított részlete
+// src/components/SmoothScroll.tsx
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom"; // ⬅️ Importáljuk a helyzetjelzőt
-import Lenis from "@studio-freight/lenis";
+import { useLocation } from "react-router-dom";
+import Lenis from "lenis";
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
-  const location = useLocation(); // ⬅️ Figyeljük, ha változik az URL / aloldal
+  const location = useLocation();
 
   useEffect(() => {
+    // Inicializáljuk a Lenis-t
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 1.2, // Egy picit lejjebb vettem a reakcióidőt a pattogósabb érzetért
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.1, // Kicsit emeltem, hogy ne tűnjön fásultnak a görgetés
     });
+
+    // Változó az animációs keret azonosítójának mentéséhez
+    let rafId: number;
 
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf); // Elmentjük az aktuális ciklust
     }
-    requestAnimationFrame(raf);
 
-    // ⬅️ Amikor oldalt vált a látogató, azonnal tekerjük a lap tetejére animáció nélkül
+    // Elindítjuk az animációt
+    rafId = requestAnimationFrame(raf);
+
+    // Azonnal a lap tetejére ugrunk oldalváltáskor
     lenis.scrollTo(0, { immediate: true });
 
+    // ⚠️ TAKARÍTÁS: Amikor a komponens frissül vagy lecsatolódik,
+    // megállítjuk a háttérben futó animációs ciklust és töröljük a Lenis-t.
     return () => {
+      cancelAnimationFrame(rafId); // ⬅️ EZ HIÁNYZOTT! Megállítja a processzor pörgetését
       lenis.destroy();
     };
-  }, [location]); // ⬅️ újra lefut, ha változik az oldal!
+  }, [location]);
 
   return <>{children}</>;
 };
