@@ -237,11 +237,13 @@ const GallerySection = ({
 
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
+                      {/* A feliratnak fix középszürkét adunk, ami biztosan látszik fehéren */}
+                      <p className="text-sm font-medium text-zinc-500">
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
-                      <p className="text-lg text-gray-900 font-normal">
-                        {/* ⚠️ selectedPainting.technique HELYETT a technique_display-t használjuk */}
+
+                      {/* A tartalomnak pedig egy fix, jól olvasható sötétszürkét (majdnem feketét) */}
+                      <p className="text-lg font-semibold text-zinc-800 capitalize">
                         {selectedPainting.technique_display ||
                           selectedPainting.technique}
                       </p>
