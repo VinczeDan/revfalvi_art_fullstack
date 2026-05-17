@@ -92,6 +92,7 @@ Hogy mit kapsz a pénzedért cserébe?
       formMessage: "Üzenet...",
       sendButton: "Üzenet küldése",
       sending: "Küldés...",
+      socialTitle: "Kövess a közösségi oldalakon is",
       // Vállalkozói adatok
       businessName: "Révfalvi Péter",
       businessStatus: "Egyéni vállalkozó",
@@ -197,6 +198,7 @@ What do you get for your money?
       formMessage: "Message...",
       sendButton: "Send Message",
       sending: "Sending...",
+      socialTitle: "Follow me on social media",
       // Business Info
       businessName: "Péter Révfalvi",
       businessStatus: "Sole Proprietor",

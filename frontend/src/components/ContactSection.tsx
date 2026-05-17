@@ -213,16 +213,16 @@ const ContactSection = () => {
                 </a>
               </div>
 
-              {/* --- KÖZÖSSÉGI MÉDIA SZEKCIÓ --- */}
               <div className="pt-6 border-t border-white/10">
+                {/* A t() függvény most már dinamikusan a megfelelő nyelvi verziót fogja betölteni */}
                 <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider mb-4">
-                  {t("contact.socialsTitle") ||
+                  {t("contact.socialTitle") ||
                     "Kövess a közösségi oldalakon is"}
                 </h4>
                 <div className="flex gap-4">
                   {/* Facebook Link */}
                   <a
-                    href="https://facebook.com/REVFALVI_PROFILOD_NEVE" // ← Írd át a valós linkre!
+                    href="https://facebook.com/REVFALVI_PROFILOD_NEVE"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-primary/10 hover:border-primary/30 transition-all group shadow-sm"
@@ -235,7 +235,7 @@ const ContactSection = () => {
 
                   {/* Instagram Link */}
                   <a
-                    href="https://instagram.com/REVFALVI_PROFILOD_NEVE" // ← Írd át a valós linkre!
+                    href="https://instagram.com/REVFALVI_PROFILOD_NEVE"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all group shadow-sm"
