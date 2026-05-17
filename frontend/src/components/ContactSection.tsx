@@ -222,7 +222,7 @@ const ContactSection = () => {
                 <div className="flex gap-4">
                   {/* Facebook Link */}
                   <a
-                    href="https://facebook.com/REVFALVI_PROFILOD_NEVE"
+                    href="https://www.facebook.com/revfalvi.peter"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-primary/10 hover:border-primary/30 transition-all group shadow-sm"
