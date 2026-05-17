@@ -4,7 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Palette, ShieldCheck, MapPin } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Palette,
+  ShieldCheck,
+  MapPin,
+  Facebook,
+  Instagram,
+} from "lucide-react"; // ← Facebook és Instagram hozzáadva
 import { toast } from "sonner";
 import { useTranslation } from "@/TranslationContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -168,6 +176,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
+              {/* Elérhetőségek (Email, Telefon) */}
               <div className="space-y-5 pt-2">
                 <a
                   href="mailto:revfalvi.peter@googlemail.com"
@@ -203,6 +212,42 @@ const ContactSection = () => {
                   </div>
                 </a>
               </div>
+
+              {/* --- KÖZÖSSÉGI MÉDIA SZEKCIÓ --- */}
+              <div className="pt-6 border-t border-white/10">
+                <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider mb-4">
+                  {t("contact.socialsTitle") ||
+                    "Kövess a közösségi oldalakon is"}
+                </h4>
+                <div className="flex gap-4">
+                  {/* Facebook Link */}
+                  <a
+                    href="https://facebook.com/REVFALVI_PROFILOD_NEVE" // ← Írd át a valós linkre!
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-primary/10 hover:border-primary/30 transition-all group shadow-sm"
+                  >
+                    <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">
+                      Facebook
+                    </span>
+                  </a>
+
+                  {/* Instagram Link */}
+                  <a
+                    href="https://instagram.com/REVFALVI_PROFILOD_NEVE" // ← Írd át a valós linkre!
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all group shadow-sm"
+                  >
+                    <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-secondary transition-colors" />
+                    <span className="text-sm font-medium text-foreground/80 group-hover:text-secondary transition-colors">
+                      Instagram
+                    </span>
+                  </a>
+                </div>
+              </div>
+              {/* --- KÖZÖSSÉGI MÉDIA VÉGE --- */}
             </div>
           </div>
 
