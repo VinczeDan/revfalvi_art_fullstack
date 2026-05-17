@@ -237,13 +237,11 @@ const GallerySection = ({
 
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      {/* A feliratnak fix középszürkét adunk, ami biztosan látszik fehéren */}
                       <p className="text-sm font-medium text-zinc-500">
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
-
-                      {/* A tartalomnak pedig egy fix, jól olvasható sötétszürkét (majdnem feketét) */}
-                      <p className="text-lg font-semibold text-zinc-800 capitalize">
+                      <p className="text-lg font-semibold text-zinc-800">
+                        {/* A backendről érkező pontos, lefordított nevet írjuk ki */}
                         {selectedPainting.technique_display ||
                           selectedPainting.technique}
                       </p>

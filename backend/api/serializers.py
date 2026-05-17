@@ -10,7 +10,8 @@ class TodoSerializer(serializers.ModelSerializer):
 
 class PaintingSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
-    technique_display = serializers.CharField(source='get_technique_display', read_only=True)
+    # ⚠️ Átírjuk SerializerMethodField-re, hogy mi vezérelhessük a nyelvet!
+    technique_display = serializers.SerializerMethodField()
     title = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
 
@@ -47,6 +48,26 @@ class PaintingSerializer(serializers.ModelSerializer):
             return obj.description_en
         return obj.description_hu
 
+    # ⬅️ EZT AZ ÚJ FÜGGVÉNYT ADD HOZZÁ:
+    def get_technique_display(self, obj):
+        lang = self.context.get("lang", "hu")
+        tech = obj.technique
+        
+        # Magyar fordítások
+        if lang == "hu":
+            if tech == "watercolor": return "Akvarell"
+            if tech == "acrylic": return "Akril"
+            if tech == "oil": return "Olajfestmény"
+            if tech == "pencil": return "Ceruza munka"
+            return obj.get_technique_display()
+            
+        # Angol fordítások
+        else:
+            if tech == "watercolor": return "Watercolor"
+            if tech == "acrylic": return "Acrylic"
+            if tech == "oil": return "Oil painting"
+            if tech == "pencil": return "Pencil drawing"
+            return tech.capitalize()
 
 # ÚJ: Képek serializer a News-hoz
 class NewsImageSerializer(serializers.ModelSerializer):
