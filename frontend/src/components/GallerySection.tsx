@@ -10,7 +10,7 @@ interface Painting {
   id: number;
   title: string;
   description: string;
-  technique: "watercolor" | "acrylic" | "oil" | "pencil" | string; // Kibővítve a típusbiztonságért
+  technique: string;
   technique_display: string;
   image_url: string;
   created_at: string;
@@ -23,14 +23,6 @@ interface GallerySectionProps {
   description: string;
   color: "watercolor" | "acrylic" | "oil" | "pencil";
 }
-
-// Színvariációk Tailwind osztályai (fontos, hogy teljes stringként szerepeljenek)
-const colorVariants: Record<string, string> = {
-  watercolor: "bg-gradient-to-r from-blue-500 to-blue-600 text-white",
-  acrylic: "bg-gradient-to-r from-purple-500 to-pink-500 text-white",
-  oil: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white",
-  pencil: "bg-gradient-to-r from-gray-500 to-gray-600 text-white",
-};
 
 const PaintingCard = ({
   painting,
@@ -45,10 +37,6 @@ const PaintingCard = ({
   const delays = ["", "reveal-delay-2", "reveal-delay-3"];
   const delay = delays[index % 3];
 
-  // Megkeressük a megfelelő színt, ha nincs, adunk egy alapértelmezett sötétet
-  const badgeColor =
-    colorVariants[painting.technique] || "bg-zinc-700 text-white";
-
   return (
     <div
       ref={ref}
@@ -60,22 +48,12 @@ const PaintingCard = ({
       >
         <CardContent className="p-0">
           <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
-            {/* KÉP */}
             <img
               src={painting.image_url}
               alt={painting.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-
-            {/* 🌟 ÚJ: TECHNIKA BADGE A KÁRTYA SARKÁBAN */}
-            <div
-              className={`absolute top-3 left-3 z-10 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm ${badgeColor}`}
-            >
-              {painting.technique_display || painting.technique}
-            </div>
-
-            {/* HOVER EFFEKT / SZÖVEG */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-4 left-4 right-4">
                 <h3 className="text-white font-semibold text-lg mb-1">
                   {painting.title}
@@ -107,7 +85,6 @@ const GallerySection = ({
   const [expanded, setExpanded] = useState(false);
 
   const { language } = useTranslation();
-  const header = useScrollReveal({ threshold: 0.05 });
 
   useEffect(() => {
     const fetchPaintings = async () => {
@@ -131,6 +108,13 @@ const GallerySection = ({
 
     fetchPaintings();
   }, [id, language]);
+
+  const colorVariants = {
+    watercolor: "from-blue-400 to-blue-600",
+    acrylic: "from-purple-500 to-pink-500",
+    oil: "from-yellow-500 to-orange-500",
+    pencil: "from-gray-400 to-gray-600",
+  };
 
   const visiblePaintings = expanded ? paintings : paintings.slice(0, 3);
   const hasMore = paintings.length > 3;
@@ -163,11 +147,8 @@ const GallerySection = ({
   return (
     <section id={id} className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div
-          ref={header.ref}
-          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
-        >
+        {/* 🌟 JAVÍTÁS: Ebből a div-ből kivettem a reveal osztályokat, így mindig látható lesz nagyban! */}
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {title}
           </h2>
@@ -220,55 +201,52 @@ const GallerySection = ({
         {/* Modal */}
         {selectedPainting && (
           <div
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 animate-fade-in"
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
             onClick={() => setSelectedPainting(null)}
           >
             <div
-              className="bg-white rounded-lg overflow-hidden w-full max-w-6xl max-h-[90vh] flex flex-col lg:flex-row relative shadow-2xl"
+              className="bg-white rounded-lg overflow-hidden w-full max-w-6xl max-h-[90vh] flex flex-col lg:flex-row relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedPainting(null)}
-                className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold z-50 bg-white/80 w-10 h-10 rounded-full flex items-center justify-center shadow-sm"
+                className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold z-50"
               >
                 ×
               </button>
 
               {/* Left Side - Image */}
-              <div className="lg:w-1/2 h-[50vh] lg:h-[70vh] bg-zinc-50 flex items-center justify-center p-8 border-b lg:border-b-0 lg:border-r border-zinc-100">
+              <div className="lg:w-1/2 h-[70vh] bg-gray-50 flex items-center justify-center p-8">
                 <img
                   src={selectedPainting.image_url}
                   alt={selectedPainting.title}
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
+                  className="max-w-full max-h-full object-contain"
                 />
               </div>
 
               {/* Right Side - Content */}
-              <div className="lg:w-1/2 p-8 overflow-y-auto bg-white">
+              <div className="lg:w-1/2 p-8 overflow-y-auto">
                 <div className="space-y-6">
                   <h3 className="text-3xl font-bold text-gray-900">
                     {selectedPainting.title}
                   </h3>
 
                   <div className="grid grid-cols-2 gap-6">
-                    {/* 🌟 JAVÍTOTT TECHNIKA SZEKCIÓ A MODALBAN */}
                     <div>
-                      <p className="text-sm font-medium text-zinc-400 mb-1">
+                      <p className="text-sm font-medium text-zinc-500">
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
-                      <span
-                        className={`inline-block text-sm font-semibold px-3 py-1 rounded-md ${colorVariants[selectedPainting.technique] || "bg-zinc-700 text-white"}`}
-                      >
+                      <p className="text-lg font-semibold text-zinc-800">
                         {selectedPainting.technique_display ||
                           selectedPainting.technique}
-                      </span>
+                      </p>
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-400 mb-1">
+                      <p className="text-sm font-medium text-gray-500">
                         {language === "en" ? "Created" : "Készült"}
                       </p>
-                      <p className="text-base font-semibold text-zinc-800 pt-1">
+                      <p className="text-lg">
                         {new Date(
                           selectedPainting.created_at,
                         ).toLocaleDateString(
@@ -299,7 +277,7 @@ const GallerySection = ({
                     <h4 className="text-sm font-medium text-gray-500 mb-2">
                       {language === "en" ? "Description" : "Leírás"}
                     </h4>
-                    <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+                    <p className="text-gray-700 whitespace-pre-line">
                       {selectedPainting.description}
                     </p>
                   </div>
