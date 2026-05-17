@@ -11,6 +11,7 @@ interface Painting {
   title: string;
   description: string;
   technique: string;
+  technique_display: string;
   image_url: string;
   created_at: string;
   price: string;
@@ -239,9 +240,10 @@ const GallerySection = ({
                       <p className="text-sm font-medium text-gray-500">
                         {language === "en" ? "Technique" : "Technika"}
                       </p>
-
-                      <p className="text-lg capitalize">
-                        {selectedPainting.technique}
+                      <p className="text-lg text-gray-900 font-normal">
+                        {/* ⚠️ selectedPainting.technique HELYETT a technique_display-t használjuk */}
+                        {selectedPainting.technique_display ||
+                          selectedPainting.technique}
                       </p>
                     </div>
 
