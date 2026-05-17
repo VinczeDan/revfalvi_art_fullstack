@@ -235,7 +235,7 @@ const ContactSection = () => {
 
                   {/* Instagram Link */}
                   <a
-                    href="https://instagram.com/REVFALVI_PROFILOD_NEVE"
+                    href="https://www.instagram.com/revfalvi_peter_art?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all group shadow-sm"
