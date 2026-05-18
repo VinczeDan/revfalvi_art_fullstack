@@ -15,11 +15,11 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-# Resend API végpont
+# --- RESEND KONFIGURÁCIÓ ---
 RESEND_API_URL = "https://api.resend.com/emails"
 
-def send_resend_email(subject, html_content, to_emails, reply_to_email):
-    """Segédfüggvény a Resend API híváshoz HTTP-n keresztül (többes címzett és reply_to támogatással)"""
+def send_resend_email(subject, html_content, to_email):
+    """Segédfüggvény a Resend API híváshoz HTTP-n keresztül (egyesével küldéshez)"""
     headers = {
         "Authorization": f"Bearer {settings.RESEND_API_KEY}",
         "Content-Type": "application/json",
@@ -27,15 +27,17 @@ def send_resend_email(subject, html_content, to_emails, reply_to_email):
 
     data = {
         "from": f"Revfalvi Art <{settings.DEFAULT_FROM_EMAIL}>",
-        "to": to_emails,                    # Lista az e-mail címekkel
-        "reply_to": reply_to_email,         # A látogató e-mail címe, hogy egyből neki lehessen válaszolni
+        "to": [to_email],  # A Resend listaként várja a címzettet a JSON-ban
         "subject": subject,
         "html": html_content,
     }
 
-    response = requests.post(RESEND_API_URL, json=data, headers=headers, timeout=5)
+    # Ha a frontend küldött be reply_to-t (a látogató email címét), ide be lehetne fűzni,
+    # de most a legtisztább, alap API hívást használjuk.
+    response = requests.post(RESEND_API_URL, json=data, headers=headers, timeout=10)
     response.raise_for_status()
     return response
+
 
 @csrf_exempt
 def send_contact_email(request):
@@ -45,7 +47,7 @@ def send_contact_email(request):
     try:
         data = json.loads(request.body)
         name = data.get("name")
-        email = data.get("email")  # Ez a látogató e-mail címe
+        email = data.get("email")  # A látogató e-mail címe
         subject = data.get("subject")
         message = data.get("message")
 
@@ -61,27 +63,26 @@ def send_contact_email(request):
         <p style="white-space: pre-wrap;">{message}</p>
         """
 
-        # Címzettek beolvasása a local_settings.py-ból
+        # 1. Beolvassuk a local_settings.py-ból a CONTACT_EMAILS szöveget
         contact_emails_setting = getattr(settings, 'CONTACT_EMAILS', None)
+        
+        # 2. Ha létezik, felbontjuk a vesszők mentén és listát csinálunk belőle
         if contact_emails_setting:
-            # Ha vesszővel elválasztott string, listává alakítjuk
             recipient_list = [e.strip() for e in contact_emails_setting.split(",")]
         else:
-            # Régi egyedi e-mail beállítás fallback
-            single_email = getattr(settings, 'CONTACT_EMAIL', settings.DEFAULT_FROM_EMAIL)
-            recipient_list = [single_email]
+            # Bombabiztos tartalék, ha a local_settings-ben valami elgépelés lenne
+            recipient_list = ["daniel.vincze15@gmail.com"]
 
-        # Ha be van állítva Resend API kulcs, azzal küldjük (ez megy élesben a Dropleten)
+        # 3. Ha be van állítva Resend API kulcs, azzal küldjük (ez megy élesben a Dropleten)
         if getattr(settings, 'RESEND_API_KEY', None):
             for egy_email in recipient_list:
                 send_resend_email(
                     subject=f"Weboldal üzenet: {subject}",
                     html_content=html_content,
-                    to_emails=egy_email,  # Most már egyszerre csak 1 címet kap stringként
-                    reply_to_email=email
+                    to_email=egy_email  # Ciklusban egyesével küldjük a Resendnek
                 )
         else:
-            # Helyi fejlesztői környezetben (otthon) a sima konzolos/SMTP fallback
+            # Helyi fejlesztői környezetben (otthon) a sima konzolos/SMTP fallback, ha nincs API kulcs
             full_message = f"Feladó: {name} ({email})\n\nTárgy: {subject}\n\nÜzenet:\n{message}"
             send_mail(
                 subject=f"Weboldal üzenet: {subject}",
@@ -93,9 +94,6 @@ def send_contact_email(request):
 
         return JsonResponse({"status": "success", "message": "Email sikeresen elküldve!"})
 
-    except requests.exceptions.Timeout:
-        logger.error("A Resend API időtúllépés miatt megszakadt.")
-        return JsonResponse({"status": "error", "message": "A levélküldő szolgáltatás nem válaszol. Kérjük próbálja meg később!"}, status=504)
     except Exception as e:
         logger.error(f"Email küldési hiba: {str(e)}")
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
