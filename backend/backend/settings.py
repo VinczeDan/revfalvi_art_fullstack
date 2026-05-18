@@ -102,9 +102,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL – biztonságos default
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-DEFAULT_FROM_EMAIL = "daniel.vincze15@gmail.com"
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev" # Teszteléshez a resend alapértelmezettje, ha validálod a domained, lehet saját info@webfizz.hu stb.
 DEFAULT_TO_EMAIL = "daniel.vincze15@gmail.com"
-BREVO_API_KEY = None
+RESEND_API_KEY = None # A local_settings.py fogja felülírni élesben
 
 # --- Local settings import ---
 try:
@@ -144,7 +144,9 @@ try:
     EMAIL_HOST_PASSWORD = getattr(local_settings, 'EMAIL_HOST_PASSWORD', None)
     DEFAULT_FROM_EMAIL = getattr(local_settings, 'DEFAULT_FROM_EMAIL', None)
     DEFAULT_TO_EMAIL = getattr(local_settings, 'DEFAULT_TO_EMAIL', None)
-    BREVO_API_KEY = getattr(local_settings, 'BREVO_API_KEY', None)
+
+    RESEND_API_KEY = getattr(local_settings, 'RESEND_API_KEY', None)
     CONTACT_EMAIL = getattr(local_settings, 'CONTACT_EMAIL', DEFAULT_FROM_EMAIL)
+
 except ImportError:
     print("local_settings nem található!")
