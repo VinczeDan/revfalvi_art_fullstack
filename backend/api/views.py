@@ -73,12 +73,13 @@ def send_contact_email(request):
 
         # Ha be van állítva Resend API kulcs, azzal küldjük (ez megy élesben a Dropleten)
         if getattr(settings, 'RESEND_API_KEY', None):
-            send_resend_email(
-                subject=f"Weboldal üzenet: {subject}",
-                html_content=html_content,
-                to_emails=recipient_list,
-                reply_to_email=email
-            )
+            for egy_email in recipient_list:
+                send_resend_email(
+                    subject=f"Weboldal üzenet: {subject}",
+                    html_content=html_content,
+                    to_emails=egy_email,  # Most már egyszerre csak 1 címet kap stringként
+                    reply_to_email=email
+                )
         else:
             # Helyi fejlesztői környezetben (otthon) a sima konzolos/SMTP fallback
             full_message = f"Feladó: {name} ({email})\n\nTárgy: {subject}\n\nÜzenet:\n{message}"
