@@ -135,18 +135,12 @@ try:
             }
         }
 
-    EMAIL_BACKEND = getattr(local_settings, 'EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
-    EMAIL_HOST = getattr(local_settings, 'EMAIL_HOST', None)
-    EMAIL_PORT = getattr(local_settings, 'EMAIL_PORT', 2525)
-    EMAIL_USE_TLS = getattr(local_settings, 'EMAIL_USE_TLS', True)
-    EMAIL_USE_SSL = getattr(local_settings, 'EMAIL_USE_SSL', False)
-    EMAIL_HOST_USER = getattr(local_settings, 'EMAIL_HOST_USER', None)
-    EMAIL_HOST_PASSWORD = getattr(local_settings, 'EMAIL_HOST_PASSWORD', None)
     DEFAULT_FROM_EMAIL = getattr(local_settings, 'DEFAULT_FROM_EMAIL', None)
     DEFAULT_TO_EMAIL = getattr(local_settings, 'DEFAULT_TO_EMAIL', None)
 
     RESEND_API_KEY = getattr(local_settings, 'RESEND_API_KEY', None)
-    CONTACT_EMAIL = getattr(local_settings, 'CONTACT_EMAIL', DEFAULT_FROM_EMAIL)
+    CONTACT_EMAIL = getattr(local_settings, 'CONTACT_EMAIL', [DEFAULT_FROM_EMAIL])
 
 except ImportError:
     print("local_settings nem található!")
+    CONTACT_EMAIL = [DEFAULT_FROM_EMAIL]

@@ -88,7 +88,7 @@ def send_contact_email(request):
                 subject=f"Weboldal üzenet: {subject}",
                 message=full_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=recipient_list,
+                recipient_list=settings.CONTACT_EMAIL,
                 fail_silently=False,
             )
 
