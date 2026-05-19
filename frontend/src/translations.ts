@@ -56,22 +56,22 @@ Hogy mit kapsz a pénzedért cserébe?
       watercolor: {
         title: "Akvarell",
         description:
-          "Paintings created with a transparent, light technique that showcase the harmonious play of water and pigment.",
+          "Átlátszó, könnyed technikával készült festmények, amelyek a víz és a pigment harmonikus játékát mutatják be.",
       },
       acrylic: {
         title: "Akril",
         description:
-          "Acrylic paintings with vibrant colors and rich textures, created with a modern technique.",
+          "Akril festmények vibrant színekkel és gazdag textúrával, modern technikával készültek.",
       },
       oil: {
         title: "Olajfestés",
         description:
-          "Works made with classic oil painting techniques that reflect depth and richness.",
+          "Klasszikus olajfestési technikával készült munkák, amelyek mélységet és gazdagságot tükröznek.",
       },
       pencil: {
         title: "Ceruza munkák",
         description:
-          "Delicate compositions and detailed depictions made with charcoal, graphite, colored and pastel pencils.",
+          "Finom kompozíciók és részletes ábrázolások szénnel, grafittal, színes és pasztellceruzákkal.",
       },
     },
     contact: {
