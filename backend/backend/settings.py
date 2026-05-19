@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -92,11 +94,17 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# EMAIL – biztonságos default
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev" # Teszteléshez a resend alapértelmezettje, ha validálod a domained, lehet saját info@webfizz.hu stb.
+DEFAULT_TO_EMAIL = "daniel.vincze15@gmail.com"
+RESEND_API_KEY = None # A local_settings.py fogja felülírni élesben
 
 # --- Local settings import ---
 try:
@@ -126,5 +134,13 @@ try:
                 'PORT': '',
             }
         }
+
+    DEFAULT_FROM_EMAIL = getattr(local_settings, 'DEFAULT_FROM_EMAIL', None)
+    DEFAULT_TO_EMAIL = getattr(local_settings, 'DEFAULT_TO_EMAIL', None)
+
+    RESEND_API_KEY = getattr(local_settings, 'RESEND_API_KEY', None)
+    CONTACT_EMAIL = getattr(local_settings, 'CONTACT_EMAIL', [DEFAULT_FROM_EMAIL])
+
 except ImportError:
     print("local_settings nem található!")
+    CONTACT_EMAIL = [DEFAULT_FROM_EMAIL]
