@@ -1,80 +1,8 @@
 from django.contrib import admin
-from .models import Course, Painting, News, NewsImage, Video
-
+from .models import Painting
 
 @admin.register(Painting)
 class PaintingAdmin(admin.ModelAdmin):
-    list_display = ('get_title', 'technique', 'created_at', 'is_featured')
-    list_filter = ('technique', 'is_featured', 'created_at')
-    search_fields = ('title_hu', 'title_en', 'description_hu', 'description_en')
-
-    fieldsets = (
-        ("Címek", {
-            'fields': ('title_hu', 'title_en')
-        }),
-        ("Leírások", {
-            'fields': ('description_hu', 'description_en')
-        }),
-        ("Egyéb adatok", {
-            'fields': ('technique', 'price', 'image', 'is_featured')
-        }),
-    )
-
-    def get_title(self, obj):
-        return obj.title_hu or obj.title_en
-    get_title.short_description = "Cím"
-
-
-class NewsImageInline(admin.TabularInline):
-    model = NewsImage
-    extra = 1  # hány üres sort mutasson
-    fields = ('image', 'caption', 'order')
-
-
-@admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ('get_title', 'publication_date')
-    list_filter = ('publication_date',)
-    search_fields = ('title_hu', 'title_en', 'content_hu', 'content_en')
-    inlines = [NewsImageInline]  # ⬅️ itt hozzáadva
-
-    fieldsets = (
-        ("Címek", {
-            'fields': ('title_hu', 'title_en')
-        }),
-        ("Tartalom", {
-            'fields': ('content_hu', 'content_en')
-        }),
-        ("Borítókép", {
-            'fields': ('image',)
-        }),
-    )
-
-    def get_title(self, obj):
-        return obj.title_hu or obj.title_en
-    get_title.short_description = "Cím"
-    
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('get_title', 'level', 'price', 'is_active', 'order')
-    list_editable = ('is_active', 'order') # Közvetlenül a listában is állítható
-    list_filter = ('level', 'is_active')
-    search_fields = ('title_hu', 'title_en')
-
-    fieldsets = (
-        ("Alapadatok", {
-            'fields': ('title_hu', 'title_en', 'icon', 'order', 'is_active')
-        }),
-        ("Részletek", {
-            'fields': ('description_hu', 'description_en', 'level', 'duration', 'price')
-        }),
-    )
-
-    def get_title(self, obj):
-        return obj.title_hu or obj.title_en
-    get_title.short_description = "Cím"
-    
-@admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title_hu', 'is_active', 'order', 'created_at')
-    list_editable = ('is_active', 'order')
+    list_display = ('title', 'technique', 'created_at')
+    list_filter = ('technique',)
+    search_fields = ('title', 'description')
