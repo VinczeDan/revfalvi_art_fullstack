@@ -18,8 +18,7 @@ logger = logging.getLogger(__name__)
 # --- RESEND KONFIGURÁCIÓ ---
 RESEND_API_URL = "https://api.resend.com/emails"
 
-def send_resend_email(subject, html_content, to_email):
-    """Segédfüggvény a Resend API híváshoz HTTP-n keresztül (egyesével küldéshez)"""
+def send_resend_email(subject, html_content, to_emails):
     headers = {
         "Authorization": f"Bearer {settings.RESEND_API_KEY}",
         "Content-Type": "application/json",
@@ -27,76 +26,58 @@ def send_resend_email(subject, html_content, to_email):
 
     data = {
         "from": f"Revfalvi Art <{settings.DEFAULT_FROM_EMAIL}>",
-        "to": [to_email],  # A Resend listaként várja a címzettet a JSON-ban
+        "to": to_emails,   # <-- LISTA
         "subject": subject,
         "html": html_content,
     }
 
-    # Ha a frontend küldött be reply_to-t (a látogató email címét), ide be lehetne fűzni,
-    # de most a legtisztább, alap API hívást használjuk.
-    response = requests.post(RESEND_API_URL, json=data, headers=headers, timeout=10)
+    response = requests.post(
+        RESEND_API_URL,
+        json=data,
+        headers=headers,
+        timeout=10
+    )
+
     response.raise_for_status()
     return response
 
-
 @csrf_exempt
 def send_contact_email(request):
-    if request.method != "POST":
-        return JsonResponse({"error": "Invalid method"}, status=405)
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
 
-    try:
-        data = json.loads(request.body)
-        name = data.get("name")
-        email = data.get("email")  # A látogató e-mail címe
-        subject = data.get("subject")
-        message = data.get("message")
+            name = data.get("name")
+            email = data.get("email")
+            subject = data.get("subject")
+            message = data.get("message")
 
-        if not all([name, email, subject, message]):
-            return JsonResponse({"status": "error", "message": "Minden mező kitöltése kötelező!"}, status=400)
+            html_content = f"""
+            <h3>Új üzenet érkezett a weboldalról!</h3>
+            <p><strong>Feladó:</strong> {name} ({email})</p>
+            <p><strong>Tárgy:</strong> {subject}</p>
+            <p><strong>Üzenet:</strong></p>
+            <p style="white-space: pre-wrap;">{message}</p>
+            """
 
-        # HTML formátum a szép értesítő levélhez
-        html_content = f"""
-        <h3>Új üzenet érkezett a weboldalról!</h3>
-        <p><strong>Feladó:</strong> {name} ({email})</p>
-        <p><strong>Tárgy:</strong> {subject}</p>
-        <p><strong>Üzenet:</strong></p>
-        <p style="white-space: pre-wrap;">{message}</p>
-        """
-
-        # 1. Beolvassuk a local_settings.py-ból a CONTACT_EMAILS szöveget
-        contact_emails_setting = getattr(settings, 'CONTACT_EMAILS', None)
-        
-        # 2. Ha létezik, felbontjuk a vesszők mentén és listát csinálunk belőle
-        if contact_emails_setting:
-            recipient_list = [e.strip() for e in contact_emails_setting.split(",")]
-        else:
-            # Bombabiztos tartalék, ha a local_settings-ben valami elgépelés lenne
-            recipient_list = ["daniel.vincze15@gmail.com"]
-
-        # 3. Ha be van állítva Resend API kulcs, azzal küldjük (ez megy élesben a Dropleten)
-        if getattr(settings, 'RESEND_API_KEY', None):
-            for egy_email in recipient_list:
-                send_resend_email(
-                    subject=f"Weboldal üzenet: {subject}",
-                    html_content=html_content,
-                    to_email=egy_email  # Ciklusban egyesével küldjük a Resendnek
-                )
-        else:
-            # Helyi fejlesztői környezetben (otthon) a sima konzolos/SMTP fallback, ha nincs API kulcs
-            full_message = f"Feladó: {name} ({email})\n\nTárgy: {subject}\n\nÜzenet:\n{message}"
-            send_mail(
+            send_resend_email(
                 subject=f"Weboldal üzenet: {subject}",
-                message=full_message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=settings.CONTACT_EMAIL,
-                fail_silently=False,
+                html_content=html_content,
+                to_emails=settings.CONTACT_EMAIL
             )
 
-        return JsonResponse({"status": "success", "message": "Email sikeresen elküldve!"})
+            return JsonResponse({
+                "status": "success",
+                "message": "Email sikeresen elküldve!"
+            })
 
-    except Exception as e:
-        logger.error(f"Email küldési hiba: {str(e)}")
-        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+        except Exception as e:
+            return JsonResponse({
+                "status": "error",
+                "message": str(e)
+            }, status=500)
+
+    return JsonResponse({"error": "Invalid method"}, status=405)
 
 def index_view(request):
     return render(request, 'index.html')
