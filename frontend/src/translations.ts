@@ -152,7 +152,7 @@ What do you get for your money?
 
 I completed my college studies at University of Pannonia. A number of subjects captured my interest, such as American Culture and Civilization, English Culture and Civilization, American Literature, and many other fascinating courses as well.
 
-ITNWAS THE PEAK OF PEAKS! 
+IT WAS THE PEAK OF PEAKS! 
 
 During this period, I also studied at University of Westminster. Below, you can see the diploma issued by the university, which is equivalent to a master’s degree.`,
     },
