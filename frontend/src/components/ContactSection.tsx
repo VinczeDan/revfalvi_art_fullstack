@@ -219,31 +219,27 @@ const ContactSection = () => {
                   {t("contact.socialTitle") ||
                     "Kövess a közösségi oldalakon is"}
                 </h4>
-                <div className="flex gap-4">
-                  {/* Facebook Link */}
+
+                {/* Közösségi Média Linkek */}
+                <div className="flex items-center space-x-4 pt-4">
                   <a
-                    href="https://www.facebook.com/revfalvi.peter"
+                    href="https://www.facebook.com/revfalvi.peter" // ← Itt cserélheted ki Péter pontos linkjére
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-primary/10 hover:border-primary/30 transition-all group shadow-sm"
+                    className="p-3 rounded-full bg-slate-50 text-[#1877F2]/70 hover:text-[#1877F2] hover:bg-[#1877F2]/10 transition-all duration-300 shadow-sm border border-slate-100"
+                    aria-label="Facebook"
                   >
-                    <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">
-                      Facebook
-                    </span>
+                    <Facebook className="w-5 h-5" />
                   </a>
 
-                  {/* Instagram Link */}
                   <a
                     href="https://www.instagram.com/revfalvi_peter_art?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-3 bg-card border border-white/5 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all group shadow-sm"
+                    className="p-3 rounded-full bg-slate-50 text-[#F56040]/70 hover:text-[#E4405F] hover:bg-[#F56040]/10 transition-all duration-300 shadow-sm border border-slate-100"
+                    aria-label="Instagram"
                   >
-                    <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-secondary transition-colors" />
-                    <span className="text-sm font-medium text-foreground/80 group-hover:text-secondary transition-colors">
-                      Instagram
-                    </span>
+                    <Instagram className="w-5 h-5" />
                   </a>
                 </div>
               </div>
@@ -318,7 +314,7 @@ const ContactSection = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-primary hover:opacity-90 transition-opacity text-white font-medium h-12 rounded-full"
+                    className="w-full bg-[#8B4513] hover:bg-[#A0522D] transition-all duration-300 text-white font-medium h-12 rounded-full shadow-md"
                   >
                     {isSubmitting
                       ? t("contact.sending") || "Küldés..."
