@@ -78,12 +78,16 @@ const Index = () => {
           description={t("gallery.watercolor.description")}
           color="watercolor"
         />
+
+        {/*  
         <GallerySection
           id="acrylic"
           title={t("gallery.acrylic.title")}
           description={t("gallery.acrylic.description")}
           color="acrylic"
         />
+        */}
+        
         <GallerySection
           id="oil"
           title={t("gallery.oil.title")}
