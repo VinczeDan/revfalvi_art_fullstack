@@ -1,7 +1,10 @@
+// src/components/AboutMe.tsx
 import { Card, CardContent } from "@/components/ui/card";
 import { Palette } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+// Importáld a képet (ügyelj a helyes elérési útra a projektedben)
+import diplomaImage from "@/assets/Angliai diploma.jpeg";
 
 const AboutMe = () => {
   const { t } = useTranslation();
@@ -18,16 +21,18 @@ const AboutMe = () => {
           ref={header.ref}
           className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6 shadow-lg">
             <Palette className="w-8 h-8 text-white" />
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("about.title")}
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm rounded-full"></div>
 
-          <p className="text-lg text-muted-foreground">{t("about.text")}</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {t("about.text")}
+          </p>
         </div>
 
         {/* Kétkártyás elrendezés */}
@@ -37,8 +42,8 @@ const AboutMe = () => {
             ref={leftCard.ref}
             className={`reveal reveal-left ${leftCard.isVisible ? "is-visible" : ""}`}
           >
-            <Card className="border-0 shadow-soft h-full">
-              <CardContent className="pt-6">
+            <Card className="border-0 shadow-soft h-full bg-card/50 backdrop-blur-sm">
+              <CardContent className="pt-8">
                 <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
                   {t("about.leftContent")}
                 </p>
@@ -46,13 +51,22 @@ const AboutMe = () => {
             </Card>
           </div>
 
-          {/* Jobb oldali kártya */}
+          {/* Jobb oldali kártya - Beillesztett képpel */}
           <div
             ref={rightCard.ref}
             className={`reveal reveal-right reveal-delay-2 ${rightCard.isVisible ? "is-visible" : ""}`}
           >
-            <Card className="border-0 shadow-soft h-full">
-              <CardContent className="pt-6">
+            <Card className="border-0 shadow-soft h-full bg-card/50 backdrop-blur-sm">
+              <CardContent className="pt-8">
+                {/* Kép beillesztése */}
+                <div className="mb-6 overflow-hidden rounded-lg shadow-medium">
+                  <img
+                    src={diplomaImage}
+                    alt="Angliai diploma"
+                    className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
                 <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
                   {t("about.rightContent")}
                 </p>
