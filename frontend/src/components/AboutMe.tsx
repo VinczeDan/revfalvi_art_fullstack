@@ -63,11 +63,11 @@ const AboutMe = () => {
                 <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
                   {t("about.rightContent")}
                 </p>
-                <div className="mb-6 overflow-hidden rounded-lg shadow-medium">
+                <div className="mb-6 rounded-lg shadow-medium flex justify-center">
                   <img
                     src={diploma}
                     alt="Diploma"
-                    className="w-full h-auto object-cover aspect-[4/3]"
+                    className="max-w-full h-auto object-contain"
                   />
                 </div>
               </CardContent>
