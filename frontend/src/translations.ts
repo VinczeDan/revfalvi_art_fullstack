@@ -17,32 +17,37 @@ export const translations = {
     about: {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
-      leftContent: `
-Kedves Nyelvtanuló! 
-
-Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
-
-Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában. Sok-sok évvel ezelőtt, én is kerestem azt a lehetőséget, azt a személyt, aki segített eligazodni egy idegen nyelv használatában. Tanultam a suliban, de igazából nem kaptam 100%-os figyelmet. A csoportbontásról már ne is beszéljünk. Túl sokan voltunk, és tudásunk nagyon eltérő volt. 
-
-Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt! 
-
-Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg azt, az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem. 
-
-Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen hallgatni és beszélni az angolt. Ez volt a csúcsok csúcsa! Nem bántam meg!!! 
-
-Majd hazajöttem, és azóta itthon segítek azoknak, akik szeretnének egy versenyképesebb angol nyelvtudással rendelkezni. 
-
-Hogy mit kapsz a pénzedért cserébe? 
-
-100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!
-Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
+      leftContent: `Kedves Nyelvtanuló!
 
 
-A főiskolai tanulmányaimat a Pannon Egyetemen töltöttem. Számos tantár felkeltette a figyelmet mint például, Amerikai kultúra és civilizáció, Angol kultúra és civilizáció, és még sok egyéb tantárgy is.
+Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár.
 
 
-Ez volt a csúcsok csúcsa!!!! Ez idő alatt tanultam a londoni székhelyű Westminster Egyetemen. Alább láthatjátok azt a mester foknak megfelelő diplomát, amit az egyetem állított ki.
-`,
+Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában. Sok-sok évvel ezelőtt, én is kerestem azt a lehetőséget, azt a személyt, aki segített eligazodni egy idegen nyelv használatában. Tanultam a suliban, de igazából nem kaptam 100%-os figyelmet. A csoportbontásról már ne is beszéljünk. Túl sokan voltunk, és tudásunk nagyon eltérő volt.
+
+
+Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt!
+
+
+Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg azt, az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
+
+
+A főiskolai tanulmányaimat a Pannon Egyetemen töltöttem. Számos tantárgy felkeltette a figyelmet mint például, Amerikai kultúra és civilizáció, Angol kultúra és civilizáció, és még sok egyéb tantárgy is.
+
+
+Majd jött az Egyesült Királyság. Ez volt az igazi ,,mélyvíz”! Éveken keresztül volt lehetőségem Londonban, anyanyelvi területen élni és beszélni az angolt. Ez volt a csúcsok csúcsa! 
+
+
+Ez idő alatt tanultam a londoni székhelyű Westminster Egyetemen. Alább láthatjátok azt a mester foknak megfelelő diplomát, amit az egyetem állított ki.
+
+
+Szeretnél egy versenyképes angol nyelvtudást? 
+
+
+Szeretnél 100%-os figyelmet, biztatást, és sok-sok segítséget kapni, ha valamit nem értesz?
+
+
+Jelentkezz személyes vagy online angol óráimra! `,
       rightContent: `Kedves Művész Növendékek!
       
       Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell, és az olajfesték. 
@@ -134,31 +139,27 @@ Ez volt a csúcsok csúcsa!!!! Ez idő alatt tanultam a londoni székhelyű West
     about: {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
-      leftContent: `
-Dear Language Learner,
+      leftContent: `Dear Language Learner,
 
-I am Péter Révfalvi, an English teacher by profession.
+My name is Péter Révfalvi, and I am a qualified English teacher.
 
-You are in the right place if you need help learning English. Many years ago, I too was looking for that opportunity, that person who helped me navigate the use of a foreign language. I studied in school, but I didn't really get 100% attention. Let's not even talk about group splits. There were too many of us, and our knowledge was very different.
+You’ve come to the right place if you need help learning English. Many years ago, I was also looking for an opportunity and a mentor who could help me navigate the use of a foreign language. I studied English at school, but I never really received 100% attention. And as for dividing students into smaller groups—well, that was another issue altogether. There were simply too many of us, and our language skills varied greatly.
 
-I also attended courses where I felt much better and dared to speak English. We studied in small groups, and the teacher had much more time to focus on me. It was truly motivating!
+I also attended language courses, where I felt much more comfortable and gained the confidence to speak English. We studied in small groups, which gave the teacher much more time to focus on me. It was truly motivating!
 
-After that, I also took individual lessons. I think this is where I received the full attention I always longed for as a learner. I remember Tom, who was American. He taught me several expressions that I remember to this day.
+After that, I took private one-to-one lessons as well. I believe that was where I finally received the full attention I had always wanted as a language learner. I still remember Tom, an American teacher, who taught me many expressions that I still use and remember to this day.
 
-Then came the United Kingdom. That was the real "deep water"! For years, I had the opportunity to listen to and speak English in London, in a native environment. It was the peak of peaks!
+I completed my college studies at Pannon University. A number of subjects captured my interest, including American Culture and Civilization, British Culture and Civilization, and many others.
 
-Then I came home, and since then I have been helping those here at home who want to have a more competitive knowledge of English.
+Then came the United Kingdom. That was the real “deep end”! For several years, I had the opportunity to live in London, immersed in a native English-speaking environment and using English every day. It was an incredible experience and the highlight of my language-learning journey.
 
-What do you get for your money?
+During this time, I also studied at the University of Westminster in London. Below, you can see the master's-level qualification awarded by the university.
 
-100% attention, consideration of individual needs, encouragement, and lots of help if you don't understand something!
-HE TAUGHT ME SEVERAL EXPRESSIONS THAT I REMEMBER TO THIS DAY. 
+Would you like to develop a competitive level of English proficiency?
 
-I completed my college studies at University of Pannonia. A number of subjects captured my interest, such as American Culture and Civilization, English Culture and Civilization, American Literature, and many other fascinating courses as well.
+Would you like to receive 100% attention, encouragement, and plenty of support whenever you don’t understand something?
 
-IT WAS THE PEAK OF PEAKS! 
-
-During this period, I also studied at University of Westminster. Below, you can see the diploma issued by the university, which is equivalent to a master’s degree.`,
+Sign up for my in-person or online English lessons today!`,
       rightContent: `Dear Art Students, 
 
       Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. 
