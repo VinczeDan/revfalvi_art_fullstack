@@ -17,7 +17,8 @@ export const translations = {
     about: {
       title: "Rólam",
       text: "Ismerj meg közelebbről és fedezd fel a művészetem mögött rejlő történetet.",
-      leftContent: `Kedves Nyelvtanuló! 
+      leftContent: `
+Kedves Nyelvtanuló! 
 
 Révfalvi Péter vagyok, végzettségemet tekintve angol nyelvtanár. 
 
@@ -131,7 +132,8 @@ Ez volt a csúcsok csúcsa!!!! Ez idő alatt tanultam a londoni székhelyű West
     about: {
       title: "About Me",
       text: "Get to know me better and explore the story behind my art.",
-      leftContent: `Dear Language Learner,
+      leftContent: `
+Dear Language Learner,
 
 I am Péter Révfalvi, an English teacher by profession.
 
