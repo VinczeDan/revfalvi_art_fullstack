@@ -4,7 +4,7 @@ import { Palette } from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 // Importáld a képet (ügyelj a helyes elérési útra a projektedben)
-import diplomaImage from "@/assets/Angliai diploma.jpeg";
+
 
 const AboutMe = () => {
   const { t } = useTranslation();
@@ -60,11 +60,7 @@ const AboutMe = () => {
               <CardContent className="pt-8">
                 {/* Kép beillesztése */}
                 <div className="mb-6 overflow-hidden rounded-lg shadow-medium">
-                  <img
-                    src={diplomaImage}
-                    alt="Angliai diploma"
-                    className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
-                  />
+                  
                 </div>
 
                 <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
