@@ -33,16 +33,18 @@ Majd hazajöttem, és azóta itthon segítek azoknak, akik szeretnének egy vers
 
 Hogy mit kapsz a pénzedért cserébe? 
 
-100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!`,
-      rightContent: `Kedves Művész Növendékek!
-      
-      Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell, és az olajfesték. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
+100%-os figyelmet, egyéni szükségletek figyelembe vételét, biztatást, és sok-sok segítséget, ha valamit nem értesz!
+Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
 
 
 A főiskolai tanulmányaimat a Pannon Egyetemen töltöttem. Számos tantár felkeltette a figyelmet mint például, Amerikai kultúra és civilizáció, Angol kultúra és civilizáció, és még sok egyéb tantárgy is.
 
 
-Ez volt a csúcsok csúcsa!!!! Ez idő alatt tanultam a londoni székhelyű Westminster Egyetemen. Alább láthatjátok azt a mester foknak megfelelő diplomát, amit az egyetem állított ki.`,
+Ez volt a csúcsok csúcsa!!!! Ez idő alatt tanultam a londoni székhelyű Westminster Egyetemen. Alább láthatjátok azt a mester foknak megfelelő diplomát, amit az egyetem állított ki.
+`,
+      rightContent: `Kedves Művész Növendékek!
+      
+      Művészetemmel egy olyan folyamatosan változó világot szeretnék ábrázolni, amely képes embereket gondolatban olyan helyekre eljuttatni, amelyek emlékeket, megélt pillanatokat jelentenek számukra. Mind a tájképeimben, mind az emberi egyén ábrázolásában van egy olyan festészeti ecsetvonás vagy ceruzavonal, amely ezeket a megélt pillanatokat segítenek felszínre hozni. Számomra a színek fontossága elengedhetetlenek alkotásaimban. Nélkülük a világunk olyan lenne, mint egy kút, víz nélkül, vagyis üres. Ezért törekszem arra, hogy a színek, mint elsődleges szereplők, jelen legyenek, és nem utolsó sorban-harmóniában legyenek alkotásaimban. Ez a mozgatóerő az, ami leültet a vászon vagy papír elé, és segít ecsetet vagy ceruzát ragadni. Kedvenc médiumaim közé tartozik a szénceruza, a porpasztell, az akvarell, és az olajfesték. `,
     },
     videos: {
       title: "Videók",
@@ -145,16 +147,17 @@ Then I came home, and since then I have been helping those here at home who want
 
 What do you get for your money?
 
-100% attention, consideration of individual needs, encouragement, and lots of help if you don't understand something!`,
-      rightContent: `Dear Art Students, 
-
-      Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. HE TAUGHT ME SEVERAL EXPRESSIONS THAT I REMEMBER TO THIS DAY. 
+100% attention, consideration of individual needs, encouragement, and lots of help if you don't understand something!
+HE TAUGHT ME SEVERAL EXPRESSIONS THAT I REMEMBER TO THIS DAY. 
 
 I completed my college studies at University of Pannonia. A number of subjects captured my interest, such as American Culture and Civilization, English Culture and Civilization, American Literature, and many other fascinating courses as well.
 
 IT WAS THE PEAK OF PEAKS! 
 
 During this period, I also studied at University of Westminster. Below, you can see the diploma issued by the university, which is equivalent to a master’s degree.`,
+      rightContent: `Dear Art Students, 
+
+      Through my art, I want to depict a constantly changing world that is capable of mentally transporting people to places that mean memories and lived moments for them. In both my landscapes and my depictions of the human individual, there is a painterly brushstroke or pencil line that helps bring these lived moments to the surface. For me, the importance of colors is essential in my creations. Without them, our world would be like a well without water, i.e., empty. That is why I strive for colors, as primary protagonists, to be present and—last but not least—in harmony in my works. This driving force is what sits me down in front of the canvas or paper and helps me pick up a brush or pencil. My favorite mediums include charcoal, soft pastel, watercolor, and oil paint. `,
     },
     videos: {
       title: "Videos",
