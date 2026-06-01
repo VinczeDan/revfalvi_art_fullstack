@@ -59,6 +59,10 @@ const AboutMe = () => {
             <Card className="border-0 shadow-soft h-full bg-card/50 backdrop-blur-sm">
               <CardContent className="pt-8">
                 {/* 2. KÉP BEILLESZTÉSE */}
+
+                <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                  {t("about.rightContent")}
+                </p>
                 <div className="mb-6 overflow-hidden rounded-lg shadow-medium">
                   <img
                     src={diploma}
@@ -66,10 +70,6 @@ const AboutMe = () => {
                     className="w-full h-auto object-cover aspect-[4/3]"
                   />
                 </div>
-
-                <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                  {t("about.rightContent")}
-                </p>
               </CardContent>
             </Card>
           </div>
