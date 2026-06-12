@@ -19,6 +19,11 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     { id: "courses", label: t("navigation.courses"), highlight: true },
     { id: "news", label: t("navigation.news"), highlight: false },
     { id: "portfolio", label: t("navigation.portfolio"), highlight: false },
+    {
+      id: "testimonials",
+      label: language === "hu" ? "Vélemények" : "Testimonials",
+      highlight: false,
+    }, // ← ÚJ MENÜPONT
     { id: "contact", label: t("navigation.contact"), highlight: false },
   ];
 

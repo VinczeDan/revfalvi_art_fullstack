@@ -9,6 +9,7 @@ import NewsSection from "@/components/NewsSection";
 import CoursesSection from "@/components/CoursesSection";
 import VideoSection from "@/components/VideoSection"; // ← ÚJ IMPORT
 import { useTranslation } from "@/TranslationContext";
+import TestimonialsSection from "@/components/TestimonialsSection"; // ← 1. ÚJ IMPORT HOZZÁADÁSA
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -23,6 +24,7 @@ const Index = () => {
         "videos", // ← ÚJ: Scroll figyeléshez
         "news",
         "portfolio",
+        "testimonials",
         "contact",
       ];
       // ... a többi scroll logika marad változatlan ...
@@ -87,7 +89,7 @@ const Index = () => {
           color="acrylic"
         />
         */}
-        
+
         <GallerySection
           id="oil"
           title={t("gallery.oil.title")}
@@ -101,6 +103,8 @@ const Index = () => {
           color="pencil"
         />
       </div>
+
+      <TestimonialsSection />
 
       <ContactSection />
     </div>
