@@ -21,7 +21,7 @@ const TestimonialsSection = () => {
   // A megadott válaszok alapján strukturált adatok Anna és Petra nevével
   const testimonials: Testimonial[] = [
     {
-      name: "Anna",
+      name: "Flóra",
       personality: "Segítőkész, vicces, megértő, figyelmes, együttérző.",
       goal: "Kitűzött célom, hogy jobban és bátrabban beszéljek angolul. Sikeres nyelvvizsgákat tudjak tenni, amik teljesítése elengedhetetlen a továbbtanulásomhoz.",
       progress: "Igen, úgy érzem mióta hozzád járok, nagyon sokat fejlődtem.",
@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
         "Megbízható vagy. Olyan tanár, akitől bátran tudok kérdezni, a kérdésekre érthető választ kapok. Valamint kellemes és megbízható környezetben tanulhatok nálad.",
     },
     {
-      name: "Petra",
+      name: "",
       personality: "Segítőkész, megértő, nyitott, vicces, megbízható.",
       goal: "Kitűzött célom, hogy bátran és jobban beszéljek angolul. Amiben úgy érzem, nagy segítségemre vagy. Nemcsak a magas szintű nyelvtudásod miatt, hanem a biztató szavaid, őszinte érdeklődésed az elkészített feladatok átnézésében.",
       progress: "Igen, úgy érzem nagyon sokat fejlődtem, amióta hozzád járok.",
