@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
         "Megbízható vagy. Olyan tanár, akitől bátran tudok kérdezni, a kérdésekre érthető választ kapok. Valamint kellemes és megbízható környezetben tanulhatok nálad.",
     },
     {
-      name: "",
+      name: " ",
       personality: "Segítőkész, megértő, nyitott, vicces, megbízható.",
       goal: "Kitűzött célom, hogy bátran és jobban beszéljek angolul. Amiben úgy érzem, nagy segítségemre vagy. Nemcsak a magas szintű nyelvtudásod miatt, hanem a biztató szavaid, őszinte érdeklődésed az elkészített feladatok átnézésében.",
       progress: "Igen, úgy érzem nagyon sokat fejlődtem, amióta hozzád járok.",
