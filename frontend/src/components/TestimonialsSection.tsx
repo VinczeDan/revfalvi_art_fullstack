@@ -40,6 +40,16 @@ const TestimonialsSection = () => {
       recommendation:
         "Az órák jó hangulatban telnek, mindig érzem az őszinte támogatásodat, biztató szavaid mindig nagy lendületet adnak, akkor is amikor úgy érzem, hogy elfáradtam és nehezebben értem meg az adott óra anyagát.",
     },
+    {
+      name: "Dóra",
+      personality: "Kedves, figyelmes, előzékeny és jól felkészült.",
+      goal: "Azért szeretek hozzád járni, mert szeretnék magabiztosabban beszélni angolul, és úgy érzem, veled ezt a célomat el tudom érni.",
+      progress: "Igen, elégedett vagyok a haladásommal.",
+      improvement:
+        "Sokat fejlődtem abban, hogy jobban odafigyelek az új kifejezésekre, és igyekszem azokat aktívan alkalmazni is.",
+      recommendation:
+        "Azért ajánlanálak másoknak is, mert nagyon türelmes vagy, és mindig személyre szabott órákat tartasz.",
+    },
   ];
 
   return (
