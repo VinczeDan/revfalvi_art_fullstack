@@ -266,8 +266,8 @@ const GallerySection = ({
                           Number(selectedPainting.price) > 0
                             ? `${Number(selectedPainting.price).toLocaleString("hu-HU")} Ft`
                             : language === "en"
-                              ? "Not for sale / Inquire"
-                              : "Nem eladó / Érdeklődjön"}
+                              ? "Not for sale / Sold"
+                              : "Nem eladó / Eladva"}
                         </p>
                       </div>
                     </div>
