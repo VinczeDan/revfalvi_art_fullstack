@@ -33,16 +33,16 @@ const FeaturedArtist = () => {
           <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary shadow-sm" />
         </div>
 
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
           <div
             ref={artwork.ref}
-            className={`reveal reveal-left ${artwork.isVisible ? "is-visible" : ""}`}
+            className={`reveal reveal-left lg:col-span-7 ${artwork.isVisible ? "is-visible" : ""}`}
           >
             <Card className="overflow-hidden border-0 bg-card/70 shadow-medium">
               <CardContent className="p-3">
                 <img
                   alt="Absztrakt, színes művészeti illusztráció – helyőrző Szloboda Szilárd alkotásához"
-                  className="aspect-[4/5] w-full rounded-lg object-cover shadow-medium"
+                  className="aspect-[4/3] w-full rounded-lg object-cover shadow-medium"
                   src={featuredArtwork}
                 />
               </CardContent>
@@ -51,7 +51,7 @@ const FeaturedArtist = () => {
 
           <div
             ref={story.ref}
-            className={`reveal reveal-right reveal-delay-2 ${story.isVisible ? "is-visible" : ""}`}
+            className={`reveal reveal-right reveal-delay-2 lg:col-span-5 ${story.isVisible ? "is-visible" : ""}`}
           >
             <Card className="border-0 bg-card/70 shadow-soft backdrop-blur-sm">
               <CardContent className="p-6 md:p-8">
