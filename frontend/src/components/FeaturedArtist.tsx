@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import featuredArtwork from "@/assets/featured-artist-artwork.svg";
+import featuredArtwork from "@/assets/featured-artist-artwork.jpg";
 
 const FeaturedArtist = () => {
   const header = useScrollReveal({ threshold: 0.2 });
