@@ -29,7 +29,7 @@ Jó helyen jársz, ha segítségre van szükséged az angol nyelv tanulásában.
 Jártam tanfolyamra is, ahol már sokkal jobban éreztem magamat, és meg mertem szólalni angolul. Kiscsoportban tanultunk, a tanárnak sokkal több ideje volt rám figyelni. Igazán motiváló volt!
 
 
-Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg azt, az a teljes figyelmet, amire mindig is vágytam nyelvtanulóknak. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
+Ezután vettem egyéni órákat is. Azt gondolom, hogy itt kaptam meg azt, az a teljes figyelmet, amire mindig is vágytam nyelvtanulóként. Emlékszem Tomra, aki amerikai volt. Ő tanított meg jó néhány kifejezésre, amire mai napig emlékszem.
 
 
 A főiskolai tanulmányaimat a Pannon Egyetemen töltöttem. Számos tantárgy felkeltette a figyelmet mint például, Amerikai kultúra és civilizáció, Angol kultúra és civilizáció, és még sok egyéb tantárgy is.
