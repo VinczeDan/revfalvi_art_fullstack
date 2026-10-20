@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import AboutMe from "@/components/AboutMe";
+import FeaturedArtist from "@/components/FeaturedArtist";
 import NewsSection from "@/components/NewsSection";
 import CoursesSection from "@/components/CoursesSection";
 import VideoSection from "@/components/VideoSection"; // ← ÚJ IMPORT
@@ -64,6 +65,7 @@ const Index = () => {
         buttonText={t("hero.button")}
       />
       <AboutMe />
+      <FeaturedArtist />
 
       <CoursesSection />
 
