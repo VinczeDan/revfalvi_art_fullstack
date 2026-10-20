@@ -42,7 +42,7 @@ const FeaturedArtist = () => {
               <CardContent className="p-3">
                 <img
                   alt="Absztrakt, színes művészeti illusztráció – helyőrző Szloboda Szilárd alkotásához"
-                  className="aspect-[4/3] w-full rounded-lg object-cover shadow-medium"
+                  className="h-auto w-full rounded-lg object-contain shadow-medium"
                   src={featuredArtwork}
                 />
               </CardContent>
