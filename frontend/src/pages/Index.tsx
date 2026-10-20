@@ -1,0 +1,114 @@
+// src/pages/Index.tsx
+import { useState, useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import HeroSection from "@/components/HeroSection";
+import GallerySection from "@/components/GallerySection";
+import ContactSection from "@/components/ContactSection";
+import AboutMe from "@/components/AboutMe";
+import NewsSection from "@/components/NewsSection";
+import CoursesSection from "@/components/CoursesSection";
+import VideoSection from "@/components/VideoSection"; // ← ÚJ IMPORT
+import { useTranslation } from "@/TranslationContext";
+import TestimonialsSection from "@/components/TestimonialsSection"; // ← 1. ÚJ IMPORT HOZZÁADÁSA
+
+const Index = () => {
+  const [activeSection, setActiveSection] = useState("home");
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "home",
+        "about",
+        "courses",
+        "videos", // ← ÚJ: Scroll figyeléshez
+        "news",
+        "portfolio",
+        "testimonials",
+        "contact",
+      ];
+      // ... a többi scroll logika marad változatlan ...
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+
+      if (window.scrollY < 200) setActiveSection("home");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen">
+      <Navigation
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
+      <HeroSection
+        setActiveSection={setActiveSection}
+        title={t("hero.title")}
+        subtitle={t("hero.subtitle")}
+        buttonText={t("hero.button")}
+      />
+      <AboutMe />
+
+      <CoursesSection />
+
+      {/* ÚJ: Videó szekció a Tanfolyamok és Hírek közé */}
+      <VideoSection />
+
+      <NewsSection />
+
+      <div id="portfolio">
+        {/* ... Galériák maradnak ... */}
+        <GallerySection
+          id="watercolor"
+          title={t("gallery.watercolor.title")}
+          description={t("gallery.watercolor.description")}
+          color="watercolor"
+        />
+
+        {/*  
+        <GallerySection
+          id="acrylic"
+          title={t("gallery.acrylic.title")}
+          description={t("gallery.acrylic.description")}
+          color="acrylic"
+        />
+        */}
+
+        <GallerySection
+          id="oil"
+          title={t("gallery.oil.title")}
+          description={t("gallery.oil.description")}
+          color="oil"
+        />
+        <GallerySection
+          id="pencil"
+          title={t("gallery.pencil.title")}
+          description={t("gallery.pencil.description")}
+          color="pencil"
+        />
+      </div>
+
+      <TestimonialsSection />
+
+      <ContactSection />
+    </div>
+  );
+};
+
+export default Index;

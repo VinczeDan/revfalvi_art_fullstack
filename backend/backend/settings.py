@@ -1,0 +1,146 @@
+from pathlib import Path
+import os
+import sys
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Default values (felülírható a local_settings.py-ban)
+DEBUG = True
+ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = []
+SECRET_KEY = 'django-insecure-a8yjq+-+(oh-tcnwrorii&l18j5iiakij%7!@6@h^m4v7!@*g!'
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'api',
+    'ckeditor',
+    'ckeditor_uploader',
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'backend.urls'
+
+REACT_BUILD_DIR = os.path.join(BASE_DIR.parent, 'frontend', 'dist')
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [REACT_BUILD_DIR],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'backend.wsgi.application'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    REACT_BUILD_DIR
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# EMAIL – biztonságos default
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev" # Teszteléshez a resend alapértelmezettje, ha validálod a domained, lehet saját info@webfizz.hu stb.
+DEFAULT_TO_EMAIL = "daniel.vincze15@gmail.com"
+RESEND_API_KEY = None # A local_settings.py fogja felülírni élesben
+
+# --- Local settings import ---
+try:
+    import local_settings
+
+    DEBUG = getattr(local_settings, 'DEBUG', DEBUG)
+    ALLOWED_HOSTS = getattr(local_settings, 'ALLOWED_HOSTS', ALLOWED_HOSTS)
+    CORS_ALLOWED_ORIGINS = getattr(local_settings, 'CORS_ALLOWED_ORIGINS', CORS_ALLOWED_ORIGINS)
+
+    HOL_VAGYOK = getattr(local_settings, 'HOL_VAGYOK', None)
+
+    if HOL_VAGYOK == 'otthon':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+    elif HOL_VAGYOK == 'droplet':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': local_settings.DB_NAME,
+                'USER': local_settings.DB_USER,
+                'PASSWORD': local_settings.DB_PASSWORD,
+                'HOST': local_settings.DB_HOST,
+                'PORT': '',
+            }
+        }
+
+    DEFAULT_FROM_EMAIL = getattr(local_settings, 'DEFAULT_FROM_EMAIL', None)
+    DEFAULT_TO_EMAIL = getattr(local_settings, 'DEFAULT_TO_EMAIL', None)
+
+    RESEND_API_KEY = getattr(local_settings, 'RESEND_API_KEY', None)
+    CONTACT_EMAIL = getattr(local_settings, 'CONTACT_EMAIL', [DEFAULT_FROM_EMAIL])
+
+except ImportError:
+    print("local_settings nem található!")
+    CONTACT_EMAIL = [DEFAULT_FROM_EMAIL]

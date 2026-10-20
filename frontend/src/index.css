@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Művészeti portfólió dizájn rendszer - Faber Castell színpaletta */
+
+@layer base {
+  :root {
+    --background: 33 35% 88%;
+    --foreground: 29 45% 12%;
+
+    --card: 33 40% 95%;
+    --card-foreground: 29 45% 12%;
+
+    --primary: 38 32% 40%;
+    --primary-foreground: 33 100% 98%;
+    --primary-glow: 38 32% 50%;
+
+    --secondary: 29 35% 25%;
+    --secondary-foreground: 33 60% 96%;
+
+    --muted: 33 20% 78%;
+    --muted-foreground: 29 20% 35%;
+
+    --accent: 38 32% 40%;
+    --accent-foreground: 33 100% 98%;
+
+    --border: 29 20% 75%;
+    --input: 33 25% 85%;
+    --ring: 38 32% 40%;
+
+    --artist-blue: 33 45% 85%;
+    --artist-turquoise: 29 40% 25%;
+    --artist-light: 33 45% 92%;
+    --artist-dark: 29 40% 15%;
+
+    --shadow-soft: 0 4px 20px hsla(29, 45%, 10%, 0.12);
+    --shadow-medium: 0 8px 30px hsla(29, 45%, 10%, 0.18);
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 215 25% 27%;
+    --foreground: 210 100% 98%;
+
+    --card: 215 20% 30%;
+    --card-foreground: 210 100% 98%;
+
+    --popover: 215 20% 30%;
+    --popover-foreground: 210 100% 98%;
+
+    --primary: 174 44% 51%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 174 54% 61%;
+
+    --secondary: 215 20% 35%;
+    --secondary-foreground: 210 100% 98%;
+
+    --muted: 215 20% 35%;
+    --muted-foreground: 210 40% 70%;
+
+    --accent: 215 20% 35%;
+    --accent-foreground: 210 100% 98%;
+
+    --destructive: 0 62% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 40%;
+    --input: 215 20% 35%;
+    --ring: 174 44% 51%;
+
+    --artist-blue: 200 89% 78%;
+    --artist-turquoise: 174 44% 51%;
+    --artist-light: 210 100% 98%;
+    --artist-dark: 215 25% 27%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(120deg, hsl(var(--artist-blue)), hsl(var(--artist-turquoise)));
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* =============================================
+   SCROLL REVEAL ANIMÁCIÓK
+   ============================================= */
+
+/* Alapállapot: láthatatlan, eltolva */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up    { transform: translateY(40px); }
+.reveal-left  { transform: translateX(-50px); }
+.reveal-right { transform: translateX(50px); }
+.reveal-scale { transform: scale(0.93); }
+.reveal-fade  { transform: none; }
+
+/* Látható állapot — ez a kulcs */
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) scale(1) !important;
+}
+
+/* Késleltetések */
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+.reveal-delay-5 { transition-delay: 500ms; }
+.reveal-delay-6 { transition-delay: 600ms; }
+
+/* =============================================
+   EREDETI ANIMÁCIÓK (megtartva)
+   ============================================= */
+
+@layer utilities {
+  .slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+  }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

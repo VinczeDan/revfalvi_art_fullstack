@@ -1,0 +1,333 @@
+// src/components/ContactSection.tsx
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Mail,
+  Phone,
+  Palette,
+  ShieldCheck,
+  MapPin,
+  Facebook,
+  Instagram,
+} from "lucide-react"; // ← Facebook és Instagram hozzáadva
+import { toast } from "sonner";
+import { useTranslation } from "@/TranslationContext";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { t } = useTranslation();
+
+  const header = useScrollReveal({ threshold: 0.2 });
+  const leftCol = useScrollReveal({ threshold: 0.1 });
+  const rightCol = useScrollReveal({ threshold: 0.1 });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-contact-email/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`,
+        );
+      }
+
+      toast.success(t("contact.successTitle") || "Sikeres küldés!", {
+        description:
+          t("contact.successDescription") ||
+          "Üzenetét megkaptuk, hamarosan válaszolunk.",
+      });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      toast.error(t("contact.errorTitle") || "Hiba", {
+        description: error instanceof Error ? error.message : "Ismeretlen hiba",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="contact" className="py-20 px-4 bg-gradient-soft">
+      <div className="container mx-auto max-w-7xl">
+        {/* Section Header */}
+        <div
+          ref={header.ref}
+          className={`text-center mb-16 reveal reveal-up ${header.isVisible ? "is-visible" : ""}`}
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-6">
+            <Mail className="w-8 h-8 text-white" />
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            {t("contact.title")}
+          </h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
+
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {t("contact.text")}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Bal oldal */}
+          <div
+            ref={leftCol.ref}
+            className={`reveal reveal-left ${leftCol.isVisible ? "is-visible" : ""} space-y-8`}
+          >
+            {/* Szolgáltatások Kártya */}
+            <Card className="border-0 shadow-soft">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-white" />
+                  </div>
+                  {t("contact.servicesTitle") || "Művészeti szolgáltatások"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground whitespace-pre-line">
+                  {t("contact.servicesList")}
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Vállalkozói és Elérhetőségi Adatok */}
+            <div className="space-y-6 bg-card/30 p-8 rounded-2xl border border-white/10 shadow-medium backdrop-blur-sm">
+              <div>
+                <h3 className="font-bold text-3xl text-primary mb-1">
+                  {t("contact.businessName")}
+                </h3>
+                <p className="text-secondary font-semibold uppercase tracking-widest text-xs">
+                  {t("contact.businessStatus")}
+                </p>
+                <p className="text-foreground/80 mt-3 italic font-light">
+                  {t("contact.businessTitle")}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-8 border-y border-white/10">
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
+                      {t("contact.taxNumberLabel")}
+                    </p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.taxNumber")}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
+                      {t("contact.regNumberLabel")}
+                    </p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.regNumber")}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start sm:col-span-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
+                      {t("contact.locationLabel")}
+                    </p>
+                    <p className="text-foreground font-medium">
+                      {t("contact.location")}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Elérhetőségek (Email, Telefon) */}
+              <div className="space-y-5 pt-2">
+                <a
+                  href="mailto:revfalvi.peter@googlemail.com"
+                  className="flex items-center gap-5 group transition-all"
+                >
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
+                    <Mail className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
+                      {t("contact.emailTitle")}
+                    </h4>
+                    <p className="text-foreground font-medium group-hover:text-primary transition-colors">
+                      revfalvi.peter@googlemail.com
+                    </p>
+                  </div>
+                </a>
+
+                <a
+                  href="tel:06308623832"
+                  className="flex items-center gap-5 group transition-all"
+                >
+                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shrink-0 shadow-soft group-hover:scale-110 transition-transform">
+                    <Phone className="w-6 h-6 text-secondary-foreground" />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider">
+                      {t("contact.phoneTitle")}
+                    </h4>
+                    <p className="text-foreground font-medium group-hover:text-secondary transition-colors">
+                      06 30 862 3832
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              <div className="pt-6 border-t border-white/10">
+                {/* A t() függvény most már dinamikusan a megfelelő nyelvi verziót fogja betölteni */}
+                <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider mb-4">
+                  {t("contact.socialTitle") ||
+                    "Kövess a közösségi oldalakon is"}
+                </h4>
+
+                {/* Közösségi Média Linkek */}
+                <div className="flex items-center space-x-4 pt-4">
+                  <a
+                    href="https://www.facebook.com/revfalvi.peter" // ← Itt cserélheted ki Péter pontos linkjére
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-slate-50 text-[#1877F2]/70 hover:text-[#1877F2] hover:bg-[#1877F2]/10 transition-all duration-300 shadow-sm border border-slate-100"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/revfalvi_peter_art?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-slate-50 text-[#F56040]/70 hover:text-[#E4405F] hover:bg-[#F56040]/10 transition-all duration-300 shadow-sm border border-slate-100"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+              {/* --- KÖZÖSSÉGI MÉDIA VÉGE --- */}
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div
+            ref={rightCol.ref}
+            className={`reveal reveal-right reveal-delay-2 ${rightCol.isVisible ? "is-visible" : ""}`}
+          >
+            <Card className="border-0 shadow-medium">
+              <CardHeader>
+                <CardTitle className="text-2xl">
+                  {t("contact.formTitle") || "Üzenet küldése"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Input
+                        name="name"
+                        placeholder={t("contact.formName") || "Teljes név"}
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        minLength={2}
+                        className="h-12"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        name="email"
+                        type="email"
+                        placeholder={t("contact.formEmail") || "Email cím"}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                        className="h-12"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Input
+                      name="subject"
+                      placeholder={t("contact.formSubject") || "Tárgy"}
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      minLength={3}
+                      className="h-12"
+                    />
+                  </div>
+
+                  <div>
+                    <Textarea
+                      name="message"
+                      placeholder={t("contact.formMessage") || "Üzenet..."}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      minLength={10}
+                      rows={6}
+                      className="resize-none"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#8B4513] hover:bg-[#A0522D] transition-all duration-300 text-white font-medium h-12 rounded-full shadow-md"
+                  >
+                    {isSubmitting
+                      ? t("contact.sending") || "Küldés..."
+                      : t("contact.sendButton") || "Üzenet küldése"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;

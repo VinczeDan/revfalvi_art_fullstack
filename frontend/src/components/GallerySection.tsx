@@ -1,0 +1,294 @@
+// src/components/GallerySection.tsx
+
+import React, { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "@/TranslationContext";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+interface Painting {
+  id: number;
+  title: string;
+  description: string;
+  technique: string;
+  technique_display: string;
+  image_url: string;
+  created_at: string;
+  price: string;
+}
+
+interface GallerySectionProps {
+  id: string;
+  title: string;
+  description: string;
+  color: "watercolor" | "acrylic" | "oil" | "pencil";
+}
+
+const PaintingCard = ({
+  painting,
+  index,
+  onSelect,
+}: {
+  painting: Painting;
+  index: number;
+  onSelect: (p: Painting) => void;
+}) => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.05 });
+  const delays = ["", "reveal-delay-2", "reveal-delay-3"];
+  const delay = delays[index % 3];
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""}`}
+    >
+      <Card
+        className="group hover-lift cursor-pointer border-0 shadow-soft hover:shadow-medium overflow-hidden"
+        onClick={() => onSelect(painting)}
+      >
+        <CardContent className="p-0">
+          <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
+            <img
+              src={painting.image_url}
+              alt={painting.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-white font-semibold text-lg mb-1">
+                  {painting.title}
+                </h3>
+                <p className="text-white/90 text-sm line-clamp-2">
+                  {painting.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+const GallerySection = ({
+  id,
+  title,
+  description,
+  color,
+}: GallerySectionProps) => {
+  const [paintings, setPaintings] = useState<Painting[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedPainting, setSelectedPainting] = useState<Painting | null>(
+    null,
+  );
+  const [expanded, setExpanded] = useState(false);
+
+  const { language } = useTranslation();
+
+  useEffect(() => {
+    const fetchPaintings = async () => {
+      setLoading(true);
+      setExpanded(false);
+      try {
+        const response = await fetch(
+          `/api/paintings/?technique=${id}&lang=${language}`,
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
+        const data: Painting[] = await response.json();
+        setPaintings(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
+        console.error("Error fetching paintings:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPaintings();
+  }, [id, language]);
+
+  const colorVariants = {
+    watercolor: "from-blue-400 to-blue-600",
+    acrylic: "from-purple-500 to-pink-500",
+    oil: "from-yellow-500 to-orange-500",
+    pencil: "from-gray-400 to-gray-600",
+  };
+
+  const visiblePaintings = expanded ? paintings : paintings.slice(0, 3);
+  const hasMore = paintings.length > 3;
+
+  if (loading)
+    return (
+      <section id={id} className="py-20 px-4">
+        <div className="container mx-auto max-w-7xl text-center">
+          <p>
+            {language === "en" ? "Loading paintings..." : "Képek betöltése..."}
+          </p>
+        </div>
+      </section>
+    );
+
+  if (error)
+    return (
+      <section id={id} className="py-20 px-4">
+        <div className="container mx-auto max-w-7xl text-center text-red-500">
+          <p>
+            {language === "en"
+              ? "Error loading paintings:"
+              : "Hiba történt a képek betöltése közben:"}{" "}
+            {error}
+          </p>
+        </div>
+      </section>
+    );
+
+  return (
+    <section id={id} className="py-20 px-4">
+      <div className="container mx-auto max-w-7xl">
+        {/* 🌟 JAVÍTÁS: Ebből a div-ből kivettem a reveal osztályokat, így mindig látható lesz nagyban! */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            {title}
+          </h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {description}
+          </p>
+        </div>
+
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {visiblePaintings.map((painting, index) => (
+            <PaintingCard
+              key={painting.id}
+              painting={painting}
+              index={index}
+              onSelect={setSelectedPainting}
+            />
+          ))}
+        </div>
+
+        {/* Bővítő/összecsukó gomb */}
+        {hasMore && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="
+              mt-6 w-full flex items-center justify-center gap-3
+              py-4 px-6 rounded-lg border-2 border-dashed
+              border-muted-foreground/30 text-muted-foreground
+              hover:border-primary hover:text-primary hover:bg-primary/5
+              transition-all duration-200 font-medium text-sm
+            "
+          >
+            {expanded ? (
+              <>
+                <ChevronUp className="w-4 h-4" />
+                {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-4 h-4" />
+                {language === "en"
+                  ? `View all ${title} works (${paintings.length} pieces)`
+                  : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
+              </>
+            )}
+          </button>
+        )}
+
+        {/* Modal */}
+        {selectedPainting && (
+          <div
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            onClick={() => setSelectedPainting(null)}
+          >
+            <div
+              className="bg-white rounded-lg overflow-hidden w-full max-w-6xl max-h-[90vh] flex flex-col lg:flex-row relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedPainting(null)}
+                className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold z-50"
+              >
+                ×
+              </button>
+
+              {/* Left Side - Image */}
+              <div className="lg:w-1/2 h-[70vh] bg-gray-50 flex items-center justify-center p-8">
+                <img
+                  src={selectedPainting.image_url}
+                  alt={selectedPainting.title}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="lg:w-1/2 p-8 overflow-y-auto">
+                <div className="space-y-6">
+                  <h3 className="text-3xl font-bold text-gray-900">
+                    {selectedPainting.title}
+                  </h3>
+
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <p className="text-sm font-medium text-zinc-500">
+                        {language === "en" ? "Technique" : "Technika"}
+                      </p>
+                      <p className="text-lg font-semibold text-zinc-800">
+                        {selectedPainting.technique_display ||
+                          selectedPainting.technique}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">
+                        {language === "en" ? "Created" : "Készült"}
+                      </p>
+                      <p className="text-lg">
+                        {new Date(
+                          selectedPainting.created_at,
+                        ).toLocaleDateString(
+                          language === "en" ? "en-US" : "hu-HU",
+                        )}
+                      </p>
+                    </div>
+
+                    {/* ÁR */}
+                    <div className="col-span-2">
+                      <div className="bg-gradient-to-r from-amber-100 to-yellow-50 border border-amber-200 rounded-xl p-5">
+                        <p className="text-sm uppercase tracking-wide text-amber-700 font-medium mb-1">
+                          {language === "en" ? "Price" : "Ár"}
+                        </p>
+                        <p className="text-4xl font-bold text-amber-900">
+                          {selectedPainting.price &&
+                          Number(selectedPainting.price) > 0
+                            ? `${Number(selectedPainting.price).toLocaleString("hu-HU")} Ft`
+                            : language === "en"
+                              ? "Not for sale / Inquire"
+                              : "Nem eladó / Érdeklődjön"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-200 pt-4">
+                    <h4 className="text-sm font-medium text-gray-500 mb-2">
+                      {language === "en" ? "Description" : "Leírás"}
+                    </h4>
+                    <p className="text-gray-700 whitespace-pre-line">
+                      {selectedPainting.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default GallerySection;
