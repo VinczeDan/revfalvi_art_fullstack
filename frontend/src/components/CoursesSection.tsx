@@ -1,6 +1,12 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Loader2, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  GraduationCap,
+  Loader2,
+  ChevronDown,
+  Clock3,
+  Palette,
+} from "lucide-react";
 import { useTranslation } from "@/TranslationContext";
 import { useQuery } from "@tanstack/react-query";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -11,6 +17,7 @@ interface Course {
   icon: string;
   title: string;
   description: string;
+  cover_image_url: string | null;
   level: "beginner" | "advanced" | "all";
   duration: string;
   price: string;
@@ -51,40 +58,56 @@ const CourseCard = ({
   return (
     <div
       ref={ref}
-      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""} flex w-full md:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)] min-w-[320px] max-w-[450px] h-fit`}
+      className={`reveal reveal-up ${delay} ${isVisible ? "is-visible" : ""} w-full`}
     >
-      <Card className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 flex flex-col w-full overflow-hidden bg-card">
-        {/* Kattintható fejléc: Ikon, Szint, Ár és Cím */}
-        <div
-          className="cursor-pointer p-6 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <div className="flex justify-between items-start mb-4">
-            <div className="text-4xl">{course.icon || "🎨"}</div>
+      <Card className="group flex h-full w-full flex-col overflow-hidden border-0 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium">
+        <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-artist-blue via-artist-light to-primary/30">
+          {course.cover_image_url ? (
+            <img
+              src={course.cover_image_url}
+              alt={course.title}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
             <div
-              className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+              aria-hidden="true"
+              className="flex h-full items-center justify-center bg-gradient-to-br from-primary/15 via-artist-light to-secondary/20"
             >
-              <ChevronDown className="w-5 h-5 text-muted-foreground" />
+              <span className="flex h-20 w-20 items-center justify-center rounded-full bg-background/75 text-5xl shadow-soft backdrop-blur-sm">
+                {course.icon || <Palette className="h-10 w-10 text-primary" />}
+              </span>
             </div>
-          </div>
+          )}
+          <span
+            className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm ${
+              LEVEL_MAP[course.level]?.color || "bg-gray-500"
+            }`}
+          >
+            {t(`courses.levels.${LEVEL_MAP[course.level]?.key ?? "all"}`)}
+          </span>
+        </div>
 
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span
-              className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold text-white ${
-                LEVEL_MAP[course.level]?.color || "bg-gray-500"
-              }`}
-            >
-              {t(`courses.levels.${LEVEL_MAP[course.level]?.key ?? "all"}`)}
-            </span>
-            <span className="px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold bg-muted text-muted-foreground">
+        <button
+          aria-expanded={isOpen}
+          className="flex w-full items-start justify-between gap-4 p-6 text-left transition-colors hover:bg-accent/30"
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+        >
+          <span className="min-w-0">
+            <span className="mb-2 block text-sm font-semibold text-primary">
               {course.price}
             </span>
-          </div>
-
-          <h3 className="text-xl md:text-2xl font-bold leading-tight">
-            {course.title}
-          </h3>
-        </div>
+            <span className="block text-xl font-bold leading-tight text-foreground md:text-2xl">
+              {course.title}
+            </span>
+          </span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
+        </button>
 
         {/* Lenyitható tartalom: Leírás, Időtartam és Jelentkezés gomb */}
         <div
@@ -101,14 +124,13 @@ const CourseCard = ({
               </p>
 
               <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <span className="text-lg">⏱</span>
+                <Clock3 aria-hidden="true" className="h-4 w-4 text-primary" />
                 <span>{course.duration}</span>
               </div>
 
               <button
                 onClick={(e) => {
-                  e.stopPropagation(); // Ne csukódjon be a kártya a gombra kattintáskor
-                  scrollToContact(course.title);
+                  scrollToContact();
                 }}
                 className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all active:scale-95"
               >
@@ -139,7 +161,7 @@ const CoursesSection = () => {
     },
   });
 
-  const scrollToContact = (courseTitle: string) => {
+  const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
@@ -178,7 +200,7 @@ const CoursesSection = () => {
         )}
 
         {/* Dinamikus kártyák flexibilis elrendezéssel */}
-        <div className="flex flex-wrap justify-center gap-8 mb-10 items-start">
+        <div className="mb-10 grid grid-cols-1 items-start gap-8 md:grid-cols-2 xl:grid-cols-3">
           {courses?.map((course, index) => (
             <CourseCard
               key={course.id}

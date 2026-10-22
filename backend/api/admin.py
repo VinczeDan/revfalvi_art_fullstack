@@ -65,6 +65,9 @@ class CourseAdmin(admin.ModelAdmin):
         ("Alapadatok", {
             'fields': ('title_hu', 'title_en', 'icon', 'order', 'is_active')
         }),
+        ("Borítókép", {
+            'fields': ('cover_image',)
+        }),
         ("Részletek", {
             'fields': ('description_hu', 'description_en', 'level', 'duration', 'price')
         }),

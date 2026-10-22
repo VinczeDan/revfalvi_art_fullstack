@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('level', models.CharField(choices=[('beginner', 'Kezdő'), ('advanced', 'Haladó'), ('all', 'Minden szint')], default='all', max_length=20, verbose_name='Szint')),
                 ('duration', models.CharField(help_text='Pl. 8 alkalom', max_length=100, verbose_name='Időtartam')),
                 ('price', models.CharField(help_text='Pl. 35 000 Ft', max_length=100, verbose_name='Ár')),
-                ('icon', models.CharField(blank=True, default='🎨', verbose_name='Ikon (emoji)')),
+                ('icon', models.CharField(blank=True, default='🎨', max_length=50, verbose_name='Ikon (emoji)')),
                 ('is_active', models.BooleanField(default=True, verbose_name='Aktív')),
                 ('order', models.PositiveIntegerField(default=0, verbose_name='Sorrend')),
             ],

@@ -103,6 +103,12 @@ class Course(models.Model):
     description_hu = models.TextField(verbose_name="Leírás (magyar)")
     description_en = models.TextField(verbose_name="Leírás (angol)", blank=True, null=True)
 
+    cover_image = models.ImageField(
+        upload_to='course_covers/',
+        verbose_name="Borítókép",
+        blank=True,
+        null=True
+    )
     level = models.CharField(
         max_length=20,
         choices=LEVEL_CHOICES,
@@ -111,7 +117,12 @@ class Course(models.Model):
     )
     duration = models.CharField(max_length=100, verbose_name="Időtartam", help_text="Pl. 8 alkalom")
     price = models.CharField(max_length=100, verbose_name="Ár", help_text="Pl. 35 000 Ft")
-    icon = models.CharField(verbose_name="Ikon (emoji)", default="🎨", blank=True)
+    icon = models.CharField(
+        max_length=50,
+        verbose_name="Ikon (emoji)",
+        default="🎨",
+        blank=True
+    )
     is_active = models.BooleanField(default=True, verbose_name="Aktív")
     order = models.PositiveIntegerField(default=0, verbose_name="Sorrend")
 

@@ -127,6 +127,7 @@ class NewsSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
+    cover_image_url = serializers.SerializerMethodField()
     level_display = serializers.CharField(source='get_level_display', read_only=True)
 
     class Meta:
@@ -135,6 +136,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
+            'cover_image_url',
             'level',
             'level_display',
             'duration',
@@ -155,6 +157,14 @@ class CourseSerializer(serializers.ModelSerializer):
         if lang == "en" and obj.description_en:
             return obj.description_en
         return obj.description_hu
+
+    def get_cover_image_url(self, obj):
+        if obj.cover_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(obj.cover_image.url)
+            return obj.cover_image.url
+        return None
     
 class VideoSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
