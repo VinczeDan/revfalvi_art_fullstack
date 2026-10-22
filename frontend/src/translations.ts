@@ -268,9 +268,9 @@ Mit meiner Kunst möchte ich eine sich ständig verändernde Welt darstellen, di
     },
     videos: {
       title: "Videos",
-      description:
-        "Sehen Sie sich meine neuesten Lernvideos und Demonstrationen an.",
+      description: "Check out my latest educational videos and demonstrations.",
     },
+
     news: {
       title: "Aktuelle Nachrichten",
       description:
