@@ -233,4 +233,99 @@ Sign up for my in-person or online English lessons today!`,
       location: "1141 Budapest, Mogyoródi út 100 II.em. 6.",
     },
   },
+  de: {
+    navigation: {
+      home: "Startseite",
+      about: "Über mich",
+      courses: "Kurse",
+      news: "Presse",
+      portfolio: "Portfolio",
+      contact: "Kontakt",
+    },
+    hero: {
+      title: "Willkommen auf meiner Website",
+      subtitle:
+        "Kunstunterricht, Malerlebnisse, Englisch- und Schachunterricht an einem Ort.",
+      button: "Galerie ansehen",
+    },
+    about: {
+      title: "Über mich",
+      text: "Lernen Sie mich besser kennen und entdecken Sie die Geschichte hinter meiner Kunst.",
+      // IDE KERÜLT AZ "xxx" A BAL OLDALI KÁRTYÁHOZ:
+      leftContent: `Liebe Sprachlernende!
+Mein Name ist Péter Révfalvi, und ich bin ausgebildeter Englischlehrer.
+Hier bist du genau richtig, wenn du Unterstützung beim Englischlernen brauchst. Vor vielen Jahren war ich selbst auf der Suche nach einer Möglichkeit und der richtigen Person, die mir dabei hilft, mich in einer Fremdsprache zurechtzufinden. Ich habe zwar in der Schule gelernt, aber dort habe ich keine 100-prozentige Aufmerksamkeit bekommen. Ganz zu schweigen von der Gruppeneinteilung – wir waren einfach zu viele Schüler, und unser Wissensstand war völlig unterschiedlich.
+Später habe ich auch Sprachkurse besucht, wo ich mich schon viel wohler gefühlt und mich endlich getraut habe, Englisch zu sprechen. Wir haben in kleinen Gruppen gelernt, wodurch der Lehrer viel mehr Zeit hatte, auf mich einzugehen. Das war wirklich motivierend!
+Danach habe ich auch Einzelunterricht genommen. Ich denke, dass ich genau dort die volle Aufmerksamkeit erhalten habe, nach der ich mich als Sprachschüler immer gehakt hatte. Ich erinnere mich noch gut an Tom, der Amerikaner war. Er brachte mir eine Reihe von Redewendungen bei, an die ich mich bis heute erinnere.
+Mein Studium habe ich an der Pannon-Universität absolviert. Viele Fächer haben mein Interesse geweckt, wie zum Beispiel amerikanische Kultur und Zivilisation, englische Kultur und Zivilisation und viele weitere Kurse.
+Und dann kam das Vereinigte Königreich. Das war der echte Sprung ins kalte Wasser! Jahrelang hatte ich die Gelegenheit, in London, mitten im englischsprachigen Raum, zu leben und die Sprache täglich zu sprechen. Das war das absolute Highlight!
+Während dieser Zeit habe ich an der University of Westminster mit Sitz in London studiert. Unten seht ihr das Master-Diplom, das mir von der Universität ausgestellt wurde.
+Möchtest du dir wettbewerbsfähige Englischkenntnisse aneignen?
+Wünschst du dir 100-prozentige Aufmerksamkeit, Ermutigung und jede Menge Unterstützung, wenn du etwas nicht verstehst?
+Melde dich für meinen Präsenz- oder Online-Englischunterricht an!`,
+      rightContent: `Liebe Kunstschülerinnen und Kunstschüler!
+Mit meiner Kunst möchte ich eine sich ständig verändernde Welt darstellen, die in der Lage ist, Menschen in ihren Gedanken an Orte zu versetzen, die für sie Erinnerungen und erlebte Momente bedeuten. Sowohl in meinen Landschaften als auch in der Darstellung des menschlichen Individuums gibt es einen malerischen Pinselstrich oder eine Bleistiftlinie, die dabei helfen, diese erlebten Momente an die Oberfläche zu bringen. Für mich ist die Bedeutung der Farben in meinen Werken unerlässlich. Ohne sie wäre unsere Welt wie ein Brunnen ohne Wasser, das heißt leer. Deshalb strebe ich danach, dass die Farben als Hauptakteure präsent und nicht zuletzt in Harmonie in meinen Werken sind. Diese treibende Kraft ist es, die mich vor die Leinwand oder das Papier setzt und mir hilft, zum Pinsel oder Stift zu greifen. Zu meinen Lieblingsmedien gehören Kohle, Softpastell, Aquarell und Ölfarbe.`,
+    },
+    videos: {
+      title: "Videos",
+      description:
+        "Sehen Sie sich meine neuesten Lernvideos und Demonstrationen an.",
+    },
+    news: {
+      title: "Aktuelle Nachrichten",
+      description:
+        "Bleiben Sie auf dem Laufenden mit Pressemitteilungen und Artikeln über meine Arbeit.",
+      loading: "Lade Nachrichten...",
+      error: "Fehler beim Laden der Nachrichten",
+      noNews: "Keine Nachrichten vorhanden.",
+      back: "Zurück zu den Nachrichten",
+    },
+    gallery: {
+      watercolor: {
+        title: "Aquarell",
+        description: "Aquarellmalerei mit transparenter, leichter Technik.",
+      },
+      acrylic: {
+        title: "Acryl",
+        description: "Acrylbilder mit lebendigen Farben und reicher Textur.",
+      },
+      oil: {
+        title: "Ölmalerei",
+        description:
+          "Werke in klassischer Ölmaltechnik mit Tiefe und Reichtum.",
+      },
+      pencil: {
+        title: "Bleistiftarbeiten",
+        description: "Feine Kompositionen mit Kohle, Graphit und Farbstiften.",
+      },
+    },
+    contact: {
+      title: "Kontakt",
+      text: "Wenn Sie sich für meine Kurse oder Kunstwerke interessieren, füllen Sie bitte das Formular aus.",
+      successTitle: "Erfolgreich gesendet!",
+      successDescription: "Vielen Dank für Ihre Nachricht.",
+      errorTitle: "Fehler",
+      servicesTitle: "Künstlerische Dienstleistungen",
+      servicesList: "• Porträts\n• Auftragsmalerei",
+      emailTitle: "E-Mail",
+      phoneTitle: "Telefon",
+      formTitle: "Nachricht senden",
+      formName: "Vollständiger Name",
+      formEmail: "E-Mail-Adresse",
+      formSubject: "Betreff",
+      formMessage: "Nachricht...",
+      sendButton: "Nachricht senden",
+      sending: "Senden...",
+      socialTitle: "Folgen Sie mir in den sozialen Medien",
+      businessName: "Péter Révfalvi",
+      businessStatus: "Einzelunternehmer",
+      businessTitle: "Englischlehrer, Kunstpädagoge, Bildender Künstler",
+      taxNumberLabel: "Steuernummer",
+      regNumberLabel: "Registrierungsnummer",
+      locationLabel: "Sitz",
+      taxNumber: "91713838-1-42",
+      regNumber: "61764965",
+      location: "1141 Budapest, Mogyoródi út 100 II.em. 6.",
+    },
+  },
 };

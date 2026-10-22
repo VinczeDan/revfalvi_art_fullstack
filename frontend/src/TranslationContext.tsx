@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { translations } from "./translations";
 
-type Language = "hu" | "en";
+type Language = "hu" | "en" | "de";
 
 interface TranslationContextProps {
   language: Language;
