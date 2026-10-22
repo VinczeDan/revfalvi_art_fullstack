@@ -22,7 +22,7 @@ const FeaturedArtist = () => {
         >
           <Badge className="mb-5 px-4 py-2 text-sm" variant="secondary">
             <Award aria-hidden="true" className="mr-2 h-4 w-4" />
-            Különdíjas Alkotónk
+            Különdíjas alkotó
           </Badge>
           <h2
             className="text-3xl font-bold text-foreground md:text-5xl"
@@ -60,17 +60,18 @@ const FeaturedArtist = () => {
                   Nagyon súlyos autistaként kezdtem életem, ceruzát 5 évesen
                   vettem a kezembe, és nem ment a beszéd sem. Anya fejlesztése
                   hatására megtanultam beszélni és olvasni, és egyre jobb
-                  kinyílt a világom. Rajzaim először inkább az &quot;odabent&quot;-et,
-                  a fejemben lévő dolgokat ábrázolták; de ahogy egyre jobban
-                  megértem a körülöttem zajló eseményeket, egyre komplexebbek a
-                  festményeim, grafikáim is. Ha jól megnézed őket, lehet, hogy
-                  érzel rajtuk valami különlegeset.... a Másság különleges
-                  szépségét. Ha tetszik ez a kép, jelölj be a Szloboda Szilárd
-                  Facebook oldalon, ahová az összes művem felkerül!
+                  kinyílt a világom. Rajzaim először inkább az
+                  &quot;odabent&quot;-et, a fejemben lévő dolgokat ábrázolták;
+                  de ahogy egyre jobban megértem a körülöttem zajló eseményeket,
+                  egyre komplexebbek a festményeim, grafikáim is. Ha jól
+                  megnézed őket, lehet, hogy érzel rajtuk valami
+                  különlegeset.... a Másság különleges szépségét. Ha tetszik ez
+                  a kép, jelölj be a Szloboda Szilárd Facebook oldalon, ahová az
+                  összes művem felkerül!
                 </p>
                 <Button asChild className="mt-7" size="lg">
                   <a
-                    href="https://www.facebook.com/"
+                    href="https://www.facebook.com/share/1KamH7CpgM/?mibextid=wwXIfr"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
