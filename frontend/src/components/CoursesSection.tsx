@@ -17,7 +17,7 @@ interface Course {
   icon: string;
   title: string;
   description: string;
-  cover_image_url: string | null;
+  cover_image_url?: string | null;
   level: "beginner" | "advanced" | "all";
   duration: string;
   price: string;
@@ -44,6 +44,7 @@ const CourseCard = ({
 }) => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
   const [isOpen, setIsOpen] = useState(false); // Lenyitás állapota
+  const [coverImageFailed, setCoverImageFailed] = useState(false);
 
   const delays = [
     "",
@@ -62,11 +63,12 @@ const CourseCard = ({
     >
       <Card className="group flex h-full w-full flex-col overflow-hidden border-0 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium">
         <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-artist-blue via-artist-light to-primary/30">
-          {course.cover_image_url ? (
+          {course.cover_image_url && !coverImageFailed ? (
             <img
               src={course.cover_image_url}
               alt={course.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={() => setCoverImageFailed(true)}
             />
           ) : (
             <div
