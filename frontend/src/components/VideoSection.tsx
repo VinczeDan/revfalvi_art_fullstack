@@ -49,7 +49,7 @@ const VideoSection = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { language } = useTranslation();
+  const { language, t } = useTranslation();
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -72,7 +72,7 @@ const VideoSection = () => {
   if (loading)
     return (
       <div className="py-20 text-center text-primary italic">
-        {language === "en" ? "Loading videos..." : "Videók betöltése..."}
+        {t("videos.loading")}
       </div>
     );
 
@@ -84,7 +84,7 @@ const VideoSection = () => {
         {/* Fejléc — NEM reveal osztállyal, hogy mindig látszódjon */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            {language === "en" ? "Videos" : "Videók"}
+            {t("videos.title")}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
         </div>

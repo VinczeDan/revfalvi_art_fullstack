@@ -57,6 +57,7 @@ Jelentkezz személyes vagy online angol óráimra! `,
     videos: {
       title: "Videók",
       description: "Tekintse meg legújabb oktatóvideóimat és bemutatóimat.",
+      loading: "Videók betöltése...",
     },
     news: {
       title: "Friss hírek",
@@ -169,6 +170,7 @@ Sign up for my in-person or online English lessons today!`,
     videos: {
       title: "Videos",
       description: "Check out my latest educational videos and demonstrations.",
+      loading: "Loading videos...",
     },
     news: {
       title: "Latest News",
@@ -267,8 +269,9 @@ Melde dich für meinen Präsenz- oder Online-Englischunterricht an!`,
 Mit meiner Kunst möchte ich eine sich ständig verändernde Welt darstellen, die in der Lage ist, Menschen in ihren Gedanken an Orte zu versetzen, die für sie Erinnerungen und erlebte Momente bedeuten. Sowohl in meinen Landschaften als auch in der Darstellung des menschlichen Individuums gibt es einen malerischen Pinselstrich oder eine Bleistiftlinie, die dabei helfen, diese erlebten Momente an die Oberfläche zu bringen. Für mich ist die Bedeutung der Farben in meinen Werken unerlässlich. Ohne sie wäre unsere Welt wie ein Brunnen ohne Wasser, das heißt leer. Deshalb strebe ich danach, dass die Farben als Hauptakteure präsent und nicht zuletzt in Harmonie in meinen Werken sind. Diese treibende Kraft ist es, die mich vor die Leinwand oder das Papier setzt und mir hilft, zum Pinsel oder Stift zu greifen. Zu meinen Lieblingsmedien gehören Kohle, Softpastell, Aquarell und Ölfarbe.`,
     },
     videos: {
-      title: "Videos",
-      description: "Check out my latest educational videos and demonstrations.",
+      title: "Videobeiträge",
+      description: "Entdecken Sie meine neuesten Lehrvideos und Vorführungen.",
+      loading: "Videobeiträge werden geladen...",
     },
 
     news: {
