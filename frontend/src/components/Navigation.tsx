@@ -21,11 +21,33 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     { id: "portfolio", label: t("navigation.portfolio"), highlight: false },
     {
       id: "testimonials",
-      label: language === "hu" ? "Vélemények" : "Testimonials",
+      label:
+        language === "hu"
+          ? "Vélemények"
+          : language === "de"
+            ? "Bewertungen"
+            : "Testimonials",
       highlight: false,
-    }, // ← ÚJ MENÜPONT
+    },
     { id: "contact", label: t("navigation.contact"), highlight: false },
   ];
+
+  const languages = [
+    { code: "hu", label: "HU" },
+    { code: "en", label: "EN" },
+    { code: "de", label: "DE" },
+  ] as const;
+
+  const languageLabels = {
+    hu: "Nyelv",
+    en: "Language",
+    de: "Sprache",
+  };
+
+  const changeLanguage = (nextLanguage: (typeof languages)[number]["code"]) => {
+    setLanguage(nextLanguage);
+    setIsOpen(false);
+  };
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -84,26 +106,35 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
               </button>
             ))}
 
-            {/* Nyelvváltó */}
-            <button
-              className="ml-4 px-3 py-1 border rounded text-sm hover:bg-accent transition-colors"
-              onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
+            <div
+              aria-label={languageLabels[language]}
+              className="ml-3 flex items-center gap-1 rounded-lg border border-border p-1"
+              role="group"
             >
-              {language === "hu" ? "EN" : "HU"}
-            </button>
+              {languages.map(({ code, label }) => (
+                <button
+                  key={code}
+                  aria-pressed={language === code}
+                  className={`rounded-md px-2 py-1 text-xs font-semibold transition-colors ${
+                    language === code
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                  onClick={() => changeLanguage(code)}
+                  type="button"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              className="px-2 py-1 border rounded text-sm hover:bg-accent transition-colors"
-              onClick={() => setLanguage(language === "hu" ? "en" : "hu")}
-            >
-              {language === "hu" ? "EN" : "HU"}
-            </button>
-
             <Button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isOpen}
               className="slide-in-right"
             >
               {isOpen ? (
@@ -142,6 +173,32 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
                   {item.label}
                 </button>
               ))}
+              <div className="mt-3 border-t border-border px-3 pt-4">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {languageLabels[language]}
+                </p>
+                <div
+                  aria-label={languageLabels[language]}
+                  className="flex gap-2"
+                  role="group"
+                >
+                  {languages.map(({ code, label }) => (
+                    <button
+                      key={code}
+                      aria-pressed={language === code}
+                      className={`min-w-14 rounded-md border px-4 py-2 text-sm font-semibold transition-colors ${
+                        language === code
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                      onClick={() => changeLanguage(code)}
+                      type="button"
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
