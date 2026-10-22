@@ -21,12 +21,7 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     { id: "portfolio", label: t("navigation.portfolio"), highlight: false },
     {
       id: "testimonials",
-      label:
-        language === "hu"
-          ? "Vélemények"
-          : language === "de"
-            ? "Bewertungen"
-            : "Testimonials",
+      label: t("navigation.testimonials"),
       highlight: false,
     },
     { id: "contact", label: t("navigation.contact"), highlight: false },
@@ -37,12 +32,6 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
     { code: "en", label: "EN" },
     { code: "de", label: "DE" },
   ] as const;
-
-  const languageLabels = {
-    hu: "Nyelv",
-    en: "Language",
-    de: "Sprache",
-  };
 
   const changeLanguage = (nextLanguage: (typeof languages)[number]["code"]) => {
     setLanguage(nextLanguage);
@@ -107,7 +96,7 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
             ))}
 
             <div
-              aria-label={languageLabels[language]}
+              aria-label={t("navigation.language")}
               className="ml-3 flex items-center gap-1 rounded-lg border border-border p-1"
               role="group"
             >
@@ -133,7 +122,11 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
           <div className="md:hidden flex items-center gap-2">
             <Button
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                isOpen
+                  ? t("navigation.closeMenu")
+                  : t("navigation.openMenu")
+              }
               aria-expanded={isOpen}
               className="slide-in-right"
             >
@@ -175,10 +168,10 @@ const Navigation = ({ activeSection, setActiveSection }: NavigationProps) => {
               ))}
               <div className="mt-3 border-t border-border px-3 pt-4">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {languageLabels[language]}
+                  {t("navigation.language")}
                 </p>
                 <div
-                  aria-label={languageLabels[language]}
+                  aria-label={t("navigation.language")}
                   className="flex gap-2"
                   role="group"
                 >

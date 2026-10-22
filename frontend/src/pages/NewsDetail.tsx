@@ -49,7 +49,7 @@ const NewsDetail = () => {
   if (error)
     return (
       <p className="text-red-500">
-        {t("news.error")}: {error}
+        {t("news.error")}
       </p>
     );
   if (!news) return <p>{t("news.noNews")}</p>;
@@ -79,7 +79,13 @@ const NewsDetail = () => {
 
             {/* Dátum */}
             <p className="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
-              {new Date(news.publication_date).toLocaleDateString()}
+              {new Date(news.publication_date).toLocaleDateString(
+                language === "hu"
+                  ? "hu-HU"
+                  : language === "de"
+                    ? "de-DE"
+                    : "en-US",
+              )}
             </p>
 
             {/* Tartalom */}
@@ -119,7 +125,7 @@ const NewsDetail = () => {
         >
           <img
             src={zoomedImage}
-            alt="Zoomed"
+            alt={t("news.zoomedImageAlt")}
             className="max-h-[90%] max-w-[90%] rounded-lg shadow-lg transform transition-transform duration-300 scale-100"
           />
         </div>

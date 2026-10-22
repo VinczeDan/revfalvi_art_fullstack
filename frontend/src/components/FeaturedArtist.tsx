@@ -2,10 +2,12 @@ import { Award, Facebook } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/TranslationContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import featuredArtwork from "@/assets/featured-artist-artwork.jpg";
 
 const FeaturedArtist = () => {
+  const { t } = useTranslation();
   const header = useScrollReveal({ threshold: 0.2 });
   const artwork = useScrollReveal({ threshold: 0.15 });
   const story = useScrollReveal({ threshold: 0.15 });
@@ -22,13 +24,13 @@ const FeaturedArtist = () => {
         >
           <Badge className="mb-5 px-4 py-2 text-sm" variant="secondary">
             <Award aria-hidden="true" className="mr-2 h-4 w-4" />
-            Különdíjas alkotó
+            {t("featuredArtist.badge")}
           </Badge>
           <h2
             className="text-3xl font-bold text-foreground md:text-5xl"
             id="featured-artist-title"
           >
-            Kiemelt Művész: Szloboda Szilárd
+            {t("featuredArtist.title")}
           </h2>
           <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary shadow-sm" />
         </div>
@@ -41,7 +43,7 @@ const FeaturedArtist = () => {
             <Card className="overflow-hidden border-0 bg-card/70 shadow-medium">
               <CardContent className="p-3">
                 <img
-                  alt="Absztrakt, színes művészeti illusztráció – helyőrző Szloboda Szilárd alkotásához"
+                  alt={t("featuredArtist.imageAlt")}
                   className="h-auto w-full rounded-lg object-contain shadow-medium"
                   src={featuredArtwork}
                 />
@@ -56,18 +58,7 @@ const FeaturedArtist = () => {
             <Card className="border-0 bg-card/70 shadow-soft backdrop-blur-sm">
               <CardContent className="p-6 md:p-8">
                 <p className="leading-relaxed text-muted-foreground">
-                  Szloboda Szilárd vagyok, 16 éves autizmussal élő fiatal.
-                  Nagyon súlyos autistaként kezdtem életem, ceruzát 5 évesen
-                  vettem a kezembe, és nem ment a beszéd sem. Anya fejlesztése
-                  hatására megtanultam beszélni és olvasni, és egyre jobb
-                  kinyílt a világom. Rajzaim először inkább az
-                  &quot;odabent&quot;-et, a fejemben lévő dolgokat ábrázolták;
-                  de ahogy egyre jobban megértem a körülöttem zajló eseményeket,
-                  egyre komplexebbek a festményeim, grafikáim is. Ha jól
-                  megnézed őket, lehet, hogy érzel rajtuk valami
-                  különlegeset.... a Másság különleges szépségét. Ha tetszik ez
-                  a kép, jelölj be a Szloboda Szilárd Facebook oldalon, ahová az
-                  összes művem felkerül!
+                  {t("featuredArtist.story")}
                 </p>
                 <Button asChild className="mt-7" size="lg">
                   <a
@@ -76,7 +67,7 @@ const FeaturedArtist = () => {
                     target="_blank"
                   >
                     <Facebook aria-hidden="true" />
-                    Szloboda Szilárd Facebook oldala
+                    {t("featuredArtist.facebook")}
                   </a>
                 </Button>
               </CardContent>

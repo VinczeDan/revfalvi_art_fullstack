@@ -63,6 +63,7 @@ const Index = () => {
         title={t("hero.title")}
         subtitle={t("hero.subtitle")}
         buttonText={t("hero.button")}
+        coursesButtonText={t("hero.coursesButton")}
       />
       <AboutMe />
       <FeaturedArtist />

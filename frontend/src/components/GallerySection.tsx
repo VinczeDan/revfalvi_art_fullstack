@@ -84,7 +84,7 @@ const GallerySection = ({
   );
   const [expanded, setExpanded] = useState(false);
 
-  const { language } = useTranslation();
+  const { language, t } = useTranslation();
 
   useEffect(() => {
     const fetchPaintings = async () => {
@@ -124,7 +124,7 @@ const GallerySection = ({
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center">
           <p>
-            {language === "en" ? "Loading paintings..." : "Képek betöltése..."}
+            {t("gallery.loading")}
           </p>
         </div>
       </section>
@@ -135,10 +135,7 @@ const GallerySection = ({
       <section id={id} className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center text-red-500">
           <p>
-            {language === "en"
-              ? "Error loading paintings:"
-              : "Hiba történt a képek betöltése közben:"}{" "}
-            {error}
+            {t("gallery.error")}
           </p>
         </div>
       </section>
@@ -185,14 +182,14 @@ const GallerySection = ({
             {expanded ? (
               <>
                 <ChevronUp className="w-4 h-4" />
-                {language === "en" ? "Show less" : "Kevesebb megjelenítése"}
+                {t("gallery.showLess")}
               </>
             ) : (
               <>
                 <ChevronDown className="w-4 h-4" />
-                {language === "en"
-                  ? `View all ${title} works (${paintings.length} pieces)`
-                  : `Összes ${title.toLowerCase()} megtekintése (${paintings.length} mű)`}
+                {t("gallery.showAll")
+                  .replace("{title}", title.toLocaleLowerCase(language))
+                  .replace("{count}", String(paintings.length))}
               </>
             )}
           </button>
@@ -211,6 +208,7 @@ const GallerySection = ({
               <button
                 onClick={() => setSelectedPainting(null)}
                 className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold z-50"
+                aria-label={t("gallery.close")}
               >
                 ×
               </button>
@@ -234,7 +232,7 @@ const GallerySection = ({
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <p className="text-sm font-medium text-zinc-500">
-                        {language === "en" ? "Technique" : "Technika"}
+                        {t("gallery.technique")}
                       </p>
                       <p className="text-lg font-semibold text-zinc-800">
                         {selectedPainting.technique_display ||
@@ -244,13 +242,17 @@ const GallerySection = ({
 
                     <div>
                       <p className="text-sm font-medium text-gray-500">
-                        {language === "en" ? "Created" : "Készült"}
+                        {t("gallery.created")}
                       </p>
                       <p className="text-lg">
                         {new Date(
                           selectedPainting.created_at,
                         ).toLocaleDateString(
-                          language === "en" ? "en-US" : "hu-HU",
+                          language === "hu"
+                            ? "hu-HU"
+                            : language === "de"
+                              ? "de-DE"
+                              : "en-US",
                         )}
                       </p>
                     </div>
@@ -259,15 +261,13 @@ const GallerySection = ({
                     <div className="col-span-2">
                       <div className="bg-gradient-to-r from-amber-100 to-yellow-50 border border-amber-200 rounded-xl p-5">
                         <p className="text-sm uppercase tracking-wide text-amber-700 font-medium mb-1">
-                          {language === "en" ? "Price" : "Ár"}
+                          {t("gallery.price")}
                         </p>
                         <p className="text-4xl font-bold text-amber-900">
                           {selectedPainting.price &&
                           Number(selectedPainting.price) > 0
-                            ? `${Number(selectedPainting.price).toLocaleString("hu-HU")} Ft`
-                            : language === "en"
-                              ? "Not for sale / Inquire"
-                              : "Nem eladó / Érdeklődjön"}
+                            ? `${Number(selectedPainting.price).toLocaleString(language === "hu" ? "hu-HU" : language === "de" ? "de-DE" : "en-US")} ${t("gallery.currency")}`
+                            : t("gallery.notForSale")}
                         </p>
                       </div>
                     </div>
@@ -275,7 +275,7 @@ const GallerySection = ({
 
                   <div className="border-t border-gray-200 pt-4">
                     <h4 className="text-sm font-medium text-gray-500 mb-2">
-                      {language === "en" ? "Description" : "Leírás"}
+                      {t("gallery.descriptionLabel")}
                     </h4>
                     <p className="text-gray-700 whitespace-pre-line">
                       {selectedPainting.description}

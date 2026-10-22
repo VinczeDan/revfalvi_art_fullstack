@@ -57,16 +57,15 @@ const ContactSection = () => {
         );
       }
 
-      toast.success(t("contact.successTitle") || "Sikeres küldés!", {
-        description:
-          t("contact.successDescription") ||
-          "Üzenetét megkaptuk, hamarosan válaszolunk.",
+      toast.success(t("contact.successTitle"), {
+        description: t("contact.successDescription"),
       });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      toast.error(t("contact.errorTitle") || "Hiba", {
-        description: error instanceof Error ? error.message : "Ismeretlen hiba",
+      console.error("Failed to send contact message:", error);
+      toast.error(t("contact.errorTitle"), {
+        description: t("contact.errorDescription"),
       });
     } finally {
       setIsSubmitting(false);
@@ -108,7 +107,7 @@ const ContactSection = () => {
                   <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                     <Palette className="w-5 h-5 text-white" />
                   </div>
-                  {t("contact.servicesTitle") || "Művészeti szolgáltatások"}
+                  {t("contact.servicesTitle")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -216,8 +215,7 @@ const ContactSection = () => {
               <div className="pt-6 border-t border-white/10">
                 {/* A t() függvény most már dinamikusan a megfelelő nyelvi verziót fogja betölteni */}
                 <h4 className="text-[10px] font-bold text-secondary/60 uppercase tracking-wider mb-4">
-                  {t("contact.socialTitle") ||
-                    "Kövess a közösségi oldalakon is"}
+                  {t("contact.socialTitle")}
                 </h4>
 
                 {/* Közösségi Média Linkek */}
@@ -227,7 +225,7 @@ const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-slate-50 text-[#1877F2]/70 hover:text-[#1877F2] hover:bg-[#1877F2]/10 transition-all duration-300 shadow-sm border border-slate-100"
-                    aria-label="Facebook"
+                    aria-label={t("contact.facebook")}
                   >
                     <Facebook className="w-5 h-5" />
                   </a>
@@ -237,7 +235,7 @@ const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-slate-50 text-[#F56040]/70 hover:text-[#E4405F] hover:bg-[#F56040]/10 transition-all duration-300 shadow-sm border border-slate-100"
-                    aria-label="Instagram"
+                    aria-label={t("contact.instagram")}
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
@@ -255,7 +253,7 @@ const ContactSection = () => {
             <Card className="border-0 shadow-medium">
               <CardHeader>
                 <CardTitle className="text-2xl">
-                  {t("contact.formTitle") || "Üzenet küldése"}
+                  {t("contact.formTitle")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -264,7 +262,8 @@ const ContactSection = () => {
                     <div>
                       <Input
                         name="name"
-                        placeholder={t("contact.formName") || "Teljes név"}
+                        placeholder={t("contact.formName")}
+                        aria-label={t("contact.formName")}
                         value={formData.name}
                         onChange={handleInputChange}
                         required
@@ -276,7 +275,8 @@ const ContactSection = () => {
                       <Input
                         name="email"
                         type="email"
-                        placeholder={t("contact.formEmail") || "Email cím"}
+                        placeholder={t("contact.formEmail")}
+                        aria-label={t("contact.formEmail")}
                         value={formData.email}
                         onChange={handleInputChange}
                         required
@@ -289,7 +289,8 @@ const ContactSection = () => {
                   <div>
                     <Input
                       name="subject"
-                      placeholder={t("contact.formSubject") || "Tárgy"}
+                      placeholder={t("contact.formSubject")}
+                      aria-label={t("contact.formSubject")}
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
@@ -301,7 +302,8 @@ const ContactSection = () => {
                   <div>
                     <Textarea
                       name="message"
-                      placeholder={t("contact.formMessage") || "Üzenet..."}
+                      placeholder={t("contact.formMessage")}
+                      aria-label={t("contact.formMessage")}
                       value={formData.message}
                       onChange={handleInputChange}
                       required
@@ -317,8 +319,8 @@ const ContactSection = () => {
                     className="w-full bg-[#8B4513] hover:bg-[#A0522D] transition-all duration-300 text-white font-medium h-12 rounded-full shadow-md"
                   >
                     {isSubmitting
-                      ? t("contact.sending") || "Küldés..."
-                      : t("contact.sendButton") || "Üzenet küldése"}
+                      ? t("contact.sending")
+                      : t("contact.sendButton")}
                   </Button>
                 </form>
               </CardContent>

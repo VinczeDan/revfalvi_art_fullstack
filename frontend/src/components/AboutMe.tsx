@@ -66,7 +66,7 @@ const AboutMe = () => {
                 <div className="mb-6 rounded-lg shadow-medium flex justify-center">
                   <img
                     src={diploma}
-                    alt="Diploma"
+                    alt={t("about.diplomaAlt")}
                     className="max-w-full h-auto object-contain"
                   />
                 </div>

@@ -12,6 +12,7 @@ interface Video {
 
 const VideoCard = ({ video, index }: { video: Video; index: number }) => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.05 });
+  const { t } = useTranslation();
   const delays = ["", "reveal-delay-2", "reveal-delay-3", "reveal-delay-4"];
   const delay = delays[index % 4];
 
@@ -29,7 +30,7 @@ const VideoCard = ({ video, index }: { video: Video; index: number }) => {
           className="w-full h-full object-contain"
         >
           <source src={video.video_url} type="video/mp4" />
-          Your browser does not support the video tag.
+          {t("videos.unsupported")}
         </video>
       </div>
 

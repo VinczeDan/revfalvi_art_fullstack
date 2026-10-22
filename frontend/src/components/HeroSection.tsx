@@ -6,6 +6,7 @@ interface HeroSectionProps {
   title: string;
   subtitle: string;
   buttonText: string;
+  coursesButtonText: string;
 }
 
 const HeroSection = ({
@@ -13,6 +14,7 @@ const HeroSection = ({
   title,
   subtitle,
   buttonText,
+  coursesButtonText,
 }: HeroSectionProps) => {
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -60,7 +62,7 @@ const HeroSection = ({
             onClick={() => scrollToSection("courses")}
             className="bg-red-500 hover:bg-red-600 text-white transition-all duration-300 px-8 py-4 text-lg font-medium rounded-full shadow-strong hover-lift"
           >
-            Tanfolyamok
+            {coursesButtonText}
           </Button>
         </div>
       </div>

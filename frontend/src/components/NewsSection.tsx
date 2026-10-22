@@ -53,7 +53,7 @@ const NewsSection = () => {
       <section id="news" className="py-20 px-4">
         <div className="container mx-auto max-w-7xl text-center text-red-500">
           <p>
-            {t("news.error")}: {error}
+            {t("news.error")}
           </p>
         </div>
       </section>

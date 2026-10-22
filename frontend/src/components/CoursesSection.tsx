@@ -17,21 +17,21 @@ interface Course {
 }
 
 // Szintek fordítása és színei a backend kulcsok alapján
-const LEVEL_MAP: Record<string, { hu: string; en: string; color: string }> = {
-  beginner: { hu: "Kezdő", en: "Beginner", color: "bg-green-500" },
-  advanced: { hu: "Haladó", en: "Advanced", color: "bg-orange-500" },
-  all: { hu: "Minden szint", en: "All levels", color: "bg-blue-500" },
+const LEVEL_MAP: Record<string, { key: string; color: string }> = {
+  beginner: { key: "beginner", color: "bg-green-500" },
+  advanced: { key: "advanced", color: "bg-orange-500" },
+  all: { key: "all", color: "bg-blue-500" },
 };
 
 // Egyedi kártya komponens lenyitható (Accordion) funkcióval
 const CourseCard = ({
   course,
-  language,
+  t,
   index,
   scrollToContact,
 }: {
   course: Course;
-  language: string;
+  t: (key: string) => string;
   index: number;
   scrollToContact: (title: string) => void;
 }) => {
@@ -74,9 +74,7 @@ const CourseCard = ({
                 LEVEL_MAP[course.level]?.color || "bg-gray-500"
               }`}
             >
-              {language === "hu"
-                ? LEVEL_MAP[course.level]?.hu
-                : LEVEL_MAP[course.level]?.en}
+              {t(`courses.levels.${LEVEL_MAP[course.level]?.key ?? "all"}`)}
             </span>
             <span className="px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold bg-muted text-muted-foreground">
               {course.price}
@@ -114,9 +112,7 @@ const CourseCard = ({
                 }}
                 className="w-full py-3 rounded-full text-sm font-bold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:shadow-md transition-all active:scale-95"
               >
-                {language === "hu"
-                  ? "Jelentkezés a tanfolyamra"
-                  : "Sign up for course"}
+                {t("courses.apply")}
               </button>
             </CardContent>
           </div>
@@ -127,7 +123,7 @@ const CourseCard = ({
 };
 
 const CoursesSection = () => {
-  const { language } = useTranslation();
+  const { language, t } = useTranslation();
   const header = useScrollReveal({ threshold: 0.2 });
 
   const {
@@ -138,7 +134,7 @@ const CoursesSection = () => {
     queryKey: ["courses", language],
     queryFn: async () => {
       const response = await fetch(`/api/courses/?lang=${language}`);
-      if (!response.ok) throw new Error("Hiba az adatok letöltésekor");
+      if (!response.ok) throw new Error("Failed to load courses");
       return response.json();
     },
   });
@@ -162,7 +158,7 @@ const CoursesSection = () => {
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {language === "hu" ? "Tanfolyamok" : "Courses"}
+            {t("courses.title")}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6 shadow-sm"></div>
         </div>
@@ -177,9 +173,7 @@ const CoursesSection = () => {
         {/* Hibaüzenet */}
         {error && (
           <div className="text-center text-red-500 py-10">
-            {language === "hu"
-              ? "Nem sikerült betölteni a tanfolyamokat."
-              : "Failed to load courses."}
+            {t("courses.error")}
           </div>
         )}
 
@@ -189,7 +183,7 @@ const CoursesSection = () => {
             <CourseCard
               key={course.id}
               course={course}
-              language={language}
+              t={t}
               index={index}
               scrollToContact={scrollToContact}
             />
