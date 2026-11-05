@@ -23,7 +23,7 @@ const HeroSection = ({
   };
 
   // Vite alatt a public mappából a "/" jellel érjük el a fájlt
-  const HERO_IMAGE_PATH = "/borito.jpeg";
+  const HERO_IMAGE_PATH = "/borito2.jpeg";
 
   const heroStyle = {
     // Kettős megoldás: sötétítő réteg és a kép egyben
